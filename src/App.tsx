@@ -1,7 +1,7 @@
 import React from 'react';
 
 const App = () => {
-  return <div className="App">my fit</div>;
+  return <div className="App">myfit</div>;
 };
 
 export default App;

@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src", // src 폴더가 기준이 된다.
+    "paths": {
+      "@/*": ["*"],
+      "@components/*": ["components/*"],
+      "@api/*": ["api/*"],
+      "@assets/*": ["assets/*"],
+      "@hooks/*": ["hooks/*"],
+      "@styles/*": ["styles/*"],
+      "@types/*": ["types/*"],
+      "@utility/*": ["utility/*"]
+    }
+  }
+}
