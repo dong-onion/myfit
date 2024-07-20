@@ -1,11 +1,11 @@
 import React from 'react';
-import { Header } from '@/componenets';
 import styled from 'styled-components';
 import { starGray } from '@/assets';
 
 export const Container = styled.div`
   display: flex;
   justify-content: center;
+  height: 100%;
 `;
 
 export const Wrapper = styled.div`
@@ -13,7 +13,6 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: calc(100dvh - 60px);
   width: 940px;
   padding: 0 20px;
 `;
@@ -138,7 +137,7 @@ export const CompleteButtonText = styled.span`
 const ServiceRegistration = () => {
   return (
     <>
-      <Header />
+      {/* <HeaderLayout /> */}
       <Container>
         <Wrapper>
           <Title>나의 서비스를 입력해 주세요</Title>
