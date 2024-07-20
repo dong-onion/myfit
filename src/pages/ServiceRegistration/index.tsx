@@ -5,7 +5,6 @@ import { starGray } from '@/assets';
 
 export const Container = styled.div`
   display: flex;
-  /* background-color: lightblue; */
   justify-content: center;
 `;
 
@@ -16,7 +15,6 @@ export const Wrapper = styled.div`
   justify-content: center;
   height: calc(100dvh - 60px);
   width: 940px;
-  /* background-color: blue; */
   padding: 0 20px;
 `;
 
@@ -70,7 +68,6 @@ export const Input = styled.input`
 export const LevelWrapper = styled.div`
   display: inline-flex;
   align-items: center;
-  /* background-color: yellowgreen; */
   position: relative;
   width: 574px;
   left: 32px;
@@ -90,7 +87,7 @@ export const LevelBox = styled.div`
   display: flex;
   margin-right: 15px;
   &:hover {
-    background-color: ${({ theme }) => theme.color.gray};)};
+    background-color: ${({ theme }) => theme.color.gray};
   }
 `;
 

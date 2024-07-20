@@ -1,10 +1,10 @@
 import React from 'react';
-import ServiceRegistration from './pages/ServiceRegistration';
+import SurveyStart from './pages/SurveyStart';
 
 const App = () => {
   return (
     <div>
-      <ServiceRegistration />
+      <SurveyStart />
     </div>
   );
 };
