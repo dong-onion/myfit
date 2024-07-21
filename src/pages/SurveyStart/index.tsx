@@ -1,14 +1,12 @@
 import React from 'react';
-import { Header } from '@/componenets';
 import styled from 'styled-components';
 
-export const Container = styled.div``;
-export const Wrapper = styled.div`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: calc(100dvh - 60px);
+  height: 100%;
 `;
 export const TitleWrapper = styled.div`
   width: 180px;
@@ -69,18 +67,15 @@ export const StartButton = styled.button`
 const SurveyStart = () => {
   return (
     <Container>
-      <Header />
-      <Wrapper>
-        <TitleWrapper>
-          <Title>창업 유형 테스트</Title>
-        </TitleWrapper>
-        <MainDescripiton>나는 어떤 창업가일까?</MainDescripiton>
-        <SubDescripiton1>
-          유형 점검을 위한 몇가지 질문을 시작할게요
-        </SubDescripiton1>
-        <SubDescripiton2>16문항 / 약 1분 소요</SubDescripiton2>
-        <StartButton>시작하기</StartButton>
-      </Wrapper>
+      <TitleWrapper>
+        <Title>창업 유형 테스트</Title>
+      </TitleWrapper>
+      <MainDescripiton>나는 어떤 창업가일까?</MainDescripiton>
+      <SubDescripiton1>
+        유형 점검을 위한 몇가지 질문을 시작할게요
+      </SubDescripiton1>
+      <SubDescripiton2>16문항 / 약 1분 소요</SubDescripiton2>
+      <StartButton>시작하기</StartButton>
     </Container>
   );
 };

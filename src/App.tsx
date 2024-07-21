@@ -1,12 +1,10 @@
 import React from 'react';
-import SurveyStart from './pages/SurveyStart';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { routes } from './routes';
 
+const router = createBrowserRouter(routes);
 const App = () => {
-  return (
-    <div>
-      <SurveyStart />
-    </div>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;

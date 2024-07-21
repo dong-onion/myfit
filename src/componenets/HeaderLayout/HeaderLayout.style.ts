@@ -21,3 +21,7 @@ export const BackArrow = styled.img`
   left: 51px;
   top: 19px;
 `;
+
+export const OutletWrapper = styled.div`
+  height: calc(100dvh - 60px);
+`;
