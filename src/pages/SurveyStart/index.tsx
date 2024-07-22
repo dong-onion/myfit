@@ -22,13 +22,13 @@ export const Title = styled.div`
   font-weight: 700;
   letter-spacing: -0.08px;
   text-align: center;
-  color: ${({ theme }) => theme.color.gray};
+  color: ${({ theme }) => theme.color.gray[0]};
 `;
 
 export const MainDescripiton = styled.h1`
   font-size: 60px;
   font-weight: 800;
-  color: ${({ theme }) => theme.color.blue};
+  color: ${({ theme }) => theme.color.primary[0]};
   margin-top: 36px;
   line-height: 24px;
 `;
@@ -38,7 +38,7 @@ export const SubDescripiton1 = styled.h2`
   font-weight: 600;
   line-height: 24px;
   margin-top: 89px;
-  color: ${({ theme }) => theme.color.gray};
+  color: ${({ theme }) => theme.color.gray[0]};
 `;
 export const SubDescripiton2 = styled.h2`
   margin-top: 24px;
@@ -46,7 +46,7 @@ export const SubDescripiton2 = styled.h2`
   font-size: 32px;
   font-weight: 600;
   line-height: 24px;
-  color: ${({ theme }) => theme.color.gray};
+  color: ${({ theme }) => theme.color.gray[0]};
 `;
 
 export const StartButton = styled.button`
@@ -54,13 +54,13 @@ export const StartButton = styled.button`
   width: 282px;
   height: 78px;
   border-radius: 8px;
-  background-color: ${({ theme }) => theme.color.blue};
+  background-color: ${({ theme }) => theme.color.primary[0]};
   font-family: Pretendard;
   font-size: 24px;
   font-weight: 600;
   line-height: 24px;
   text-align: center;
-  color: ${({ theme }) => theme.color.white};
+  color: ${({ theme }) => theme.color.white[0]};
   border: none;
 `;
 

@@ -6,7 +6,7 @@ export const Container = styled.div`
   align-items: center;
   height: 60px;
   width: 100dvw;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid ${({ theme }) => theme.color.gray[4]};
 `;
 
 export const Logo = styled.img`
