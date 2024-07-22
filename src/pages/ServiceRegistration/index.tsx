@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { starGray } from '@/assets';
+import { levelSeed, levelSprout, levelTree, starGray } from '@/assets';
 
 export const Container = styled.div`
   display: flex;
@@ -41,11 +41,13 @@ export const InputWrapper = styled.div`
   display: flex;
   align-items: center;
   margin-top: 60px;
-  width: 100%;
 `;
 
 export const InputTitle = styled.h3`
-  margin-right: 24px;
+  margin-right: 22px;
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
 `;
 
 export const Input = styled.input`
@@ -62,45 +64,61 @@ export const Input = styled.input`
   line-height: 24px;
   letter-spacing: -0.12px;
   color: ${({ theme }) => theme.color.blue};
+
+  &::placeholder {
+    color: '#b2b2b2b';
+    font-weight: 600;
+    font-size: 24px;
+  }
 `;
 
 export const LevelWrapper = styled.div`
   display: inline-flex;
   align-items: center;
-  position: relative;
-  width: 574px;
-  left: 32px;
+  width: 588px;
   margin-top: 44px;
+  margin-left: 41px;
+
+  & > :not(:first-child):not(:last-child) {
+    margin-right: 10px;
+  }
 `;
 
 export const LevelTitle = styled.h3`
-  margin-right: 24px;
+  margin-right: 22px;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 24px;
+  text-align: right;
 `;
 
 export const LevelBox = styled.div`
-  width: 152px;
-  height: 52px;
-  border: 1px solid #d9d9d9;
-  border-radius: 8px;
-  padding: 14px 27px 14px 20px;
   display: flex;
-  margin-right: 15px;
+  justify-content: center;
+  align-items: center;
+  width: 168px;
+  height: 56px;
+  border: 1px solid ${({ theme }) => theme.color.blue};
+  border-radius: 10px;
+  padding: 20px 30px;
+  display: flex;
+
   &:hover {
-    background-color: ${({ theme }) => theme.color.gray};
+    background: #ecf0ff;
   }
 `;
 
 export const LevelIcon = styled.img`
-  width: 24px;
-  height: 24px;
-  align-self: center;
-  margin-right: 5px;
+  width: 28px;
+  height: 28px;
+  margin-right: 10px;
 `;
 
 export const LevelBoxText = styled.span`
-  font-size: 22px;
-  font-weight: '500';
-  letter-spacing: -1.1px;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.4px;
+  color: ${({ theme }) => theme.color.blue};
 `;
 
 export const LeveInfoText = styled.span`
@@ -137,7 +155,6 @@ export const CompleteButtonText = styled.span`
 const ServiceRegistration = () => {
   return (
     <>
-      {/* <HeaderLayout /> */}
       <Container>
         <Wrapper>
           <Title>나의 서비스를 입력해 주세요</Title>
@@ -147,20 +164,20 @@ const ServiceRegistration = () => {
           <ContentWrapper>
             <InputWrapper>
               <InputTitle>서비스명</InputTitle>
-              <Input />
+              <Input placeholder="독거 노인들을 위한 식료품 배달 서비스" />
             </InputWrapper>
             <LevelWrapper>
               <LevelTitle>단계</LevelTitle>
               <LevelBox>
-                <LevelIcon src={starGray} />
+                <LevelIcon src={levelSeed} />
                 <LevelBoxText>씨앗단계</LevelBoxText>
               </LevelBox>
               <LevelBox>
-                <LevelIcon src={starGray} />
+                <LevelIcon src={levelSprout} />
                 <LevelBoxText>새싹단계</LevelBoxText>
               </LevelBox>
               <LevelBox>
-                <LevelIcon src={starGray} />
+                <LevelIcon src={levelTree} />
                 <LevelBoxText>나무단계</LevelBoxText>
               </LevelBox>
             </LevelWrapper>
