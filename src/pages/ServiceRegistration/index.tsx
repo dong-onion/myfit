@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { levelSeed, levelSprout, levelTree, starGray } from '@/assets';
+import { levelSeed, levelSprout, levelTree } from '@/assets';
 
 export const Container = styled.div`
   display: flex;
@@ -20,7 +20,7 @@ export const Wrapper = styled.div`
 export const Title = styled.h1`
   font-size: 38px;
   font-weight: 700;
-  color: ${({ theme }) => theme.color.gray};
+  color: ${({ theme }) => theme.color.gray[0]};
 `;
 
 export const SubTitle = styled.h2`
@@ -28,7 +28,7 @@ export const SubTitle = styled.h2`
   font-size: 24px;
   font-weight: 500;
   line-height: 24px;
-  color: ${({ theme }) => theme.color.gray};
+  color: ${({ theme }) => theme.color.gray[0]};
 `;
 
 export const ContentWrapper = styled.div`
@@ -52,24 +52,19 @@ export const InputTitle = styled.h3`
 
 export const Input = styled.input`
   //todo media query로 반응형으로 만들기
+  // focus 되면 border-color, background color bg[0]으로 바꾸기
   max-width: 792px;
   height: 84px;
   flex-grow: 1;
-  border: 1px solid ${({ theme }) => theme.color.blue};
-  border-radius: 8px;
-  background-color: #f1f3f5;
+  border: 1px solid ${({ theme }) => theme.color.primary[0]};
+  border-radius: 10px;
+  background-color: #f5f5f5;
   padding: 30px 32px;
   font-size: 24px;
   font-weight: 600;
   line-height: 24px;
   letter-spacing: -0.12px;
-  color: ${({ theme }) => theme.color.blue};
-
-  &::placeholder {
-    color: '#b2b2b2b';
-    font-weight: 600;
-    font-size: 24px;
-  }
+  color: ${({ theme }) => theme.color.primary[0]};
 `;
 
 export const LevelWrapper = styled.div`
@@ -98,13 +93,13 @@ export const LevelBox = styled.div`
   align-items: center;
   width: 168px;
   height: 56px;
-  border: 1px solid ${({ theme }) => theme.color.blue};
+  border: 1px solid ${({ theme }) => theme.color.primary[0]};
   border-radius: 10px;
   padding: 20px 30px;
   display: flex;
 
   &:hover {
-    background: #ecf0ff;
+    background-color: ${({ theme }) => theme.color.gray[0]};
   }
 `;
 
@@ -118,7 +113,7 @@ export const LevelBoxText = styled.span`
   font-size: 20px;
   font-weight: 600;
   letter-spacing: -0.4px;
-  color: ${({ theme }) => theme.color.blue};
+  color: ${({ theme }) => theme.color.primary[0]};
 `;
 
 export const LeveInfoText = styled.span`
@@ -129,7 +124,7 @@ export const LeveInfoText = styled.span`
   left: 88px;
   position: relative;
   margin-top: 10px;
-  color: ${({ theme }) => theme.color.blue};
+  color: ${({ theme }) => theme.color.primary[0]};
   width: 490px;
 `;
 
@@ -139,7 +134,7 @@ export const CompleteButton = styled.div`
   border-radius: 8px;
   justify-content: center;
   align-items: center;
-  background-color: ${({ theme }) => theme.color.blue};
+  background-color: ${({ theme }) => theme.color.primary[0]};
   display: flex;
   margin-top: 80px;
 `;
@@ -149,7 +144,7 @@ export const CompleteButtonText = styled.span`
   font-weight: 600;
   line-height: 24px;
 
-  color: ${({ theme }) => theme.color.white};
+  color: ${({ theme }) => theme.color.white[0]};
 `;
 
 const ServiceRegistration = () => {

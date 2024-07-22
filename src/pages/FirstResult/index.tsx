@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100%;
-  background-color: #f5f6fa;
+  background-color: ${({ theme }) => theme.color.bg[0]};
   display: flex;
   justify-content: center;
   padding-bottom: 240px;
@@ -22,7 +22,7 @@ export const HeaderWrapper = styled.div`
     font-size: 32px;
     font-weight: 500;
     letter-spacing: -0.005em;
-    color: ${({ theme }) => theme.color.gray};
+    color: ${({ theme }) => theme.color.gray[0]};
     margin-bottom: 15px;
   }
   & > span {
@@ -31,10 +31,10 @@ export const HeaderWrapper = styled.div`
     font-weight: 700;
     line-height: 44px;
     letter-spacing: -0.018em;
-    color: ${({ theme }) => theme.color.gray};
+    color: ${({ theme }) => theme.color.gray[0]};
   }
   & > span.title {
-    color: ${({ theme }) => theme.color.blue};
+    color: ${({ theme }) => theme.color.primary[0]};
   }
 `;
 
@@ -44,7 +44,7 @@ export const SummaryContainer = styled.div`
   max-width: 1200px;
   flex-grow: 1;
   height: 176px;
-  background-color: #fcfcff;
+  background-color: ${({ theme }) => theme.color.primary[6]};
   border-radius: 12px;
 `;
 
@@ -66,7 +66,7 @@ export const AnalysisTitle = styled.h3`
   font-weight: 600;
   line-height: 32px;
   letter-spacing: -0.012em;
-  color: ${({ theme }) => theme.color.gray};
+  color: ${({ theme }) => theme.color.gray[0]};
 `;
 
 export const AnalysisInfoContainer = styled.div`
@@ -80,7 +80,7 @@ export const AnalysisInfoBox = styled.div`
   width: 588px;
   height: 275px;
   border-radius: 12px;
-  background-color: ${({ theme }) => theme.color.white};
+  background-color: ${({ theme }) => theme.color.white[0]};
   overflow: auto;
   padding-top: 38px;
   padding-left: 30px;
@@ -108,7 +108,7 @@ export const ServiceGrowthstrategyTitle = styled.h3`
   font-size: 32px;
   font-weight: 600;
   letter-spacing: -0.012em;
-  color: ${({ theme }) => theme.color.gray};
+  color: ${({ theme }) => theme.color.gray[0]};
   margin-top: 80px;
   margin: 30px;
 `;
@@ -124,7 +124,7 @@ export const Strategy = styled.div`
   height: 100px;
   display: flex;
   border-radius: 8px;
-  background-color: ${({ theme }) => theme.color.white};
+  background-color: ${({ theme }) => theme.color.white[0]};
   padding: 32px 40px;
   align-items: center;
 
@@ -138,7 +138,7 @@ export const Strategy = styled.div`
     font-weight: 500;
     line-height: 22px;
     letter-spacing: -0.005em;
-    color: ${({ theme }) => theme.color.gray};
+    color: ${({ theme }) => theme.color.gray[0]};
     margin-left: 20px;
   }
 `;
@@ -158,7 +158,7 @@ export const SurveyNavTitle = styled.span`
   font-size: 36px;
   font-weight: 400;
   letter-spacing: -0.012em;
-  color: ${({ theme }) => theme.color.white};
+  color: ${({ theme }) => theme.color.white[0]};
 
   & .bold {
     font-weight: 700;
@@ -169,7 +169,7 @@ export const SurveyNavTitle = styled.span`
 export const SurveyNavButton = styled.button`
   width: 224px;
   height: 56px;
-  background-color: ${({ theme }) => theme.color.white};
+  background-color: ${({ theme }) => theme.color.white[0]};
   border-radius: 8px;
   border: none;
 `;

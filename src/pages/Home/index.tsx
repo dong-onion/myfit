@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 100dvw;
-  background-color: ${({ theme }) => theme.color.white};
+  background-color: ${({ theme }) => theme.color.white[0]};
   height: 100dvh;
   display: flex;
   justify-content: center;
@@ -24,7 +24,7 @@ export const DescriptionHeader2 = styled.span`
   font-weight: 800;
   line-height: 24px;
   letter-spacing: -0.3px;
-  color: ${({ theme }) => theme.color.blue};
+  color: ${({ theme }) => theme.color.primary[0]};
 `;
 
 export const NavigateButton = styled.div`
@@ -38,7 +38,7 @@ export const NavigateButton = styled.div`
   height: 78px;
   border-radius: 8px;
   border-width: 0;
-  background-color: ${({ theme }) => theme.color.blue};
+  background-color: ${({ theme }) => theme.color.primary[0]};
 
   //todo : hover시 색깔 변경, style 파일 분리
   &:hover {
@@ -51,7 +51,7 @@ export const ButtonText = styled.div`
   font-size: 24px;
   line-height: 24px;
   letter-spacing: -0.12px;
-  color: ${({ theme }) => theme.color.white};
+  color: ${({ theme }) => theme.color.white[0]};
   position: relative;
   left: 7px;
 `;
