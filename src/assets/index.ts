@@ -1,6 +1,9 @@
 import logo from './logo.png';
 import backArrow from './back_arrow.png';
 import starGray from './star_gray.png';
+import levelSeed from './level_seed.png';
+import levelSprout from './level_sprout.png';
+import levelTree from './level_tree.png';
 import swotStrength from './swot_strength.png';
 import swotWeakness from './swot_weakness.png';
 import swotOpportunity from './swot_opportunity.png';
@@ -20,4 +23,7 @@ export {
   strategy1,
   strategy2,
   strategy3,
+  levelSeed,
+  levelSprout,
+  levelTree,
 };
