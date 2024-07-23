@@ -1,5 +1,6 @@
 import { Button } from '@/componenets';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -39,7 +40,8 @@ export const NavigateButton = styled(Button)`
   //todo : hover시 색깔 변경, style 파일 분리
 `;
 
-export const ButtonText = styled.div`
+export const NavigateLink = styled(Link)`
+  text-decoration: none;
   font-weight: 700;
   font-size: 24px;
   line-height: 24px;
@@ -49,6 +51,8 @@ export const ButtonText = styled.div`
   left: 7px;
 `;
 
+export const ButtonText = styled.div``;
+
 export const Test = styled.button``;
 const Home = () => {
   return (
@@ -56,7 +60,9 @@ const Home = () => {
       <DescriptionHeader1>창업 아이템이 고민이라면</DescriptionHeader1>
       <DescriptionHeader2>나만의 마켓핏을 찾는 마이핏</DescriptionHeader2>
       <NavigateButton type="button">
-        <ButtonText>마켓핏 찾으러가기&nbsp;&nbsp; {`>`}</ButtonText>
+        <NavigateLink to="/swot">
+          마켓핏 찾으러가기&nbsp;&nbsp; {`>`}
+        </NavigateLink>
       </NavigateButton>
     </Container>
   );

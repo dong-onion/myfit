@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { levelSeed, levelSprout, levelTree } from '@/assets';
 import { Button } from '@/componenets';
+import useSessionStorage from '@/hooks/useSessionStorage';
+import { useNavigate } from 'react-router-dom';
 
 export const Container = styled.div`
   display: flex;
@@ -42,6 +44,7 @@ export const InputWrapper = styled.div`
   display: flex;
   align-items: center;
   margin-top: 60px;
+  position: relative;
 `;
 
 export const InputTitle = styled.h3`
@@ -72,7 +75,7 @@ export const LevelWrapper = styled.div`
   display: inline-flex;
   align-items: center;
   width: 588px;
-  margin-top: 44px;
+  margin-top: 40px;
   margin-left: 41px;
 
   & > :not(:first-child):not(:last-child) {
@@ -88,7 +91,27 @@ export const LevelTitle = styled.h3`
   text-align: right;
 `;
 
-export const LevelBox = styled.div`
+interface LimitMessageProp {
+  disabled: boolean;
+}
+
+export const CharacterLimitMessage = styled.span<LimitMessageProp>`
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 14px;
+  letter-spacing: -0.002em;
+  color: ${({ theme }) => theme.color.state[3]};
+  position: absolute;
+  top: 94px;
+  left: 138px;
+  display: ${({ disabled }) => (disabled ? 'block' : 'none')};
+`;
+
+interface LevelBoxProp {
+  selected: boolean;
+}
+
+export const LevelBox = styled.div<LevelBoxProp>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -98,9 +121,12 @@ export const LevelBox = styled.div`
   border-radius: 10px;
   padding: 20px 30px;
   display: flex;
+  background-color: ${({ theme, selected }) =>
+    selected ? theme.color.primary[0] : theme.color.white[0]};
 
   &:hover {
-    background-color: ${({ theme }) => theme.color.bg[1]};
+    background-color: ${({ theme, selected }) =>
+      selected ? theme.color.primary[0] : theme.color.bg[1]};
   }
 `;
 
@@ -110,11 +136,12 @@ export const LevelIcon = styled.img`
   margin-right: 10px;
 `;
 
-export const LevelBoxText = styled.span`
+export const LevelBoxText = styled.span<LevelBoxProp>`
   font-size: 20px;
   font-weight: 600;
   letter-spacing: -0.4px;
-  color: ${({ theme }) => theme.color.primary[0]};
+  color: ${({ theme, selected }) =>
+    selected ? theme.color.white[0] : theme.color.primary[0]};
 `;
 
 export const LeveInfoText = styled.span`
@@ -148,6 +175,33 @@ export const CompleteButtonText = styled.span`
 `;
 
 const ServiceRegistration = () => {
+  const [level, setLevel] = useState<number | null>(null);
+  const [service, setService] = useState<string>('');
+  const [, setStoredLevel] = useSessionStorage('level', level);
+  const [, setStoredService] = useSessionStorage('service', service);
+
+  const navigate = useNavigate();
+
+  const handleCompleteButtonClick = () => {
+    setStoredLevel(level);
+    setStoredService(service);
+    navigate('./result');
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setService(e.target.value);
+  };
+
+  const levelInfoText = [
+    '사업 시작 단계로 문제 이해를 위한 시장 조사, 고객 조사가 필요해요.',
+    '무럭무럭 성장하는 단계로 아이템 점검과 구체화가 필요해요.',
+    '수확을 거두는 단계로 사업을 확장하거나 방향을 전환하는 시기에요.',
+  ];
+
+  const handleClickLevelBox = (level: number) => {
+    setLevel(level);
+  };
+
   return (
     <>
       <Container>
@@ -159,28 +213,49 @@ const ServiceRegistration = () => {
           <ContentWrapper>
             <InputWrapper>
               <InputTitle>서비스명</InputTitle>
-              <Input placeholder="독거 노인들을 위한 식료품 배달 서비스" />
+              <Input
+                placeholder="독거 노인들을 위한 식료품 배달 서비스"
+                maxLength={30}
+                onChange={handleInputChange}
+                value={service}
+              />
+              <CharacterLimitMessage disabled={service.length >= 30}>
+                최대 30자까지 입력 가능합니다
+              </CharacterLimitMessage>
             </InputWrapper>
             <LevelWrapper>
               <LevelTitle>단계</LevelTitle>
-              <LevelBox>
+              <LevelBox
+                onClick={() => handleClickLevelBox(0)}
+                selected={0 === level}
+              >
                 <LevelIcon src={levelSeed} />
-                <LevelBoxText>씨앗단계</LevelBoxText>
+                <LevelBoxText selected={0 === level}>씨앗단계</LevelBoxText>
               </LevelBox>
-              <LevelBox>
+              <LevelBox
+                onClick={() => handleClickLevelBox(1)}
+                selected={1 === level}
+              >
                 <LevelIcon src={levelSprout} />
-                <LevelBoxText>새싹단계</LevelBoxText>
+                <LevelBoxText selected={1 === level}>새싹단계</LevelBoxText>
               </LevelBox>
-              <LevelBox>
+              <LevelBox
+                onClick={() => handleClickLevelBox(2)}
+                selected={2 === level}
+              >
                 <LevelIcon src={levelTree} />
-                <LevelBoxText>나무단계</LevelBoxText>
+                <LevelBoxText selected={2 === level}>나무단계</LevelBoxText>
               </LevelBox>
             </LevelWrapper>
             <LeveInfoText>
-              사업 시작 단계로 문제 이해를 위한 시장 조사, 고객 조사가 필요해요
+              {level !== null ? levelInfoText[level] : <br />}
             </LeveInfoText>
           </ContentWrapper>
-          <CompleteButton type="button">
+          <CompleteButton
+            type="button"
+            disabled={service.length === 0 || level === null}
+            onClick={handleCompleteButtonClick}
+          >
             <CompleteButtonText>완료</CompleteButtonText>
           </CompleteButton>
         </Wrapper>
