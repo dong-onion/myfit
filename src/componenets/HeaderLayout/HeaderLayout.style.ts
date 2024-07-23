@@ -4,7 +4,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 60px;
+  height: 68px;
   width: 100dvw;
   border-bottom: 1px solid ${({ theme }) => theme.color.gray[4]};
 `;
@@ -23,5 +23,5 @@ export const BackArrow = styled.img`
 `;
 
 export const OutletWrapper = styled.div`
-  height: calc(100dvh - 60px);
+  height: calc(100dvh - 68px);
 `;
