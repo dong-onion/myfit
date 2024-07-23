@@ -1,81 +1,83 @@
 import React from 'react';
 import styled from 'styled-components';
+import { HEADER_HEIGHT } from '@/utility/constants';
+import { lessThan1Minute } from '@/assets';
+import { Button } from '@/componenets';
+import { useNavigate } from 'react-router-dom';
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   height: 100%;
 `;
-export const TitleWrapper = styled.div`
-  width: 180px;
-  height: 40px;
-  background-color: #d4e2f4;
-  border-radius: 500px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-export const Title = styled.div`
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: -0.08px;
-  text-align: center;
-  color: ${({ theme }) => theme.color.gray[0]};
+
+export const Title = styled.span`
+  color: ${({ theme }) => theme.color.primary[0]};
+  margin-top: calc((100dvh - ${HEADER_HEIGHT}) * 0.24);
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 39px;
+  letter-spacing: -0.005em;
 `;
 
 export const MainDescripiton = styled.h1`
-  font-size: 60px;
-  font-weight: 800;
   color: ${({ theme }) => theme.color.primary[0]};
-  margin-top: 36px;
+  margin-top: 32px;
   line-height: 24px;
+  font-size: 65px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
 `;
 
 export const SubDescripiton1 = styled.h2`
-  font-size: 32px;
-  font-weight: 600;
-  line-height: 24px;
-  margin-top: 89px;
+  margin-top: 60px;
   color: ${({ theme }) => theme.color.gray[0]};
-`;
-export const SubDescripiton2 = styled.h2`
-  margin-top: 24px;
-  font-family: Pretendard;
   font-size: 32px;
-  font-weight: 600;
-  line-height: 24px;
+  font-weight: 500;
+  line-height: 32px;
+  letter-spacing: -0.005em;
+`;
+export const SubDescripiton2 = styled.img`
+  margin-top: 14px;
+  width: 175px;
+  height: 49px;
   color: ${({ theme }) => theme.color.gray[0]};
 `;
 
-export const StartButton = styled.button`
-  margin-top: 91px;
-  width: 282px;
+export const StartButton = styled(Button)`
+  margin-top: 100px;
+  width: 323px;
   height: 78px;
-  border-radius: 8px;
+  border-radius: 12px;
   background-color: ${({ theme }) => theme.color.primary[0]};
-  font-family: Pretendard;
+`;
+
+export const ButtonText = styled.span`
   font-size: 24px;
   font-weight: 600;
   line-height: 24px;
   text-align: center;
   color: ${({ theme }) => theme.color.white[0]};
-  border: none;
+  letter-spacing: -0.002em;
 `;
 
 const SurveyStart = () => {
+  const navigate = useNavigate();
+  const handleClickStartButton = () => {
+    navigate('/test');
+  };
   return (
     <Container>
-      <TitleWrapper>
-        <Title>창업 유형 테스트</Title>
-      </TitleWrapper>
+      <Title>창업 유형 테스트</Title>
       <MainDescripiton>나는 어떤 창업가일까?</MainDescripiton>
       <SubDescripiton1>
         유형 점검을 위한 몇가지 질문을 시작할게요
       </SubDescripiton1>
-      <SubDescripiton2>16문항 / 약 1분 소요</SubDescripiton2>
-      <StartButton>시작하기</StartButton>
+      <SubDescripiton2 src={lessThan1Minute} />
+      <StartButton type="button" onClick={handleClickStartButton}>
+        <ButtonText>시작하기</ButtonText>
+      </StartButton>
     </Container>
   );
 };

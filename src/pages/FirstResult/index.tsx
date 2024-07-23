@@ -13,10 +13,11 @@ import styled from 'styled-components';
 import { Button } from '@/componenets';
 import { useSWOTAnalysis } from '@/hooks/useSwotAnalysis';
 import { parseSWOTAnalysis } from '@/utility/utils';
+import { useNavigate } from 'react-router-dom';
 
 export const Container = styled.div`
   width: 100%;
-  background-color: ${({ theme }) => theme.color.bg[0]};
+  background-color: ${({ theme }) => theme.color.bg[1]};
   display: flex;
   justify-content: center;
   padding-bottom: 240px;
@@ -192,8 +193,8 @@ export const SurveyNavButton = styled(Button)`
 
   &:hover {
     box-shadow: 0px 4px 10px 0px #00000066;
+    color: ${({ theme }) => theme.color.primary[0]};
     border: 1px solid ${({ theme }) => theme.color.white[0]};
-    color: ${({ theme }) => theme.color.white[0]};
   }
 `;
 
@@ -212,7 +213,7 @@ const FirstResult = () => {
   const serviceDescription = JSON.parse(
     sessionStorage.getItem('serviceDescription') || '',
   );
-
+  const navigate = useNavigate();
   const {
     strength = [],
     weakness = [],
@@ -243,6 +244,10 @@ const FirstResult = () => {
     { imgSrc: swotOpportunity, alt: 'swotOpportunity', data: opportunity },
     { imgSrc: swotThreat, alt: 'swotThreat', data: threat },
   ];
+
+  const handleClickSurveyNavButton = () => {
+    navigate('/type');
+  };
 
   return (
     <Container>
@@ -287,7 +292,7 @@ const FirstResult = () => {
         <SurveyNavTitle>
           내 서비스의 <span className="bold">부족한 점</span>은 뭘까?
         </SurveyNavTitle>
-        <SurveyNavButton type="button">
+        <SurveyNavButton type="button" onClick={handleClickSurveyNavButton}>
           취약점 파악하기 <ButtonIcon src={readingGlasses} />{' '}
         </SurveyNavButton>
       </SurveyNavBar>
