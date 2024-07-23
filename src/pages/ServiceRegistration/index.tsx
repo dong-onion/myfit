@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { levelSeed, levelSprout, levelTree } from '@/assets';
 import { Button } from '@/componenets';
-import useSessionStorage from '@/hooks/useSessionStorage';
 import { useNavigate } from 'react-router-dom';
 
 export const Container = styled.div`
@@ -176,20 +175,20 @@ export const CompleteButtonText = styled.span`
 
 const ServiceRegistration = () => {
   const [level, setLevel] = useState<number | null>(null);
-  const [service, setService] = useState<string>('');
-  const [, setStoredLevel] = useSessionStorage('level', level);
-  const [, setStoredService] = useSessionStorage('service', service);
-
+  const [serviceDescription, setserviceDescription] = useState<string>('');
   const navigate = useNavigate();
 
   const handleCompleteButtonClick = () => {
-    setStoredLevel(level);
-    setStoredService(service);
+    sessionStorage.setItem('level', JSON.stringify(level) || '');
+    sessionStorage.setItem(
+      'serviceDescription',
+      JSON.stringify(serviceDescription),
+    );
     navigate('./result');
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setService(e.target.value);
+    setserviceDescription(e.target.value);
   };
 
   const levelInfoText = [
@@ -217,9 +216,9 @@ const ServiceRegistration = () => {
                 placeholder="독거 노인들을 위한 식료품 배달 서비스"
                 maxLength={30}
                 onChange={handleInputChange}
-                value={service}
+                value={serviceDescription}
               />
-              <CharacterLimitMessage disabled={service.length >= 30}>
+              <CharacterLimitMessage disabled={serviceDescription.length >= 30}>
                 최대 30자까지 입력 가능합니다
               </CharacterLimitMessage>
             </InputWrapper>
@@ -253,7 +252,7 @@ const ServiceRegistration = () => {
           </ContentWrapper>
           <CompleteButton
             type="button"
-            disabled={service.length === 0 || level === null}
+            disabled={serviceDescription.length === 0 || level === null}
             onClick={handleCompleteButtonClick}
           >
             <CompleteButtonText>완료</CompleteButtonText>

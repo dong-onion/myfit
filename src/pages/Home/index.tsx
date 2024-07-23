@@ -1,6 +1,6 @@
 import { Button } from '@/componenets';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -37,10 +37,10 @@ export const NavigateButton = styled(Button)`
   border-radius: 8px;
   background-color: ${({ theme }) => theme.color.primary[0]};
 
-  //todo : hover시 색깔 변경, style 파일 분리
+  //todo : style 파일 분리
 `;
 
-export const NavigateLink = styled(Link)`
+export const ButtonText = styled.span`
   text-decoration: none;
   font-weight: 700;
   font-size: 24px;
@@ -51,18 +51,18 @@ export const NavigateLink = styled(Link)`
   left: 7px;
 `;
 
-export const ButtonText = styled.div``;
-
 export const Test = styled.button``;
 const Home = () => {
+  const navigate = useNavigate();
+  const handleButtonClick = () => {
+    navigate('/swot');
+  };
   return (
     <Container>
       <DescriptionHeader1>창업 아이템이 고민이라면</DescriptionHeader1>
       <DescriptionHeader2>나만의 마켓핏을 찾는 마이핏</DescriptionHeader2>
-      <NavigateButton type="button">
-        <NavigateLink to="/swot">
-          마켓핏 찾으러가기&nbsp;&nbsp; {`>`}
-        </NavigateLink>
+      <NavigateButton type="button" onClick={handleButtonClick}>
+        <ButtonText>마켓핏 찾으러가기&nbsp;&nbsp; {`>`}</ButtonText>
       </NavigateButton>
     </Container>
   );

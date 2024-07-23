@@ -10,13 +10,21 @@ const HEADERS = {
   'Content-Type': 'application/json',
 };
 
-// SWOT 분석 요청을 처리하는 함수
-export const fetchSWOTAnalysis = async (serviceDescription: string) => {
+const levelDescriptions = [
+  '지금은 창업 초기 단계야. 문제 이해와 시장 조사가 필요해.',
+  '창업 성장 단계야. 사업 구체화와 아이디어 검증이 필요해.',
+  '창업 성숙 단계야. 사업 확장 또는 방향 전환을 위한 전략이 필요해.',
+];
+
+export const fetchSWOTAnalysis = async (
+  serviceDescription: string,
+  level: number,
+) => {
   const requestData = {
     messages: [
       {
         role: 'user',
-        content: `지금 구상하고 있는 사업은 ${serviceDescription}이야. 지금은 창업 초기 단계야. 문제 이해와 시장 조사가 필요해. \n
+        content: `지금 구상하고 있는 사업은 ${serviceDescription}이야.${levelDescriptions[level]} \n
         제시된 서비스를 주제로 SWOT 분석을 진행해줘.\n
         그리고 결과 내용을 바탕으로 분석 결과 요약을 200자 이내로 작성하고 , 마지막에는 서비스가 성장하기 위해 필요한 전략와 진행 방향에 대해 간결히 제안해줘.\n
         다음과 같은 형식으로 작성해줘.\n
@@ -49,6 +57,8 @@ export const fetchSWOTAnalysis = async (serviceDescription: string) => {
     const response = await axios.post(API_URL, requestData, {
       headers: HEADERS,
     });
+
+    console.log('response', response.data);
     return response.data;
   } catch (error) {
     throw new Error('Failed to get SWOT Analysis: ' + (error as Error).message);
