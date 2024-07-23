@@ -1,5 +1,14 @@
 import React from 'react';
-import { readingGlasses, strategy1, swotStrength } from '@/assets';
+import {
+  readingGlasses,
+  strategy1,
+  strategy2,
+  strategy3,
+  swotOpportunity,
+  swotStrength,
+  swotThreat,
+  swotWeakness,
+} from '@/assets';
 import styled from 'styled-components';
 import { Button } from '@/componenets';
 import { useSWOTAnalysis } from '@/hooks/useSwotAnalysis';
@@ -143,7 +152,7 @@ export const Strategy = styled.div`
     color: ${({ theme }) => theme.color.gray[0]};
     margin-left: 20px;
     position: relative;
-    top: 2px;
+    top: 2.5px;
   }
 `;
 
@@ -195,21 +204,23 @@ export const ButtonIcon = styled.img`
   bottom: 1px;
 `;
 
-const FirstResult = () => {
-  const a = [
-    '학교 앞 핫도그 장사는 좋은 위치 선정과 저렴한 가격으로 학생들의 접근성이 용이하며, 다양한 종류의 핫도그를 제공할 수 있다는 장점이 있으나, 경쟁 업체와의 경쟁에서 우위를 점해야 하며, 계절에 따른 매출 변동 가능성과 인력 부족으로 인한 서비스 품질 저하 등의 문제점을 해결해야 한다.다양한 종류의 핫도그를 제공할 수 있다는 장점이 있으나, 경쟁 업체와의 경쟁에서 우위를 점해야 하며, 계절에 따른 매출 변동 가능성과 인력 부족으로 인한 서비스 품질 저하 등의 문제점을 해결해야 한다.다양한 종류의 핫도그를 제공할 수 있다는 장점이 있으나, 경쟁 업체와의 경쟁에서 우위를 점해야 하며, 계절에 따른 매출 변동 가능성과 인력 부족으로 인한 서비스 품질 저하 등의 문제점을 해결해야 한다.',
-  ];
+const dummyData =
+  '1. 강점\n- 학교 앞이라는 좋은 위치 선정\n- 저렴한 가격으로 학생들의 접근성 용이\n- 다양한 종류의 핫도그 제공 가능\n\n2. 약점\n- 경쟁 업체 대비 차별화된 맛이나 메뉴 부족\n- 조리 시간이 오래 걸려 대기 시간이 길어질 수 있음\n- 위생 문제 발생 가능성 존재\n\n3. 기회\n- 코로나19 이후 배달 음식 수요 증가\n- SNS를 활용한 마케팅 효과 기대\n- 학교 축제나 행사 등 이벤트 참여 가능\n\n4. 위협\n- 임대료 상승으로 인한 비용 부담 증가\n- 경기 침체로 인한 소비 심리 위축\n- 식품 안전 이슈 발생 시 매출 감소 우려\n\n5. 분석 결과 요약\n학교 앞 핫도그 장사는 좋은 위치 선정과 저렴한 가격으로 학생들의 접근성이 용이하지만, 경쟁 업체 대비 차별화된 맛이나 메뉴 부족, 조리 시간이 오래 걸리는 등의 약점이 존재한다. 또한, 코로나19 이후 배달 음식 수요 증가, SNS를 활용한 마케팅 효과 기대, 학교 축제나 행사 등 이벤트 참여 가능 등의 기회가 있지만, 임대료 상승으로 인한 비용 부담 증가, 경기 침체로 인한 소비 심리 위축, 식품 안전 이슈 발생 시 매출 감소 우려 등의 위협 요인도 존재한다.\n\n6. 성장을 위한 전략과 진행 방향\n경쟁 업체와의 차별화를 위해 새로운 메뉴 개발 및 기존 메뉴 개선이 필요하다. 조리 시간 단축을 위한 조리 시스템 개선과 위생 문제 예방을 위한 철저한 위생 관리가 필요하다. 그리고 SNS를 활용한 마케팅 강화와 학교 축제나 행사 등 이벤트 참여를 통해 고객 유치 노력이 필요하며, 임대료 상승에 대비하여 수익성 향상 방안 모색해야 한다. 이를 위해서는 고객 만족도 조사를 실시하여 고객의 요구사항을 파악하고, 이를 반영한 서비스 개선이 필요하다.';
 
+const FirstResult = () => {
   const level = Number(JSON.parse(sessionStorage.getItem('level') || '0'));
   const serviceDescription = JSON.parse(
     sessionStorage.getItem('serviceDescription') || '',
   );
 
-  console.log(
-    parseSWOTAnalysis(
-      '1. 강점\n- 학교 앞이라는 좋은 위치 선정\n- 저렴한 가격으로 학생들의 접근성 용이\n- 간단한 조리법으로 빠른 시간 내에 제공 가능\n2. 약점\n- 경쟁 업체 대비 차별화된 메뉴 부족\n- 위생 문제 발생 가능성 존재\n- 인력 부족으로 인한 서비스 품질 저하 우려\n3. 기회\n- 코로나19로 인해 배달 수요 증가 예상\n- SNS를 활용한 마케팅 효과 기대\n- 대학 축제 등 이벤트 참여 시 매출 증가 가능성\n4. 위협\n- 경기 침체로 인한 소비 심리 위축\n- 임대료 상승으로 인한 수익성 악화\n- 유사 업종의 등장으로 인한 경쟁 심화\n5. 분석 결과 요약\n학교 앞 핫도그 장사는 좋은 위치 선정과 저렴한 가격으로 학생들의 접근성이 용이하지만, 경쟁 업체 대비 차별화된 메뉴 부족과 위생 문제 발생 가능성 등이 약점으로 작용할 수 있다. \n코로나19로 인한 배달 수요 증가와 SNS를 활용한 마케팅 효과 등은 기회 요인이지만, 경기 침체와 임대료 상승, 유사 업종의 등장 등은 위협 요인으로 작용할 수 있다.\n6. 성장을 위한 전략과 진행 방향\n차별화된 메뉴 개발과 위생 관리 강화, 인력 확보 등을 통해 약점을 보완하고, 고객 만족도 향상을 통한 재구매율 증가와 SNS를 활용한 마케팅 강화, 다양한 이벤트 참여 등을 통해 기회를 적극적으로 활용해야 한다. 또한, 경기 침체와 임대료 상승 등의 위협 요인에 대한 대응책 마련과 지속적인 시장 조사를 통한 경쟁력 강화가 필요하다.',
-    ),
-  );
+  const {
+    strength = [],
+    weakness = [],
+    opportunity = [],
+    threat = [],
+    result = [],
+    strategy = [],
+  } = parseSWOTAnalysis(dummyData) ?? {};
 
   // const { data, isLoading, isError } = useSWOTAnalysis(
   //   '학교 앞 핫도그 장사',
@@ -224,31 +235,38 @@ const FirstResult = () => {
   //   return <div>Error...</div>;
   // }
 
+  console.log(strategy);
+
+  const swotData = [
+    { imgSrc: swotStrength, alt: 'swotStrength', data: strength },
+    { imgSrc: swotWeakness, alt: 'swotWeakness', data: weakness },
+    { imgSrc: swotOpportunity, alt: 'swotOpportunity', data: opportunity },
+    { imgSrc: swotThreat, alt: 'swotThreat', data: threat },
+  ];
+
   return (
     <Container>
       <InnerContainer>
         <HeaderWrapper>
           <h2>서비스 SWOT 분석과 성장 전략을 제안해드려요!</h2>
-          <span className="title">학교 앞 핫도그 장사&nbsp;</span>
+          <span className="title">{serviceDescription}&nbsp;</span>
           <span>분석 결과</span>
         </HeaderWrapper>
         <SummaryContainer>
-          <SummaryWrapper>{a[0]}</SummaryWrapper>
+          <SummaryWrapper>{result}</SummaryWrapper>
         </SummaryContainer>
         <AnalysisTitle>SWOT 분석</AnalysisTitle>
         <AnalysisInfoContainer>
-          <AnalysisInfoBox>
-            <img src={swotStrength} alt="swotStrength" />
-            <ul>
-              <li>학교 앞이라는 위치적 이점 학교 앞이라는 위치적 이점 학교</li>
-              <li>학교 앞이라는 위치적 이점 학교 앞이라는 위치적 이점 학교</li>
-              <li>학교 앞이라는 위치적 이점</li>
-              <li>학교 앞이라는 위치적 이점</li>
-            </ul>
-          </AnalysisInfoBox>
-          <AnalysisInfoBox>약점</AnalysisInfoBox>
-          <AnalysisInfoBox>기회</AnalysisInfoBox>
-          <AnalysisInfoBox>위협</AnalysisInfoBox>
+          {swotData.map((item, index) => (
+            <AnalysisInfoBox key={index}>
+              <img src={item.imgSrc} alt={item.alt} />
+              <ul>
+                {item.data.map((item, index) => (
+                  <li key={index}>{item}</li>
+                ))}
+              </ul>
+            </AnalysisInfoBox>
+          ))}
         </AnalysisInfoContainer>
         <ServiceGrowthstrategyTitle>
           서비스 성장 전략 제안
@@ -256,21 +274,12 @@ const FirstResult = () => {
         <StrategyWrapper>
           <Strategy>
             <img src={strategy1} alt="strategy1" />
-            <span>
-              고객의 요구사항을 파악하여 맞춤형 서비스를 제공해야 합니다.
-            </span>
           </Strategy>
           <Strategy>
-            <img src={strategy1} alt="strategy1" />
-            <span>
-              고객의 요구사항을 파악하여 맞춤형 서비스를 제공해야 합니다.
-            </span>
+            <img src={strategy2} alt="strategy2" />
           </Strategy>
           <Strategy>
-            <img src={strategy1} alt="strategy1" />
-            <span>
-              고객의 요구사항을 파악하여 맞춤형 서비스를 제공해야 합니다.
-            </span>
+            <img src={strategy3} alt="strategy3" />
           </Strategy>
         </StrategyWrapper>
       </InnerContainer>
