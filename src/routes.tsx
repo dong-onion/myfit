@@ -1,11 +1,8 @@
 import React from 'react';
 
 import { RouteObject } from 'react-router-dom';
-import Home from './pages/Home';
 import { HeaderLayout } from './componenets';
-import ServiceRegistration from './pages/ServiceRegistration';
-import SurveyStart from './pages/SurveyStart';
-import FirstResult from './pages/FirstResult';
+import { FirstResult, Home, ServiceRegistration, SurveyStart } from './pages';
 
 export const routes: RouteObject[] = [
   { path: '', element: <Home />, errorElement: <div>Not Found</div> },

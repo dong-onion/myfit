@@ -1,6 +1,7 @@
-import { strategy1, swotStrength } from '@/assets';
 import React from 'react';
+import { readingGlasses, strategy1, swotStrength } from '@/assets';
 import styled from 'styled-components';
+import { Button } from '@/componenets';
 
 export const Container = styled.div`
   width: 100%;
@@ -166,12 +167,29 @@ export const SurveyNavTitle = styled.span`
   margin-right: 30px;
 `;
 
-export const SurveyNavButton = styled.button`
+export const SurveyNavButton = styled(Button)`
   width: 224px;
   height: 56px;
   background-color: ${({ theme }) => theme.color.white[0]};
   border-radius: 8px;
-  border: none;
+  gap: 10px;
+  color: ${({ theme }) => theme.color.primary[0]};
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.002em;
+
+  &:hover {
+    box-shadow: 0px 4px 10px 0px #00000066;
+    border: 1px solid ${({ theme }) => theme.color.white[0]};
+    color: ${({ theme }) => theme.color.white[0]};
+  }
+`;
+
+export const ButtonIcon = styled.img`
+  width: 28px;
+  height: 28px;
+  position: relative;
+  bottom: 1px;
 `;
 
 const FirstResult = () => {
@@ -233,7 +251,9 @@ const FirstResult = () => {
         <SurveyNavTitle>
           내 서비스의 <span className="bold">부족한 점</span>은 뭘까?
         </SurveyNavTitle>
-        <SurveyNavButton>취약점 파악하기</SurveyNavButton>
+        <SurveyNavButton type="button">
+          취약점 파악하기 <ButtonIcon src={readingGlasses} />{' '}
+        </SurveyNavButton>
       </SurveyNavBar>
     </Container>
   );

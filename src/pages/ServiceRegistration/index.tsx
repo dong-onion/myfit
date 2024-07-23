@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { levelSeed, levelSprout, levelTree } from '@/assets';
+import { Button } from '@/componenets';
 
 export const Container = styled.div`
   display: flex;
@@ -99,7 +100,7 @@ export const LevelBox = styled.div`
   display: flex;
 
   &:hover {
-    background-color: ${({ theme }) => theme.color.gray[0]};
+    background-color: ${({ theme }) => theme.color.bg[1]};
   }
 `;
 
@@ -121,21 +122,20 @@ export const LeveInfoText = styled.span`
   font-weight: 500;
   line-height: 24px;
   letter-spacing: -0.005em;
-  left: 88px;
+  left: 106px;
   position: relative;
   margin-top: 10px;
   color: ${({ theme }) => theme.color.primary[0]};
   width: 490px;
 `;
 
-export const CompleteButton = styled.div`
+export const CompleteButton = styled(Button)`
   width: 300px;
   height: 78px;
   border-radius: 8px;
   justify-content: center;
   align-items: center;
   background-color: ${({ theme }) => theme.color.primary[0]};
-  display: flex;
   margin-top: 80px;
 `;
 
@@ -180,7 +180,7 @@ const ServiceRegistration = () => {
               사업 시작 단계로 문제 이해를 위한 시장 조사, 고객 조사가 필요해요
             </LeveInfoText>
           </ContentWrapper>
-          <CompleteButton>
+          <CompleteButton type="button">
             <CompleteButtonText>완료</CompleteButtonText>
           </CompleteButton>
         </Wrapper>
