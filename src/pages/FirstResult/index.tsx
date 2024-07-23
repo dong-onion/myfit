@@ -157,7 +157,7 @@ export const Strategy = styled.div`
   }
 `;
 
-export const SurveyNavBar = styled.div`
+export const TestNavBar = styled.div`
   width: 100%;
   height: 120px;
   background: linear-gradient(270deg, #6f56ff 0%, #4865ff 100%);
@@ -168,7 +168,7 @@ export const SurveyNavBar = styled.div`
   bottom: 0;
 `;
 
-export const SurveyNavTitle = styled.span`
+export const TestNavTitle = styled.span`
   font-size: 36px;
   font-weight: 400;
   letter-spacing: -0.012em;
@@ -180,7 +180,7 @@ export const SurveyNavTitle = styled.span`
   margin-right: 30px;
 `;
 
-export const SurveyNavButton = styled(Button)`
+export const TestNavButton = styled(Button)`
   width: 224px;
   height: 56px;
   background-color: ${({ theme }) => theme.color.white[0]};
@@ -245,7 +245,7 @@ const FirstResult = () => {
     { imgSrc: swotThreat, alt: 'swotThreat', data: threat },
   ];
 
-  const handleClickSurveyNavButton = () => {
+  const handleClickTestNavButton = () => {
     navigate('/type');
   };
 
@@ -288,14 +288,14 @@ const FirstResult = () => {
           </Strategy>
         </StrategyWrapper>
       </InnerContainer>
-      <SurveyNavBar>
-        <SurveyNavTitle>
+      <TestNavBar>
+        <TestNavTitle>
           내 서비스의 <span className="bold">부족한 점</span>은 뭘까?
-        </SurveyNavTitle>
-        <SurveyNavButton type="button" onClick={handleClickSurveyNavButton}>
+        </TestNavTitle>
+        <TestNavButton type="button" onClick={handleClickTestNavButton}>
           취약점 파악하기 <ButtonIcon src={readingGlasses} />{' '}
-        </SurveyNavButton>
-      </SurveyNavBar>
+        </TestNavButton>
+      </TestNavBar>
     </Container>
   );
 };
