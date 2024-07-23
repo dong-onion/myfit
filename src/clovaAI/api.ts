@@ -1,16 +1,18 @@
 import axios from 'axios';
 
-const url =
+const API_URL =
   'https://clovastudio.stream.ntruss.com/testapp/v1/chat-completions/HCX-003';
-const headers = {
+const HEADERS = {
   'X-NCP-CLOVASTUDIO-API-KEY':
     'NTA0MjU2MWZlZTcxNDJiY8fwswjOopDqr75p2g5JJCDKUgw0DjuqdI/p3XyI+x4T',
   'X-NCP-APIGW-API-KEY': 'WqDLRGl7mz79mruN8azOuq4UWxpdT6SP6FAuv4RT',
   'X-NCP-CLOVASTUDIO-REQUEST-ID': '943f9d7f-0dd2-44fe-a5a0-9d2bbc416e73',
   'Content-Type': 'application/json',
 };
-export const getSWOTAnalysis = async (serviceDescription: string) => {
-  const data = {
+
+// SWOT 분석 요청을 처리하는 함수
+export const fetchSWOTAnalysis = async (serviceDescription: string) => {
+  const requestData = {
     messages: [
       {
         role: 'user',
@@ -43,25 +45,12 @@ export const getSWOTAnalysis = async (serviceDescription: string) => {
     seed: 0,
   };
 
-  const response = await axios.post(url, data, { headers }).catch((error) => {
-    throw new Error('Failed to get SWOT Analysis:', error);
-  });
-
-  console.log(response.data);
-
-  const content = response.data.result.message.content;
-  const contentArray = content.split('\n\n');
-  if (contentArray.length !== 6) {
-    console.error('SWOT Analysis content is not in the right format');
-    return;
+  try {
+    const response = await axios.post(API_URL, requestData, {
+      headers: HEADERS,
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error('Failed to get SWOT Analysis: ' + (error as Error).message);
   }
-
-  const strength = contentArray[0].split('\n').slice(1).join('\n');
-  const weakness = contentArray[1].split('\n').slice(1).join('\n');
-  const opportunity = contentArray[2].split('\n').slice(1).join('\n');
-  const threat = contentArray[3].split('\n').slice(1).join('\n');
-  const result = contentArray[4].split('\n').slice(1).join('\n');
-  const strategy = contentArray[5].split('\n').slice(1).join('\n');
-
-  return { strength, weakness, opportunity, threat, result, strategy };
 };

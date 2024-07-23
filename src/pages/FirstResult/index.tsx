@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { readingGlasses, strategy1, swotStrength } from '@/assets';
 import styled from 'styled-components';
 import { Button } from '@/componenets';
@@ -137,10 +137,11 @@ export const Strategy = styled.div`
   & > span {
     font-size: 22px;
     font-weight: 500;
-    line-height: 22px;
     letter-spacing: -0.005em;
     color: ${({ theme }) => theme.color.gray[0]};
     margin-left: 20px;
+    position: relative;
+    top: 2px;
   }
 `;
 
@@ -196,6 +197,10 @@ const FirstResult = () => {
   const a = [
     '학교 앞 핫도그 장사는 좋은 위치 선정과 저렴한 가격으로 학생들의 접근성이 용이하며, 다양한 종류의 핫도그를 제공할 수 있다는 장점이 있으나, 경쟁 업체와의 경쟁에서 우위를 점해야 하며, 계절에 따른 매출 변동 가능성과 인력 부족으로 인한 서비스 품질 저하 등의 문제점을 해결해야 한다.다양한 종류의 핫도그를 제공할 수 있다는 장점이 있으나, 경쟁 업체와의 경쟁에서 우위를 점해야 하며, 계절에 따른 매출 변동 가능성과 인력 부족으로 인한 서비스 품질 저하 등의 문제점을 해결해야 한다.다양한 종류의 핫도그를 제공할 수 있다는 장점이 있으나, 경쟁 업체와의 경쟁에서 우위를 점해야 하며, 계절에 따른 매출 변동 가능성과 인력 부족으로 인한 서비스 품질 저하 등의 문제점을 해결해야 한다.',
   ];
+
+  useEffect(() => {
+    //
+  }, []);
 
   return (
     <Container>
