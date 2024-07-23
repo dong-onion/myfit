@@ -11,6 +11,7 @@ import swotThreat from './swot_threat.png';
 import strategy1 from './strategy1.png';
 import strategy2 from './strategy2.png';
 import strategy3 from './strategy3.png';
+import readingGlasses from './reading_glasses.png';
 
 export {
   logo,
@@ -26,4 +27,5 @@ export {
   levelSeed,
   levelSprout,
   levelTree,
+  readingGlasses,
 };
