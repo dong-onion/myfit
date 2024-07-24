@@ -65,7 +65,7 @@ export const ButtonText = styled.span`
 const TestStart = () => {
   const navigate = useNavigate();
   const handleClickStartButton = () => {
-    navigate('/test');
+    navigate('./test');
   };
   return (
     <Container>
