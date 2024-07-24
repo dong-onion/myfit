@@ -11,7 +11,6 @@ interface SWOTAnalysisResponse {
   };
 }
 
-// SWOT 분석 훅
 export const useSWOTAnalysis = (serviceDescription: string, level: number) => {
   const { data, isLoading, isError } = useQuery<SWOTAnalysis, Error>(
     [queryKeys.SWOT_ANALYSIS, serviceDescription],

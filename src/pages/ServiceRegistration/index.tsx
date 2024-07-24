@@ -56,15 +56,15 @@ export const InputTitle = styled.h3`
   text-align: center;
 `;
 
-export const Input = styled.input`
-  //todo media query로 반응형으로 만들기
+export const Input = styled.input<{ $focus: boolean }>`
   // focus 되면 border-color, background color bg[0]으로 바꾸기
   max-width: 792px;
   height: 84px;
   flex-grow: 1;
   border: 1px solid ${({ theme }) => theme.color.primary[0]};
   border-radius: 10px;
-  background-color: #f5f5f5;
+  background-color: ${({ $focus, theme }) =>
+    $focus ? theme.color.bg[0] : '#f5f5f5'};
   padding: 30px 32px;
   font-size: 24px;
   font-weight: 600;
@@ -185,6 +185,7 @@ export const CompleteButtonText = styled.span`
 const ServiceRegistration = () => {
   const [level, setLevel] = useState<number | null>(null);
   const [serviceDescription, setserviceDescription] = useState<string>('');
+  const [inputFocus, setInputFocus] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const handleCompleteButtonClick = () => {
@@ -226,6 +227,9 @@ const ServiceRegistration = () => {
                 maxLength={30}
                 onChange={handleInputChange}
                 value={serviceDescription}
+                onFocus={() => setInputFocus(true)}
+                onBlur={() => setInputFocus(false)}
+                $focus={inputFocus}
               />
               <CharacterLimitMessage disabled={serviceDescription.length >= 30}>
                 최대 30자까지 입력 가능합니다
