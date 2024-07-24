@@ -72,7 +72,7 @@ export const fetchSWOTAnalysis = async (
   };
 
   try {
-    const response = await axios.post(API_URL, requestData, {
+    const response = await axios.post(API_URL as string, requestData, {
       headers: HEADERS,
     });
 
