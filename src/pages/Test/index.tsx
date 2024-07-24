@@ -2,7 +2,7 @@ import React, { useCallback, useRef, useState } from 'react';
 import styled from 'styled-components';
 import RatingCheckbox from './components/RatingCheckbox';
 import ProgressBar from './components/ProgressBar';
-import { Button } from '@/componenets';
+import { Button } from '@/components';
 
 export const Container = styled.div`
   height: 100%;
@@ -115,7 +115,7 @@ export const SubmittButton = styled(Button)<{ $isVisible: boolean }>`
   &:disabled,
   &:disabled:hover {
     transition: none;
-    transform: scale(1);
+    transform: translate(-50%, -50%);
     box-shadow: none;
   }
 `;

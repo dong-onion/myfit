@@ -10,6 +10,7 @@
     "@types/node": "^16.11.36",
     "@types/react": "^18.0.9",
     "@types/react-dom": "^18.0.5",
+    "@vercel/node": "^3.2.7",
     "axios": "^1.7.2",
     "dotenv": "^16.4.5",
     "react": "^18.1.0",
@@ -25,7 +26,8 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build-api": "tsc"
   },
   "eslintConfig": {
     "extends": [
@@ -56,5 +58,6 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.30.0",
     "prettier": "^2.6.2"
-  }
+  },
+  "type": "module"
 }

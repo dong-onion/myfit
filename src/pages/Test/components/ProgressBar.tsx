@@ -5,7 +5,7 @@ const ProgressBarContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 123px;
+  height: 8%;
   background-color: ${({ theme }) => theme.color.gray[5]};
   justify-content: center;
   position: relative;

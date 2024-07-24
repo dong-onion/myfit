@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { levelSeed, levelSprout, levelTree } from '@/assets';
-import { Button } from '@/componenets';
+import { Button } from '@/components';
 import { useNavigate } from 'react-router-dom';
 
 export const Container = styled.div`

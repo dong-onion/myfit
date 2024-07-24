@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { RouteObject } from 'react-router-dom';
-import { HeaderLayout } from './componenets';
+import { HeaderLayout } from './components';
 import {
   FirstResult,
   Home,

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { HEADER_HEIGHT } from '@/utility/constants';
 import { lessThan1Minute, testStartBackground } from '@/assets';
-import { Button } from '@/componenets';
+import { Button } from '@/components';
 import { useNavigate } from 'react-router-dom';
 
 export const Container = styled.div`
