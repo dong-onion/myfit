@@ -39,6 +39,7 @@ const ProgressText = styled.span`
   font-family: Montserrat;
   font-size: 24px;
   font-weight: 600;
+  font-family: 'Pretendard-SemiBold';
   letter-spacing: -0.005em;
   color: ${({ theme }) => theme.color.gray[0]};
 `;

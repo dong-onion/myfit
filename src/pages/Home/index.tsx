@@ -16,6 +16,7 @@ export const Container = styled.div`
 export const DescriptionHeader1 = styled.span`
   font-size: 60px;
   font-weight: 500;
+  font-family: 'Pretendard-Medium';
   line-height: 24px;
   letter-spacing: -0.3px;
   margin-bottom: 62px;
@@ -24,6 +25,7 @@ export const DescriptionHeader1 = styled.span`
 export const DescriptionHeader2 = styled.span`
   font-size: 60px;
   font-weight: 800;
+  font-family: 'Pretendard-ExtraBold';
   line-height: 24px;
   letter-spacing: -0.3px;
   color: ${({ theme }) => theme.color.primary[0]};
@@ -43,6 +45,7 @@ export const NavigateButton = styled(Button)`
 export const ButtonText = styled.span`
   text-decoration: none;
   font-weight: 700;
+  font-family: 'Pretendard-Bold';
   font-size: 24px;
   line-height: 24px;
   letter-spacing: -0.12px;

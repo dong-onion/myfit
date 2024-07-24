@@ -50,6 +50,7 @@ export const BlankContainer = styled(QuestionContainer)<{
 export const QuestionMainText = styled.div`
   font-size: 32px;
   font-weight: 600;
+  font-family: 'Pretendard-SemiBold';
   letter-spacing: -0.012em;
   text-align: center;
   color: ${({ theme }) => theme.color.gray[0]};
@@ -58,6 +59,7 @@ export const QuestionMainText = styled.div`
 export const QuestionSubText = styled.span`
   font-size: 22px;
   font-weight: 500;
+  font-family: 'Pretendard-Medium';
   letter-spacing: -0.005em;
   color: ${({ theme }) => theme.color.gray[0]};
   top: 48px;
@@ -83,6 +85,7 @@ export const CheckboxContainer = styled.div`
 export const CheckInfoText = styled.span`
   font-size: 24px;
   font-weight: 600;
+  font-family: 'Pretendard-SemiBold';
   line-height: 24px;
   letter-spacing: -0.005em;
   color: ${({ theme }) => theme.color.gray[0]};
@@ -120,6 +123,7 @@ export const SubmittButton = styled(Button)<{ $isVisible: boolean }>`
 export const SubmittButtonText = styled.span`
   font-size: 24px;
   font-weight: 600;
+  font-family: 'Pretendard-SemiBold';
   letter-spacing: -0.002em;
   text-align: center;
   color: ${({ theme }) => theme.color.white[0]};

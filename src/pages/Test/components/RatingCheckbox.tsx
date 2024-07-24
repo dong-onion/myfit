@@ -38,6 +38,7 @@ const RatingText = styled.span`
   font-family: Montserrat;
   font-size: 32px;
   font-weight: 600;
+  font-family: 'Pretendard-SemiBold';
   letter-spacing: -0.012em;
   text-align: center;
   color: ${({ theme }) => theme.color.white[0]};

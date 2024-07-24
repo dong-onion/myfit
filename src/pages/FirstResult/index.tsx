@@ -34,6 +34,7 @@ export const HeaderWrapper = styled.div`
   & > h2 {
     font-size: 32px;
     font-weight: 500;
+    font-family: 'Pretendard-Medium';
     letter-spacing: -0.005em;
     color: ${({ theme }) => theme.color.gray[0]};
     margin-bottom: 15px;
@@ -42,6 +43,7 @@ export const HeaderWrapper = styled.div`
     font-family: Pretendard;
     font-size: 44px;
     font-weight: 700;
+    font-family: 'Pretendard-Bold';
     line-height: 44px;
     letter-spacing: -0.018em;
     color: ${({ theme }) => theme.color.gray[0]};
@@ -67,6 +69,7 @@ export const SummaryWrapper = styled.div`
   overflow: auto; /* 넘치는 내용 숨기기 */
   font-size: 22px;
   font-weight: 500;
+  font-family: 'Pretendard-Medium';
   line-height: 35.2px;
   width: 100%;
   height: 100%;
@@ -77,6 +80,7 @@ export const AnalysisTitle = styled.h3`
   margin-top: 81px;
   font-size: 32px;
   font-weight: 600;
+  font-family: 'Pretendard-SemiBold';
   line-height: 32px;
   letter-spacing: -0.012em;
   color: ${({ theme }) => theme.color.gray[0]};
@@ -112,6 +116,7 @@ export const AnalysisInfoBox = styled.div`
   & li {
     font-size: 22px;
     font-weight: 500;
+    font-family: 'Pretendard-Medium';
     line-height: 35.2px;
     letter-spacing: -0.005em;
   }
@@ -120,6 +125,7 @@ export const AnalysisInfoBox = styled.div`
 export const ServiceGrowthstrategyTitle = styled.h3`
   font-size: 32px;
   font-weight: 600;
+  font-family: 'Pretendard-SemiBold';
   letter-spacing: -0.012em;
   color: ${({ theme }) => theme.color.gray[0]};
   margin-top: 80px;
@@ -149,6 +155,8 @@ export const Strategy = styled.div`
   & > span {
     font-size: 22px;
     font-weight: 500;
+    font-family: 'Pretendard-Medium';
+
     letter-spacing: -0.005em;
     color: ${({ theme }) => theme.color.gray[0]};
     margin-left: 20px;
@@ -171,12 +179,13 @@ export const TestNavBar = styled.div`
 export const TestNavTitle = styled.span`
   font-size: 36px;
   font-weight: 400;
+  font-family: 'Pretendard-Regular';
   letter-spacing: -0.012em;
   color: ${({ theme }) => theme.color.white[0]};
 
   & .bold {
     font-weight: 700;
-    font-family: 'Pretendard';
+    font-family: 'Pretendard-Bold';
   }
   margin-right: 30px;
 `;
@@ -190,6 +199,7 @@ export const TestNavButton = styled(Button)`
   color: ${({ theme }) => theme.color.primary[0]};
   font-size: 20px;
   font-weight: 600;
+  font-family: 'Pretendard-SemiBold';
   letter-spacing: -0.002em;
 
   &:hover {

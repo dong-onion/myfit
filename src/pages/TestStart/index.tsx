@@ -21,6 +21,7 @@ export const Title = styled.span`
   margin-top: calc((100dvh - ${HEADER_HEIGHT}) * 0.24);
   font-size: 26px;
   font-weight: 600;
+  font-family: 'Pretendard-SemiBold';
   line-height: 39px;
   letter-spacing: -0.005em;
 `;
@@ -31,6 +32,7 @@ export const MainDescripiton = styled.h1`
   line-height: 24px;
   font-size: 65px;
   font-weight: 800;
+  font-family: 'Pretendard-ExtraBold';
   letter-spacing: -0.02em;
 `;
 
@@ -39,6 +41,7 @@ export const SubDescripiton1 = styled.h2`
   color: ${({ theme }) => theme.color.gray[0]};
   font-size: 32px;
   font-weight: 500;
+  font-family: 'Pretendard-Medium';
   line-height: 32px;
   letter-spacing: -0.005em;
 `;
@@ -60,6 +63,7 @@ export const StartButton = styled(Button)`
 export const ButtonText = styled.span`
   font-size: 24px;
   font-weight: 600;
+  font-family: 'Pretendard-SemiBold';
   line-height: 24px;
   text-align: center;
   color: ${({ theme }) => theme.color.white[0]};

@@ -22,6 +22,7 @@ export const Wrapper = styled.div`
 export const Title = styled.h1`
   font-size: 38px;
   font-weight: 700;
+  font-family: 'Pretendard-Bold';
   color: ${({ theme }) => theme.color.gray[0]};
 `;
 
@@ -29,6 +30,7 @@ export const SubTitle = styled.h2`
   margin-top: 33px;
   font-size: 24px;
   font-weight: 500;
+  font-family: 'Pretendard-Medium';
   line-height: 24px;
   color: ${({ theme }) => theme.color.gray[0]};
 `;
@@ -50,6 +52,7 @@ export const InputTitle = styled.h3`
   margin-right: 22px;
   font-size: 24px;
   font-weight: 600;
+  font-family: 'Pretendard-SemiBold';
   text-align: center;
 `;
 
@@ -65,6 +68,7 @@ export const Input = styled.input`
   padding: 30px 32px;
   font-size: 24px;
   font-weight: 600;
+  font-family: 'Pretendard-SemiBold';
   line-height: 24px;
   letter-spacing: -0.12px;
   color: ${({ theme }) => theme.color.primary[0]};
@@ -86,6 +90,7 @@ export const LevelTitle = styled.h3`
   margin-right: 22px;
   font-size: 24px;
   font-weight: 600;
+  font-family: 'Pretendard-SemiBold';
   line-height: 24px;
   text-align: right;
 `;
@@ -97,6 +102,7 @@ interface LimitMessageProp {
 export const CharacterLimitMessage = styled.span<LimitMessageProp>`
   font-size: 14px;
   font-weight: 500;
+  font-family: 'Pretendard-Medium';
   line-height: 14px;
   letter-spacing: -0.002em;
   color: ${({ theme }) => theme.color.state[3]};
@@ -138,6 +144,7 @@ export const LevelIcon = styled.img`
 export const LevelBoxText = styled.span<LevelBoxProp>`
   font-size: 20px;
   font-weight: 600;
+  font-family: 'Pretendard-SemiBold';
   letter-spacing: -0.4px;
   color: ${({ theme, selected }) =>
     selected ? theme.color.white[0] : theme.color.primary[0]};
@@ -146,6 +153,7 @@ export const LevelBoxText = styled.span<LevelBoxProp>`
 export const LeveInfoText = styled.span`
   font-size: 18px;
   font-weight: 500;
+  font-family: 'Pretendard-Medium';
   line-height: 24px;
   letter-spacing: -0.005em;
   left: 106px;
@@ -168,6 +176,7 @@ export const CompleteButton = styled(Button)`
 export const CompleteButtonText = styled.span`
   font-size: 24px;
   font-weight: 600;
+  font-family: 'Pretendard-SemiBold';
   line-height: 24px;
 
   color: ${({ theme }) => theme.color.white[0]};
