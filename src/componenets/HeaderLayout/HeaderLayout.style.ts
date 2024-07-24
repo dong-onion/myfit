@@ -7,6 +7,8 @@ export const Container = styled.div`
   height: 68px;
   width: 100dvw;
   border-bottom: 1px solid ${({ theme }) => theme.color.gray[4]};
+  position: relative;
+  z-index: 1000;
 `;
 
 export const Logo = styled.img`

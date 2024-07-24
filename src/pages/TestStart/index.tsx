@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { HEADER_HEIGHT } from '@/utility/constants';
-import { lessThan1Minute } from '@/assets';
+import { lessThan1Minute, testStartBackground } from '@/assets';
 import { Button } from '@/componenets';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,6 +10,10 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   height: 100%;
+  background-image: url(${testStartBackground});
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 `;
 
 export const Title = styled.span`
