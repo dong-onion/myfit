@@ -13,7 +13,7 @@ import strategy2 from './strategy2.png';
 import strategy3 from './strategy3.png';
 import readingGlasses from './reading_glasses.png';
 import lessThan1Minute from './less_than_1minute.png';
-
+import testStartBackground from './test_start_background.png';
 export {
   logo,
   backArrow,
@@ -30,4 +30,5 @@ export {
   levelTree,
   readingGlasses,
   lessThan1Minute,
+  testStartBackground,
 };

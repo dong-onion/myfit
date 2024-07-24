@@ -1,5 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import styled from 'styled-components';
+import RatingCheckbox from './components/RatingCheckbox';
+import ProgressBar from './components/ProgressBar';
+import { Button } from '@/componenets';
 
 export const Container = styled.div`
   height: 100%;
@@ -7,36 +10,44 @@ export const Container = styled.div`
 
 export const ProgressBarContainer = styled.div`
   width: 100%;
-  height: 123px;
   display: flex;
-  flex-grow: 1;
   justify-content: center;
   align-items: center;
   background-color: #f5f5f5;
+  position: relative;
+  z-index: 1;
 `;
 
-export const ProgressBar = styled.div`
-  width: 60%;
-  max-width: 1120px;
-  height: 16px;
-  border-radius: 500px;
-  background-color: green;
+export const QuestionsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: calc(100% - 123px);
+  position: absolute;
+  align-items: center;
+  top: 68px;
+  gap: 10%;
 `;
 
-export const QuestionContainer = styled.div<{ isFocused: boolean }>`
+export const QuestionContainer = styled.div<{ $isFocused: boolean }>`
   width: 100%;
   max-width: 1015px;
   height: 214px;
-  flex-grow: 1;
-  background-color: ${({ theme, isFocused }) =>
-    isFocused ? theme.color.primary[0] : theme.color.bg[1]};
-  margin: 30px auto;
   position: relative;
   display: flex;
   justify-content: center;
+  opacity: ${({ $isFocused }) => ($isFocused ? 1 : 0.4)};
+  // blur 처리
+  filter: ${({ $isFocused }) => ($isFocused ? 'none' : 'blur(2px)')};
 `;
 
-export const QuestionMainText = styled.span`
+export const BlankContainer = styled(QuestionContainer)<{
+  $isVisible: boolean;
+}>`
+  display: ${({ $isVisible }) => ($isVisible ? 'flex' : 'none')};
+`;
+
+export const QuestionMainText = styled.div`
   font-size: 32px;
   font-weight: 600;
   letter-spacing: -0.012em;
@@ -49,10 +60,70 @@ export const QuestionSubText = styled.span`
   font-weight: 500;
   letter-spacing: -0.005em;
   color: ${({ theme }) => theme.color.gray[0]};
-  //todo 여기 디스플레이 none할지 position absolute로 할지 고민
+  top: 48px;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 144px;
+  right: 0;
 `;
 
-export const QuestionCheckBox = styled.input``;
+export const CheckboxContainer = styled.div`
+  width: 100%;
+  height: 78px;
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const CheckInfoText = styled.span`
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -0.005em;
+  color: ${({ theme }) => theme.color.gray[0]};
+`;
+
+export const SubmittButton = styled(Button)<{ $isVisible: boolean }>`
+  width: 282px;
+  height: 78px;
+  border-radius: 12px;
+  background-color: ${({ theme }) => theme.color.primary[0]};
+  position: absolute;
+  bottom: 10%;
+  left: calc(50% + 16%);
+  transform: translate(-50%, -50%);
+  right: 0;
+  display: ${({ $isVisible }) => ($isVisible ? 'flex' : 'none')};
+
+  &:hover {
+    transition: 0.25s;
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+
+  &:active {
+    transition: none;
+  }
+
+  &:disabled,
+  &:disabled:hover {
+    transition: none;
+    transform: scale(1);
+    box-shadow: none;
+  }
+`;
+
+export const SubmittButtonText = styled.span`
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.002em;
+  text-align: center;
+  color: ${({ theme }) => theme.color.white[0]};
+`;
 
 const questions: { [key: number]: string[] } = {
   0: ['현재 창업 아이템은 초기 아이디어에서 많이 변경되었다.'],
@@ -91,65 +162,128 @@ const questions: { [key: number]: string[] } = {
 const Test = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const questionRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [totalScores, setTotalScores] = useState<(number | null)[]>(
+    Array.from({ length: Object.keys(questions).length }, () => null),
+  );
 
-  const handleClickQuestion = (index: number) => {
-    // 원래는 체크 돼있는 경우만 다음 질문으로 넘어가도록 해야함
-    //todo isFocused 저거 왜 난리인지 확인
-    // checkbox 저거 styled-componet로 변경
-    // sessiong storage에 객체로 값 저장하고 나중에 꺼내서 합산
-    setCurrentIndex(index);
+  const handleClickQuestionContainer = (index: number) => {
+    // 여기는 이전 질문으로 만 이동 할수 있게하는것, 점수 추가 및 다음 질문으로 보내기는 다른 함수로 분리해야함, 1번에서 마지막번호 안가게 해야함
+    // 근데 total score에 값이 있으면 (이전에 점수 체크한 기록이 있으면) 다음 질문으로 이동 가능
+    if (index === currentIndex - 1) {
+      setCurrentIndex((prev) => prev - 1);
+    } else if (totalScores[index] !== null && index - 1 === currentIndex) {
+      // 점수 체크하고 이전으로 돌아갔다가 다시 체크한 컨테이너를 누른 경우
+      setCurrentIndex((prev) => prev + 1);
+    } else if (
+      totalScores[index] === null &&
+      totalScores[currentIndex] !== null
+    ) {
+      // 이전 컨테이너에서 점수 체크한 컨테이너로 다시 왔는데, 다음 컨테이너 점수가 체크되지 않은 경우, 한번더 점수를 체크해야 해서 만든 케이스
+
+      setCurrentIndex((prev) => prev + 1);
+    }
   };
 
   const handleNextFocus = () => {
-    const nextIndex = (currentIndex + 1) % Object.keys(questions).length;
-    if (questionRefs.current[nextIndex]) {
-      questionRefs.current[nextIndex]?.focus();
+    // 마지막 질문이면 실행되지 않기
+    if (currentIndex === Object.keys(questions).length - 1) {
+      return;
     }
 
-    setCurrentIndex(nextIndex);
+    setCurrentIndex(currentIndex + 1);
   };
 
+  const handleClickScore = (score: number, index: number) => {
+    // 점수 추가 및 다음으로 이동, score는 session storage에 저장
+    const newTotalScores = [...totalScores];
+    newTotalScores[index] = score;
+    setTotalScores(newTotalScores);
+
+    handleNextFocus();
+  };
+
+  const handleSubmitt = () => {
+    // 세션 스토리지로 totalScores 저장
+    sessionStorage.setItem('totalScores', JSON.stringify(totalScores));
+  };
+
+  const submmitButtonVisible =
+    currentIndex === Object.keys(questions).length - 1;
+
   const items = Array.from(
-    // { length: Object.keys(questions).length },
-    { length: 7 },
+    { length: Object.keys(questions).length },
     (_, i) => (
       <QuestionContainer
         key={i}
         ref={(el: HTMLDivElement) => (questionRefs.current[i] = el)}
-        isFocused={currentIndex === i}
-        onClick={() => handleClickQuestion(i)}
+        $isFocused={currentIndex === i}
+        onClick={() => handleClickQuestionContainer(i)}
       >
         <QuestionMainText>
           {questions[i][0]}
-          <QuestionCheckBox type="checkbox" />
+          {questions[i].length > 1 && (
+            <QuestionSubText>{questions[i][1]}</QuestionSubText>
+          )}
+          <CheckboxContainer>
+            <CheckInfoText>매우 그렇지 않다</CheckInfoText>
+            <RatingCheckbox
+              currentScore={totalScores[i]}
+              myIndex={i}
+              currentIndex={currentIndex}
+              handleClickScore={handleClickScore}
+            />
+            <CheckInfoText>매우 그렇다</CheckInfoText>
+          </CheckboxContainer>
         </QuestionMainText>
       </QuestionContainer>
     ),
   );
 
   const getVisibleItems = () => {
-    // Show two items at the start
+    // 처음 단계에서는 첫번째 두개의 아이템 보여줌
     if (currentIndex === 0) {
       return items.slice(0, 2);
     }
-    // Show three items in the middle
+
+    // 중간 단계에서는 현재 인덱스를 기준으로 앞뒤로 아이템 두개씩 보여줌
     if (currentIndex > 0 && currentIndex < items.length - 1) {
       return items.slice(currentIndex - 1, currentIndex + 2);
     }
 
-    // show two items at the end
+    // 마지막 단계에서는 마지막 두개의 아이템 보여줌
     return items.slice(-2);
   };
 
+  const getMaximumProgress = useCallback(() => {
+    // totalScores 를 순회하면서 null 나올때 까지의 개수를 반환
+    return totalScores.filter((score) => score !== null).length;
+  }, [totalScores]);
+
+  const maximumProgress = getMaximumProgress();
+
   const visibleItems = getVisibleItems();
+
+  const submittButtonDisabled = totalScores.includes(null);
 
   return (
     <Container>
-      <ProgressBarContainer>
-        <ProgressBar />
-      </ProgressBarContainer>
-      {visibleItems}
-      <button onClick={handleNextFocus}>Next</button>
+      <ProgressBar progress={maximumProgress} />
+      <QuestionsWrapper>
+        <BlankContainer $isFocused={false} $isVisible={currentIndex === 0} />
+        {visibleItems}
+        <BlankContainer
+          $isFocused={false}
+          $isVisible={currentIndex === items.length - 1}
+        />
+        <SubmittButton
+          type="button"
+          onClick={handleSubmitt}
+          $isVisible={submmitButtonVisible}
+          disabled={submittButtonDisabled}
+        >
+          <SubmittButtonText>제출</SubmittButtonText>
+        </SubmittButton>
+      </QuestionsWrapper>
     </Container>
   );
 };

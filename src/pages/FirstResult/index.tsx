@@ -176,6 +176,7 @@ export const TestNavTitle = styled.span`
 
   & .bold {
     font-weight: 700;
+    font-family: 'Pretendard';
   }
   margin-right: 30px;
 `;
