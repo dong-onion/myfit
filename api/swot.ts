@@ -2,8 +2,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 import axios from 'axios';
 
-const API_URL =
-  'https://clovastudio.stream.ntruss.com/testapp/v1/chat-completions/HCX-003';
+const API_URL = process.env.REACT_APP_API_URL;
 const HEADERS = {
   'X-NCP-CLOVASTUDIO-API-KEY': process.env.REACT_APP_CLOVA_STUDIO_API_KEY,
   'X-NCP-APIGW-API-KEY': process.env.REACT_APP_APIGW_API_KEY,
@@ -73,7 +72,7 @@ export const fetchSWOTAnalysis = async (
   };
 
   try {
-    const response = await axios.post(API_URL, requestData, {
+    const response = await axios.post(API_URL as string, requestData, {
       headers: HEADERS,
     });
 
