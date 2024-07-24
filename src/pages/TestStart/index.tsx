@@ -62,10 +62,10 @@ export const ButtonText = styled.span`
   letter-spacing: -0.002em;
 `;
 
-const SurveyStart = () => {
+const TestStart = () => {
   const navigate = useNavigate();
   const handleClickStartButton = () => {
-    navigate('/test');
+    navigate('./test');
   };
   return (
     <Container>
@@ -82,4 +82,4 @@ const SurveyStart = () => {
   );
 };
 
-export default SurveyStart;
+export default TestStart;

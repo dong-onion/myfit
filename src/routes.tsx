@@ -2,7 +2,13 @@ import React from 'react';
 
 import { RouteObject } from 'react-router-dom';
 import { HeaderLayout } from './componenets';
-import { FirstResult, Home, ServiceRegistration, SurveyStart } from './pages';
+import {
+  FirstResult,
+  Home,
+  ServiceRegistration,
+  Test,
+  TestStart,
+} from './pages';
 
 export const routes: RouteObject[] = [
   { path: '', element: <Home />, errorElement: <div>Not Found</div> },
@@ -15,7 +21,8 @@ export const routes: RouteObject[] = [
         element: <ServiceRegistration />,
       },
       { path: '/swot/result', element: <FirstResult /> },
-      { path: '/type', element: <SurveyStart /> },
+      { path: '/type', element: <TestStart /> },
+      { path: '/type/test', element: <Test /> },
     ],
   },
 ];
