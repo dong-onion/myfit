@@ -208,13 +208,11 @@ const SecondResult = () => {
   const totalScores = getTestResult();
   const chartData = calculateScore(totalScores);
   const getWeaknessType = (): WeaknessType => {
-    const minIndex = totalScores.indexOf(Math.min(...chartData));
+    const minIndex = chartData.indexOf(Math.min(...chartData));
+    console.log(minIndex);
 
     return WEAKNESS_TYPE[minIndex];
   };
-
-  console.log(getWeaknessType());
-
   const {
     title,
     contentInfo,
