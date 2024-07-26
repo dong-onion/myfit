@@ -9,6 +9,7 @@ import {
 } from '@/utility/constants';
 import { recommendServiceTool, testResult, typeInfo } from '@/assets';
 import { Button } from '@/components';
+import { useNavigate } from 'react-router-dom';
 
 export const Container = styled.div`
   display: flex;
@@ -204,12 +205,12 @@ const SecondResult = () => {
   const getTestResult = (): number[] => {
     return JSON.parse(sessionStorage.getItem('totalScores') ?? '');
   };
+  const naviate = useNavigate();
 
   const totalScores = getTestResult();
   const chartData = calculateScore(totalScores);
   const getWeaknessType = (): WeaknessType => {
     const minIndex = chartData.indexOf(Math.min(...chartData));
-    console.log(minIndex);
 
     return WEAKNESS_TYPE[minIndex];
   };
@@ -229,6 +230,21 @@ const SecondResult = () => {
     '기술 경쟁력',
     '경영 관리',
   ];
+
+  const servicToolNavigater = (tool: string) => {
+    if (tool === '/static/media/business_model_canvas.dc3bea32c4b53d3dcc7e.png')
+      return naviate('/tools/bmc');
+    if (tool === '/static/media/service_blueprint.f3d73042bce1d2719d89.png')
+      return naviate('/tools/blp');
+    if (tool === '/static/media/customer_journey_map.e1efe6a2c919ef83d0d9.png')
+      return naviate('/tools/cjm');
+    if (tool === '/static/media/persona.e02c39fba4c7c55734ff.png')
+      return naviate('/tools/psn');
+    if (tool === '/static/media/system_map.1cb0a035920306ea42eb.png')
+      return naviate('/tools/stm');
+    if (tool === '/static/media/benchmarking.c493336ab4b3f7fad3b4.png')
+      return naviate('/tools/bcm');
+  };
 
   return (
     <Container>
@@ -279,7 +295,11 @@ const SecondResult = () => {
           </ServiceToolTitle>
           <ServiceToolContentImgWrapper>
             {serviceTool.map((tool, index) => (
-              <ServiceToolContentImg key={index} src={tool} />
+              <ServiceToolContentImg
+                onClick={() => servicToolNavigater(tool)}
+                key={index}
+                src={tool}
+              />
             ))}
           </ServiceToolContentImgWrapper>
         </ServiceToolSection>
