@@ -11,12 +11,12 @@ import {
   TestStart,
 } from './pages';
 import {
-  Persona,
-  Blueprint,
   Benchmarking,
-  CustomerJouneyMap,
-  SystemMap,
+  Blueprint,
   BusineesModelCanvas,
+  CustomerJouneyMap,
+  Persona,
+  SystemMap,
 } from './pages/ServiceTools';
 
 export const routes: RouteObject[] = [
