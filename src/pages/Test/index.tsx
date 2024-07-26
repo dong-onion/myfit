@@ -4,6 +4,7 @@ import RatingCheckbox from './components/RatingCheckbox';
 import ProgressBar from './components/ProgressBar';
 import { Button } from '@/components';
 import { QUESTIONS } from '@/utility/constants';
+import { useNavigate } from 'react-router-dom';
 
 export const Container = styled.div`
   height: 100%;
@@ -136,6 +137,7 @@ const Test = () => {
   const [totalScores, setTotalScores] = useState<(number | null)[]>(
     Array.from({ length: Object.keys(QUESTIONS).length }, () => null),
   );
+  const navigate = useNavigate();
 
   const handleClickQuestionContainer = (index: number) => {
     // 여기는 이전 질문으로 만 이동 할수 있게하는것, 점수 추가 및 다음 질문으로 보내기는 다른 함수로 분리해야함, 1번에서 마지막번호 안가게 해야함
@@ -176,6 +178,7 @@ const Test = () => {
   const handleSubmitt = () => {
     // 세션 스토리지로 totalScores 저장
     sessionStorage.setItem('totalScores', JSON.stringify(totalScores));
+    navigate('/type/result');
   };
 
   const submmitButtonVisible =

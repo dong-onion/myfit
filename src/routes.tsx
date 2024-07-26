@@ -9,6 +9,7 @@ import {
   Test,
   TestStart,
 } from './pages';
+import SecondResult from './pages/SecondResult';
 
 export const routes: RouteObject[] = [
   { path: '', element: <Home />, errorElement: <div>Not Found</div> },
@@ -23,6 +24,7 @@ export const routes: RouteObject[] = [
       { path: '/swot/result', element: <FirstResult /> },
       { path: '/type', element: <TestStart /> },
       { path: '/type/test', element: <Test /> },
+      { path: '/type/result', element: <SecondResult /> },
     ],
   },
 ];

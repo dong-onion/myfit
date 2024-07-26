@@ -1,3 +1,26 @@
+import {
+  benchmarking,
+  businessModelCanvas,
+  customerDefinitionHeader,
+  customerDefinitionInfo,
+  customerJourneyMap,
+  entrepreneurshipHeader,
+  entrepreneurshipInfo,
+  managementHeader,
+  managementInfo,
+  marketFeasibilityHeader,
+  marketFeasibilityInfo,
+  objectiveInformationHeader,
+  objectiveInformationInfo,
+  persona,
+  serviceBlueprint,
+  systemMap,
+  technologicalCompetitivenessHeader,
+  technologicalCompetitivenessInfo,
+  weakneesTypeFooter1,
+  weakneesTypeFooter2,
+} from '@/assets';
+
 export const queryKeys = {
   SWOT_ANALYSIS: 'swotAnalysis',
 };
@@ -36,4 +59,74 @@ export const QUESTIONS: { [key: number]: string[] } = {
     '사업체 운영에 분명한 비전이 있으며 모두가 동일한 비전을 공감하고 있다.',
   ],
   15: ['업무 분업이 명확하고 관리 하에 체계적으로 진행되고 있다.'],
+};
+
+export type WeaknessType =
+  | 'ENTREPRENEURSHIP'
+  | 'MARKETFEASIBILITY'
+  | 'CUSTOMERDEFINITION'
+  | 'OBJECTIVEINFORMATION'
+  | 'TECHNOLOGICALCOMPETITIVENESS'
+  | 'MANAGEMENT';
+
+export const WEAKNESS_TYPE: WeaknessType[] = [
+  'ENTREPRENEURSHIP',
+  'MARKETFEASIBILITY',
+  'CUSTOMERDEFINITION',
+  'OBJECTIVEINFORMATION',
+  'TECHNOLOGICALCOMPETITIVENESS',
+  'MANAGEMENT',
+];
+
+export const WEAKNESS_TYPE_INFO: {
+  [key in WeaknessType]: {
+    title: string;
+    contentInfo: string;
+    headerBackground: string;
+    footerBackground: string;
+    serviceTool: string[];
+  };
+} = {
+  ENTREPRENEURSHIP: {
+    title: '창업 경험 부족',
+    contentInfo: entrepreneurshipInfo,
+    headerBackground: entrepreneurshipHeader,
+    footerBackground: weakneesTypeFooter1,
+    serviceTool: [persona, systemMap],
+  },
+  MARKETFEASIBILITY: {
+    title: '시장 타당성 부족',
+    contentInfo: marketFeasibilityInfo,
+    headerBackground: marketFeasibilityHeader,
+    footerBackground: weakneesTypeFooter1,
+    serviceTool: [customerJourneyMap, businessModelCanvas],
+  },
+  CUSTOMERDEFINITION: {
+    title: '고객 정의 부족',
+    contentInfo: customerDefinitionInfo,
+    headerBackground: customerDefinitionHeader,
+    footerBackground: weakneesTypeFooter1,
+    serviceTool: [persona, customerJourneyMap],
+  },
+  OBJECTIVEINFORMATION: {
+    title: '객관적 정보 부족',
+    contentInfo: objectiveInformationInfo,
+    headerBackground: objectiveInformationHeader,
+    footerBackground: weakneesTypeFooter1,
+    serviceTool: [benchmarking, systemMap],
+  },
+  TECHNOLOGICALCOMPETITIVENESS: {
+    title: '기술 경쟁력 부족',
+    contentInfo: technologicalCompetitivenessInfo,
+    headerBackground: technologicalCompetitivenessHeader,
+    footerBackground: weakneesTypeFooter2,
+    serviceTool: [benchmarking, serviceBlueprint],
+  },
+  MANAGEMENT: {
+    title: '경영 관리 부족',
+    contentInfo: managementInfo,
+    headerBackground: managementHeader,
+    footerBackground: weakneesTypeFooter2,
+    serviceTool: [businessModelCanvas, serviceBlueprint],
+  },
 };

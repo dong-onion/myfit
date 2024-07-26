@@ -45,8 +45,6 @@ const FirstResult = () => {
     { imgSrc: swotOpportunity, alt: 'swotOpportunity', data: opportunity },
     { imgSrc: swotThreat, alt: 'swotThreat', data: threat },
   ];
-  console.log(strength);
-  console.log(strategy);
 
   const handleClickTestNavButton = () => {
     navigate('/type');

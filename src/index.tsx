@@ -5,6 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import { theme } from './styles/theme';
 import GlobalStyle from './styles/GlobalStyle';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import './assets/fonts/Font.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
