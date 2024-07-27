@@ -12,11 +12,17 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding:0;
   }
-  h1, h2, h3, h4, h5, h6, p {
+  h1, h2, h3, h4, h5, h6, p, span {
     margin: 0;
+    word-break: keep-all;
+    white-space: pre-wrap;
   }
   html, body{
     height: 100%;
+  }
+  ul, li {
+    margin: 0;
+    padding:0
   }
 `;
 

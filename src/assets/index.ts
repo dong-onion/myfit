@@ -37,6 +37,40 @@ import benchmarking from './benchmarking.png';
 import serviceBlueprint from './service_blueprint.png';
 import persona from './persona.png';
 import systemMap from './system_map.png';
+import refreshIcon from './refresh_icon.png';
+import downloadIcon from './download_icon.png';
+import personaInfo from './personaInfo.png';
+import businessCanvasInfo from './businessCanvasInfo.png';
+import benchmarkingInfo from './benchmarkingInfo.png';
+import customerJourneyMapInfo from './customerJourneyMapInfo.png';
+import blueprintInfo from './blueprintInfo.png';
+import systemMapInfo from './systemMapInfo.png';
+import personaContent1 from './personaContent1.png';
+import redQuestionMark from './redQuestionMark.png';
+import readingGlassesLeft from './readingGlassesLeft.png';
+import bullseye from './bullseye.png';
+import thumbsUp from './thumbsUp.png';
+import wallet from './wallet.png';
+import smileFace from './smileFace.png';
+import pesiveFace from './pesiveFace.png';
+import problem from './problem.png';
+import solution from './solution.png';
+import valueProposition from './valueProposition.png';
+import competitiveAdvantage from './competitiveAdvantage.png';
+import customerGroup from './customerGroup.png';
+import kpi from './kpi.png';
+import channel from './channel.png';
+import costStructure from './costStructure.png';
+import revenueSource from './revenueSource.png';
+import needs from './needs.png';
+import solutionVertical from './solutionVertical.png';
+import emotion from './emotion.png';
+import action from './action.png';
+import purpose from './purpose.png';
+import level from './level.png';
+import mainBgImg from './mainBgImg.png';
+import arrowRight from './arrowRight.png';
+import mainBg from './mainBg.png';
 export {
   logo,
   backArrow,
@@ -77,4 +111,38 @@ export {
   serviceBlueprint,
   persona,
   systemMap,
+  refreshIcon,
+  downloadIcon,
+  personaInfo,
+  businessCanvasInfo,
+  benchmarkingInfo,
+  customerJourneyMapInfo,
+  blueprintInfo,
+  systemMapInfo,
+  personaContent1,
+  redQuestionMark,
+  readingGlassesLeft,
+  bullseye,
+  thumbsUp,
+  smileFace,
+  pesiveFace,
+  wallet,
+  problem,
+  solution,
+  valueProposition,
+  competitiveAdvantage,
+  customerGroup,
+  kpi,
+  channel,
+  costStructure,
+  revenueSource,
+  needs,
+  solutionVertical,
+  emotion,
+  action,
+  purpose,
+  level,
+  mainBgImg,
+  arrowRight,
+  mainBg,
 };
