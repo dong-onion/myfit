@@ -11,7 +11,11 @@ export const HEADERS = {
   'Content-Type': 'application/json',
 };
 
+<<<<<<< HEAD
 export const getOverallAnalysisResponse = async (
+=======
+export const fetchOverallAnalysis = async (
+>>>>>>> 95ae4f58844bd75f342cfd367c2b2b2cae2bc48b
   serviceDescription: string,
   categories: string,
   weakness: string,
@@ -77,7 +81,11 @@ export default async function (
     return;
   }
 
+<<<<<<< HEAD
   const res = await getOverallAnalysisResponse(
+=======
+  const overallResult = await fetchOverallAnalysis(
+>>>>>>> 95ae4f58844bd75f342cfd367c2b2b2cae2bc48b
     serviceDescription,
     categories,
     weakness,
@@ -86,5 +94,9 @@ export default async function (
   // allow cors
   response.setHeader('Access-Control-Allow-Origin', '*');
   // has been blocked by CORS policy: Request header field priority is not allowed by Access-Control-Allow-Headers in preflight response.
+<<<<<<< HEAD
   response.send(res);
+=======
+  response.send(overallResult);
+>>>>>>> 95ae4f58844bd75f342cfd367c2b2b2cae2bc48b
 }

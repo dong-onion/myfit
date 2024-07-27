@@ -90,7 +90,6 @@ interface BMCanvas {
   keyMetrics: string[]; // 핵심 지표
   competitiveAdvantage: string[]; // 경쟁 우위
 }
-
 //parseBMCanvas
 export const parseBMCanvas = (content: string) => {
   const contentArray = content.split('\n\n');
