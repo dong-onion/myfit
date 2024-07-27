@@ -2,11 +2,13 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_API_URL;
-const HEADERS = {
-  'X-NCP-CLOVASTUDIO-API-KEY': process.env.REACT_APP_CLOVA_STUDIO_API_KEY,
-  'X-NCP-APIGW-API-KEY': process.env.REACT_APP_APIGW_API_KEY,
-  'X-NCP-CLOVASTUDIO-REQUEST-ID': process.env.REACT_APP_CLOVASTUDIO_REQUEST_ID,
+export const API_URL =
+  'https://clovastudio.stream.ntruss.com/testapp/v1/chat-completions/HCX-003';
+export const HEADERS = {
+  'X-NCP-CLOVASTUDIO-API-KEY':
+    'NTA0MjU2MWZlZTcxNDJiY8fwswjOopDqr75p2g5JJCDKUgw0DjuqdI/p3XyI+x4T',
+  'X-NCP-APIGW-API-KEY': 'WqDLRGl7mz79mruN8azOuq4UWxpdT6SP6FAuv4RT',
+  'X-NCP-CLOVASTUDIO-REQUEST-ID': '943f9d7f-0dd2-44fe-a5a0-9d2bbc416e73',
   'Content-Type': 'application/json',
 };
 
@@ -25,8 +27,8 @@ export const fetchSWOTAnalysis = async (
       {
         role: 'system',
         content: `제시된 서비스를 주제로 SWOT 분석을 진행해줘.
-        그리고 결과 내용을 바탕으로 분석 결과 요약을 200자 이내로 작성하고 , 마지막에는 서비스가 성장하기 위해 필요한 전략와 진행 방향에 대해 간결히 제안해줘.
-        다음과 같은 형식으로 작성해줘.
+        그리고 결과 내용을 바탕으로 분석 결과 요약을 200자 이내로 작성해줘. 서비스가 성장하기 위해 필요한 전략와 진행 방향에 대해 간결히 제안해줘.
+        다음과 같은 형식으로 작성해줘. 해요체로 답변해줘.
         
         1. 강점
         - {강점1}
@@ -62,10 +64,10 @@ export const fetchSWOTAnalysis = async (
         content: `지금 구상하고 있는 사업은 ${serviceDescription}이야.${levelDescriptions[level]}`,
       },
     ],
-    topP: 0.8,
+    topP: 0.1,
     topK: 0,
-    maxTokens: 3000,
-    temperature: 0.5,
+    maxTokens: 500,
+    temperature: 0.1,
     repeatPenalty: 5.0,
     stopBefore: [],
     seed: 0,

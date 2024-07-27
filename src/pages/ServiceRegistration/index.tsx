@@ -27,7 +27,7 @@ export const Title = styled.h1`
 `;
 
 export const SubTitle = styled.h2`
-  margin-top: 33px;
+  margin-top: 20px;
   font-size: 24px;
   font-weight: 500;
   font-family: 'Pretendard-Medium';
@@ -54,14 +54,15 @@ export const InputTitle = styled.h3`
   font-weight: 600;
   font-family: 'Pretendard-SemiBold';
   text-align: center;
+  color: ${({ theme }) => theme.color.gray[0]};
 `;
 
 export const Input = styled.input<{ $focus: boolean }>`
-  // focus 되면 border-color, background color bg[0]으로 바꾸기
   max-width: 792px;
   height: 84px;
   flex-grow: 1;
-  border: 1px solid ${({ theme }) => theme.color.primary[0]};
+  border: ${({ theme, $focus }) =>
+    $focus ? `1px solid ${theme.color.primary[0]}` : 'none'};
   border-radius: 10px;
   background-color: ${({ $focus, theme }) =>
     $focus ? theme.color.bg[0] : '#f5f5f5'};
@@ -72,6 +73,15 @@ export const Input = styled.input<{ $focus: boolean }>`
   line-height: 24px;
   letter-spacing: -0.12px;
   color: ${({ theme }) => theme.color.primary[0]};
+  &::placeholder {
+    font-family: Pretendard-SemiBold;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 36px;
+    letter-spacing: -0.005em;
+    text-align: left;
+    color: ${({ theme }) => theme.color.gray[3]};
+  }
 `;
 
 export const LevelWrapper = styled.div`
@@ -93,6 +103,7 @@ export const LevelTitle = styled.h3`
   font-family: 'Pretendard-SemiBold';
   line-height: 24px;
   text-align: right;
+  color: ${({ theme }) => theme.color.gray[0]};
 `;
 
 interface LimitMessageProp {

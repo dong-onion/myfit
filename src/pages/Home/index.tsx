@@ -2,56 +2,66 @@ import React from 'react';
 import { Button } from '@/components';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { arrowRight, mainBg } from '@/assets';
 
 export const Container = styled.div`
   width: 100dvw;
-  background-color: ${({ theme }) => theme.color.bg[0]};
+  background-image: url(${mainBg});
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   height: 100dvh;
-  display: flex;
-  justify-content: center;
+  /* justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-direction: column; */
 `;
 
-export const DescriptionHeader1 = styled.span`
-  font-size: 60px;
-  font-weight: 500;
-  font-family: 'Pretendard-Medium';
-  line-height: 24px;
-  letter-spacing: -0.3px;
-  margin-bottom: 62px;
-`;
+// export const DescriptionHeader1 = styled.span`
+//   font-size: 60px;
+//   font-weight: 500;
+//   font-family: 'Pretendard-Medium';
+//   line-height: 24px;
+//   letter-spacing: -0.3px;
+//   margin-bottom: 62px;
+// `;
 
-export const DescriptionHeader2 = styled.span`
-  font-size: 60px;
-  font-weight: 800;
-  font-family: 'Pretendard-ExtraBold';
-  line-height: 24px;
-  letter-spacing: -0.3px;
-  color: ${({ theme }) => theme.color.primary[0]};
-`;
+// export const DescriptionHeader2 = styled.span`
+//   font-size: 60px;
+//   font-weight: 800;
+//   font-family: 'Pretendard-ExtraBold';
+//   line-height: 24px;
+//   letter-spacing: -0.3px;
+//   color: ${({ theme }) => theme.color.primary[0]};
+// `;
 
 export const NavigateButton = styled(Button)`
   width: 100%;
   max-width: 370px;
-  margin-top: 93px;
   height: 78px;
   border-radius: 8px;
   background-color: ${({ theme }) => theme.color.primary[0]};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  position: absolute;
+  left: 16.6%;
+  bottom: 27%;
+`;
 
-  //todo : style 파일 분리
+export const ButtonIcon = styled.img`
+  width: 24px;
+  height: 24px;
 `;
 
 export const ButtonText = styled.span`
-  text-decoration: none;
-  font-weight: 700;
-  font-family: 'Pretendard-Bold';
+  font-family: Pretendard-SemiBold;
   font-size: 24px;
+  font-weight: 600;
   line-height: 24px;
-  letter-spacing: -0.12px;
+  letter-spacing: -0.002em;
+  text-align: center;
   color: ${({ theme }) => theme.color.white[0]};
-  position: relative;
-  left: 7px;
 `;
 
 export const Test = styled.button``;
@@ -62,10 +72,11 @@ const Home = () => {
   };
   return (
     <Container>
-      <DescriptionHeader1>창업 아이템이 고민이라면</DescriptionHeader1>
-      <DescriptionHeader2>나만의 마켓핏을 찾는 마이핏</DescriptionHeader2>
+      {/* <DescriptionHeader1>창업 아이템이 고민이라면</DescriptionHeader1>
+      <DescriptionHeader2>나만의 마켓핏을 찾는 마이핏</DescriptionHeader2> */}
       <NavigateButton type="button" onClick={handleButtonClick}>
-        <ButtonText>마켓핏 찾으러가기&nbsp;&nbsp; {`>`}</ButtonText>
+        <ButtonText>마켓핏 찾으러가기</ButtonText>
+        <ButtonIcon src={arrowRight} alt="arrowRight" />
       </NavigateButton>
     </Container>
   );

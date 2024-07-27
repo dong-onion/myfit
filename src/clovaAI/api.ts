@@ -24,3 +24,73 @@ export const fetchSWOTAnalysis = async (
     throw new Error('Failed to get SWOT Analysis: ' + (error as Error).message);
   }
 };
+
+export const fetchOverallAnalysis = async (
+  serviceDescription: string,
+  categories: string[],
+  weakness: string,
+) => {
+  try {
+    const response = await axios.get(
+      API_URL +
+        `/api/overall?serviceDescription=${serviceDescription}&categories=${categories}&weakness=${weakness}`,
+      {
+        headers: HEADERS,
+      },
+    );
+
+    console.log('response', response.data);
+    return response.data;
+  } catch (error) {
+    throw new Error('Failed to get SWOT Analysis: ' + (error as Error).message);
+  }
+};
+
+export const fetchPersona = async (serviceDescription: string) => {
+  try {
+    const response = await axios.get(
+      API_URL + `/api/persona?serviceDescription=${serviceDescription}`,
+      {
+        headers: HEADERS,
+      },
+    );
+
+    console.log('response', response.data);
+    return response.data;
+  } catch (error) {
+    throw new Error('Failed to get persona: ' + (error as Error).message);
+  }
+};
+
+export const fetchBusinessModelCanvas = async (serviceDescription: string) => {
+  try {
+    const response = await axios.get(
+      API_URL + `/api/bm-canvas?serviceDescription=${serviceDescription}`,
+      {
+        headers: HEADERS,
+      },
+    );
+
+    console.log('response', response.data);
+    return response.data;
+  } catch (error) {
+    throw new Error('Failed to get persona: ' + (error as Error).message);
+  }
+};
+
+export const fetchCustomerJourneyMap = async (serviceDescription: string) => {
+  try {
+    const response = await axios.get(
+      API_URL +
+        `/api/customer-journey-map?serviceDescription=${serviceDescription}`,
+      {
+        headers: HEADERS,
+      },
+    );
+
+    console.log('response', response.data);
+    return response.data;
+  } catch (error) {
+    throw new Error('Failed to get persona: ' + (error as Error).message);
+  }
+};

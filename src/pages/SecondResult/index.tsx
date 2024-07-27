@@ -9,7 +9,6 @@ import {
 } from '@/utility/constants';
 import { recommendServiceTool, testResult, typeInfo } from '@/assets';
 import { Button } from '@/components';
-import { useNavigate } from 'react-router-dom';
 
 export const Container = styled.div`
   display: flex;
@@ -71,10 +70,11 @@ export const ChartLabel = styled.span<{ $bold: boolean }>`
 `;
 
 export const TestResultSection = styled.div`
+  width: 100%;
   margin-top: 130px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
 `;
 export const TestResultImg = styled.img`
   width: 164px;
@@ -91,6 +91,7 @@ export const TestResultTitle = styled.p`
   color: ${({ theme }) => theme.color.gray[0]};
 `;
 export const TestResultContentContainer = styled.div`
+  width: 100%;
   padding: 32.5px;
   margin-top: 30px;
   max-width: 1200px;
@@ -98,6 +99,7 @@ export const TestResultContentContainer = styled.div`
   height: 250px;
   background-color: ${({ theme }) => theme.color.bg[1]};
   border-radius: 12px;
+  overflow: hidden;
 `;
 export const TestResultContentWrapper = styled.div`
   word-break: keep-all;
@@ -110,11 +112,16 @@ export const TestResultContentWrapper = styled.div`
   width: 100%;
   height: 100%;
   letter-spacing: -0.005em;
+  color: ${({ theme }) => theme.color.gray[0]};
 `;
 
 export const TypeInfoSection = styled(TestResultSection)``;
 export const TypeInfoImg = styled(TestResultImg)``;
-export const TypeInfoTitle = styled(TestResultTitle)``;
+export const TypeInfoTitle = styled(TestResultTitle)`
+  & .emphasis {
+    color: ${({ theme }) => theme.color.primary[0]};
+  }
+`;
 export const TypeInfoSubTitle = styled.p`
   margin-top: 30px;
   font-family: Pretendard-SemiBold;
@@ -122,6 +129,7 @@ export const TypeInfoSubTitle = styled.p`
   font-weight: 600;
   line-height: 22px;
   letter-spacing: -0.005em;
+  color: ${({ theme }) => theme.color.gray[0]};
 `;
 export const TypeInfoContentImg = styled.img`
   margin-top: 20px;
@@ -135,7 +143,10 @@ export const TypeInfoContentImg = styled.img`
 export const ServiceToolSection = styled(TestResultSection)`
   margin-top: 130px;
 `;
-export const ServiceToolImg = styled(TestResultImg)``;
+export const ServiceToolImg = styled(TestResultImg)`
+  width: 245px;
+  height: 46px;
+`;
 export const ServiceToolTitle = styled(TestResultTitle)``;
 export const ServiceToolContentImgWrapper = styled.div`
   width: 100%;
@@ -205,7 +216,6 @@ const SecondResult = () => {
   const getTestResult = (): number[] => {
     return JSON.parse(sessionStorage.getItem('totalScores') ?? '');
   };
-  const naviate = useNavigate();
 
   const totalScores = getTestResult();
   const chartData = calculateScore(totalScores);
@@ -214,6 +224,7 @@ const SecondResult = () => {
 
     return WEAKNESS_TYPE[minIndex];
   };
+
   const {
     title,
     contentInfo,
@@ -230,21 +241,6 @@ const SecondResult = () => {
     '기술 경쟁력',
     '경영 관리',
   ];
-
-  const servicToolNavigater = (tool: string) => {
-    if (tool === '/static/media/business_model_canvas.dc3bea32c4b53d3dcc7e.png')
-      return naviate('/tools/bmc');
-    if (tool === '/static/media/service_blueprint.f3d73042bce1d2719d89.png')
-      return naviate('/tools/blp');
-    if (tool === '/static/media/customer_journey_map.e1efe6a2c919ef83d0d9.png')
-      return naviate('/tools/cjm');
-    if (tool === '/static/media/persona.e02c39fba4c7c55734ff.png')
-      return naviate('/tools/psn');
-    if (tool === '/static/media/system_map.1cb0a035920306ea42eb.png')
-      return naviate('/tools/stm');
-    if (tool === '/static/media/benchmarking.c493336ab4b3f7fad3b4.png')
-      return naviate('/tools/bcm');
-  };
 
   return (
     <Container>
@@ -265,22 +261,15 @@ const SecondResult = () => {
         <TestResultTitle>AI가 서비스와 취약점을 분석했어요</TestResultTitle>
         <TestResultContentContainer>
           <TestResultContentWrapper>
-            창업을 진행하면서 어려움을 겪고 계시는군요. 제가 개선해야 할 부분과
-            보완 방법을 알려드릴게요. 내부 정보를 파악하고 시장을 세분화하며
-            고객 정의를 명확히 하는 것이 중요해요. 회사의 재무 상태와 직원들의
-            업무량과 역량을 파악하여 전략을 수립하고, 샐러드 배달 서비스를
-            이용하는 고객층을 세분화하여 각 고객층에 맞는 마케팅 전략을 수립해야
-            해요. 고객의 니즈와 선호도를 파악하여 이를 반영한 제품을 개발하고,
-            고객의 피드백을 적극적으로 수용하여 제품 개선에 반영하는 것도
-            중요해요.이러한 방법을 시도해 보면 사용자님의 사업이 더욱 성장할 수
-            있을 거예요.
-            {/* 데이터 바인딩 */}
+            ** 데이터 바인딩**
           </TestResultContentWrapper>
         </TestResultContentContainer>
       </TestResultSection>
       <TypeInfoSection>
         <TypeInfoImg src={typeInfo} />
-        <TypeInfoTitle>창업 경험 부족 유형은 무엇인가요?</TypeInfoTitle>
+        <TypeInfoTitle>
+          <span className="emphasis">{title}</span> 유형은 무엇인가요?
+        </TypeInfoTitle>
         <TypeInfoSubTitle>
           초기 창업가의 경험부족으로 합리적 의사결정에 어려움을 겪는 경우에요.
           아래와 같은 경우가 있을 수 있어요.
@@ -295,22 +284,18 @@ const SecondResult = () => {
           </ServiceToolTitle>
           <ServiceToolContentImgWrapper>
             {serviceTool.map((tool, index) => (
-              <ServiceToolContentImg
-                onClick={() => servicToolNavigater(tool)}
-                key={index}
-                src={tool}
-              />
+              <ServiceToolContentImg key={index} src={tool} />
             ))}
           </ServiceToolContentImgWrapper>
         </ServiceToolSection>
-        <BuutonWrapper>
+        {/* <BuutonWrapper>
           <RetryButton type="button">
             <RetryButtonText>다시 테스트 하기</RetryButtonText>
           </RetryButton>
           <DownloadButton type="button">
             <DownloadButtonText>점검 결과 다운로드</DownloadButtonText>
           </DownloadButton>
-        </BuutonWrapper>
+        </BuutonWrapper> */}
       </Footer>
     </Container>
   );
