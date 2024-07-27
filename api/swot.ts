@@ -2,11 +2,13 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_API_URL;
-const HEADERS = {
-  'X-NCP-CLOVASTUDIO-API-KEY': process.env.REACT_APP_CLOVA_STUDIO_API_KEY,
-  'X-NCP-APIGW-API-KEY': process.env.REACT_APP_APIGW_API_KEY,
-  'X-NCP-CLOVASTUDIO-REQUEST-ID': process.env.REACT_APP_CLOVASTUDIO_REQUEST_ID,
+export const API_URL =
+  'https://clovastudio.stream.ntruss.com/testapp/v1/chat-completions/HCX-003';
+export const HEADERS = {
+  'X-NCP-CLOVASTUDIO-API-KEY':
+    'NTA0MjU2MWZlZTcxNDJiY8fwswjOopDqr75p2g5JJCDKUgw0DjuqdI/p3XyI+x4T',
+  'X-NCP-APIGW-API-KEY': 'WqDLRGl7mz79mruN8azOuq4UWxpdT6SP6FAuv4RT',
+  'X-NCP-CLOVASTUDIO-REQUEST-ID': '943f9d7f-0dd2-44fe-a5a0-9d2bbc416e73',
   'Content-Type': 'application/json',
 };
 
@@ -62,10 +64,10 @@ export const fetchSWOTAnalysis = async (
         content: `지금 구상하고 있는 사업은 ${serviceDescription}이야.${levelDescriptions[level]}`,
       },
     ],
-    topP: 0.8,
+    topP: 0.1,
     topK: 0,
-    maxTokens: 3000,
-    temperature: 0.5,
+    maxTokens: 500,
+    temperature: 0.1,
     repeatPenalty: 5.0,
     stopBefore: [],
     seed: 0,

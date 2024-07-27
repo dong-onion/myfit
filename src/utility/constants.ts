@@ -25,7 +25,7 @@ export const queryKeys = {
   SWOT_ANALYSIS: 'swotAnalysis',
 };
 
-export const HEADER_HEIGHT = '68px';
+export const HEADER_HEIGHT = '60px';
 
 export const QUESTIONS: { [key: number]: string[] } = {
   0: ['현재 창업 아이템은 초기 아이디어에서 많이 변경되었다.'],
@@ -113,14 +113,14 @@ export const WEAKNESS_TYPE_INFO: {
     contentInfo: objectiveInformationInfo,
     headerBackground: objectiveInformationHeader,
     footerBackground: weakneesTypeFooter1,
-    serviceTool: [benchmarking, systemMap],
+    serviceTool: [businessModelCanvas, systemMap],
   },
   TECHNOLOGICALCOMPETITIVENESS: {
     title: '기술 경쟁력 부족',
     contentInfo: technologicalCompetitivenessInfo,
     headerBackground: technologicalCompetitivenessHeader,
     footerBackground: weakneesTypeFooter2,
-    serviceTool: [benchmarking, serviceBlueprint],
+    serviceTool: [businessModelCanvas, serviceBlueprint],
   },
   MANAGEMENT: {
     title: '경영 관리 부족',

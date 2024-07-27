@@ -21,7 +21,6 @@ import {
 
 export const routes: RouteObject[] = [
   { path: '', element: <Home />, errorElement: <div>Not Found</div> },
-  { path: '/', element: <Home /> },
   {
     element: <HeaderLayout />,
     children: [

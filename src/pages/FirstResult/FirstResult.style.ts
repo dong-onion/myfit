@@ -6,7 +6,7 @@ export const Container = styled.div`
   background-color: ${({ theme }) => theme.color.bg[1]};
   display: flex;
   justify-content: center;
-  padding-bottom: 240px;
+  padding-bottom: 225px;
 `;
 
 export const InnerContainer = styled.div`
@@ -15,12 +15,12 @@ export const InnerContainer = styled.div`
 `;
 
 export const HeaderWrapper = styled.div`
-  margin-top: 60px;
-  margin-bottom: 81px;
+  margin-top: 100px;
+  margin-bottom: 40px;
   & > h2 {
-    font-size: 32px;
-    font-weight: 500;
-    font-family: 'Pretendard-Medium';
+    font-size: 28px;
+    font-weight: 600;
+    font-family: 'Pretendard-SeimBold';
     letter-spacing: -0.005em;
     color: ${({ theme }) => theme.color.gray[0]};
     margin-bottom: 15px;
@@ -40,7 +40,6 @@ export const HeaderWrapper = styled.div`
 `;
 
 export const SummaryContainer = styled.div`
-  /* padding: 30px 30px 35px 30px;  */
   padding: 32.5px;
   max-width: 1200px;
   flex-grow: 1;
@@ -60,10 +59,11 @@ export const SummaryWrapper = styled.div`
   width: 100%;
   height: 100%;
   letter-spacing: -0.005em;
+  color: ${({ theme }) => theme.color.gray[0]};
 `;
 
 export const AnalysisTitle = styled.h3`
-  margin-top: 81px;
+  margin-top: 80px;
   font-size: 32px;
   font-weight: 600;
   font-family: 'Pretendard-SemiBold';
@@ -74,28 +74,34 @@ export const AnalysisTitle = styled.h3`
 
 export const AnalysisInfoContainer = styled.div`
   display: flex;
-  margin-top: 25px;
+  margin-top: 40px;
   flex-wrap: wrap;
   gap: 24px;
 `;
 
-export const AnalysisInfoBox = styled.div`
+export const AnalysisInfoBoxWrapper = styled.div`
   width: 588px;
-  height: 275px;
+  height: 300px;
   border-radius: 12px;
   background-color: ${({ theme }) => theme.color.white[0]};
-  overflow: auto;
-  padding-top: 38px;
-  padding-left: 30px;
-  padding-right: 30px;
+  padding: 40px 30px;
+  overflow: hidden;
 
-  & > img {
+  & img {
     width: 84px;
     height: 37px;
+    margin-bottom: 20px;
   }
+`;
 
-  & > ul {
-    margin-top: 20px;
+export const AnalysisInfoBox = styled.div`
+  width: 100%;
+  height: calc(100% - 80px);
+  overflow: scroll;
+  word-break: keep-all;
+  white-space: pre-wrap;
+
+  & ul {
     padding-left: 28px;
   }
 
@@ -119,7 +125,7 @@ export const ServiceGrowthstrategyTitle = styled.h3`
   letter-spacing: -0.012em;
   color: ${({ theme }) => theme.color.gray[0]};
   margin-top: 80px;
-  margin: 30px;
+  margin-bottom: 40px;
 `;
 
 export const StrategyWrapper = styled.div`
@@ -157,7 +163,7 @@ export const Strategy = styled.div`
 
 export const TestNavBar = styled.div`
   width: 100%;
-  height: 120px;
+  height: 85px;
   background: linear-gradient(270deg, #6f56ff 0%, #4865ff 100%);
   display: flex;
   justify-content: center;
@@ -167,17 +173,17 @@ export const TestNavBar = styled.div`
 `;
 
 export const TestNavTitle = styled.span`
-  font-size: 36px;
-  font-weight: 400;
-  font-family: 'Pretendard-Regular';
+  font-size: 24px;
+  font-weight: 500;
+  font-family: 'Pretendard-SemiBold';
   letter-spacing: -0.012em;
   color: ${({ theme }) => theme.color.white[0]};
+  margin-right: 30px;
 
   & .bold {
     font-weight: 700;
     font-family: 'Pretendard-Bold';
   }
-  margin-right: 30px;
 `;
 
 export const TestNavButton = styled(Button)`
