@@ -7,6 +7,7 @@ export const Container = styled.div`
   border-radius: 12px;
   height: 173px;
   background-color: ${({ theme }) => theme.color.white[0]};
+  color: ${({ theme }) => theme.color.gray[0]};
 `;
 
 interface Props {

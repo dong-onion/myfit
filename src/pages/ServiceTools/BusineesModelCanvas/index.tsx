@@ -12,7 +12,7 @@ const GridContainer = styled.div`
     'a b c d e'
     'a f c g e';
   gap: 14px;
-  width: 1200px;
+  width: 100%;
   height: 724px;
   margin-top: 60px;
 
@@ -102,7 +102,7 @@ const G = styled(A)`
 export const FlexContainer = styled.div`
   display: flex;
   gap: 14px;
-  width: 1200px;
+  width: 100%;
   height: 180px;
   margin-top: 14px;
 
@@ -111,7 +111,7 @@ export const FlexContainer = styled.div`
     border: 1px solid #b8c3ff;
     background-color: ${({ theme }) => theme.color.white[0]};
     border-radius: 12px;
-    width: 593px;
+    width: 100%;
   }
 
   & ul {

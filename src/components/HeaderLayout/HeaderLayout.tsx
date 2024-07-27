@@ -1,14 +1,16 @@
 import React from 'react';
-import { backArrow, logo } from '@/assets';
+import { logo } from '@/assets';
 import * as S from './HeaderLayout.style';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 
 const HeaderLayout = () => {
+  const { pathname } = useLocation();
+  const isServiceTools = pathname.startsWith('/tools/');
   return (
     <>
       <S.Container>
         <S.Logo src={logo} alt="logo" />
-        <S.BackArrow src={backArrow} alt="backArrow" />
+        {isServiceTools && <S.BackArrow />}
       </S.Container>
       <S.OutletWrapper>
         <Outlet />

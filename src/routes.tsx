@@ -18,26 +18,34 @@ import {
   Persona,
   SystemMap,
 } from './pages/ServiceTools';
+import { ROUTES_PATH } from './utility/constants';
 
 export const routes: RouteObject[] = [
-  { path: '', element: <Home />, errorElement: <div>Not Found</div> },
+  {
+    path: ROUTES_PATH.home,
+    element: <Home />,
+    errorElement: <div>Not Found</div>,
+  },
   {
     element: <HeaderLayout />,
     children: [
       {
-        path: '/swot',
+        path: ROUTES_PATH.serviceRegistration,
         element: <ServiceRegistration />,
       },
-      { path: '/swot/result', element: <FirstResult /> },
-      { path: '/type', element: <TestStart /> },
-      { path: '/type/test', element: <Test /> },
-      { path: '/type/result', element: <SecondResult /> },
-      { path: '/tools/psn', element: <Persona /> },
-      { path: '/tools/bmc', element: <BusineesModelCanvas /> },
-      { path: '/tools/cjm', element: <CustomerJouneyMap /> },
-      { path: '/tools/blp', element: <Blueprint /> },
-      { path: 'tools/stm', element: <SystemMap /> },
-      { path: '/tools/bcm', element: <Benchmarking /> },
+      { path: ROUTES_PATH.firstResult, element: <FirstResult /> },
+      { path: ROUTES_PATH.testStart, element: <TestStart /> },
+      { path: ROUTES_PATH.test, element: <Test /> },
+      { path: ROUTES_PATH.secondResult, element: <SecondResult /> },
+      { path: ROUTES_PATH.persona, element: <Persona /> },
+      {
+        path: ROUTES_PATH.busineesModelCanvas,
+        element: <BusineesModelCanvas />,
+      },
+      { path: ROUTES_PATH.customerJourneyMap, element: <CustomerJouneyMap /> },
+      { path: ROUTES_PATH.bluePrint, element: <Blueprint /> },
+      { path: ROUTES_PATH.systemMap, element: <SystemMap /> },
+      { path: ROUTES_PATH.benchmarking, element: <Benchmarking /> },
     ],
   },
 ];

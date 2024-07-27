@@ -14,6 +14,7 @@ import styled from 'styled-components';
 import ContentHeader from '../components/ContentHeader/indext';
 import ContentBox from '../components/ContentBox';
 import Frame from '../components/Frame';
+import { usePersona } from '@/hooks/usePersona';
 
 export const Content1 = styled(ContentBox)`
   margin-top: 60px;
@@ -36,7 +37,7 @@ export const Content1 = styled(ContentBox)`
     color: ${({ theme }) => theme.color.gray[0]};
     margin-left: 25px;
     position: relative;
-    top: 2px;
+    top: 1px;
   }
 `;
 
@@ -99,13 +100,42 @@ export const Content3 = styled(Content2)`
   margin-top: 0;
 `;
 
+export const Footer = styled.div`
+  width: 100%;
+  height: 70px;
+  background-color: ${({ theme }) => theme.color.bg[1]};
+`;
+
 const Persona = () => {
+  const serviceDescription = JSON.parse(
+    sessionStorage.getItem('serviceDescription') || '',
+  );
+  const { data, isError, isLoading, refetch } = usePersona(serviceDescription);
+  const {
+    introduction = '',
+    background = '',
+    goal = '',
+    motivation = '',
+    consumptionHabit = '',
+    personality = '',
+    painPoint = '',
+    reason = '',
+  } = data || {};
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error...</div>;
+  }
+
   return (
     <Frame src={personaInfo}>
       <ContentHeader />
       <Content1>
         <img src={personaContent1} alt="personaContent1"></img>
-        <span>대학교 근처 원룸에 거주하는 20대 초반의 대학생</span>
+        <span>{introduction}</span>
       </Content1>
       <Content2>
         <div>
@@ -113,11 +143,7 @@ const Persona = () => {
           <p className="title">퍼소나 선정이유</p>
         </div>
         <ContentInfo>
-          <span>
-            대학생들이 학교 앞에서 자주 이용하는 음식 중 하나가 핫도그이며,
-            저렴한 가격에 맛있는 음식을 제공하는 핫도그 가게는 대학생들에게
-            인기가 많을 것으로 예상됨
-          </span>
+          <span>{reason}</span>
         </ContentInfo>
       </Content2>
       <ContentWrapper>
@@ -127,11 +153,7 @@ const Persona = () => {
             <p className="title">배경</p>
           </div>
           <ContentInfo>
-            <span>
-              대학교 근처 원룸에 거주하는 20대 초반 대학생으로, 자취 생활로 인해
-              식비를 절약하고자 함 대학교 근처 원룸에 거주하는 20대 초반
-              대학생으로,
-            </span>
+            <span>{background}</span>
           </ContentInfo>
         </Content3>
         <Content3>
@@ -139,46 +161,38 @@ const Persona = () => {
             <img src={bullseye} />
             <p className="title">목표</p>
           </div>
-          <span>저렴한 가격에 맛있는 음식을 먹는 것</span>
+          <span>{goal}</span>
         </Content3>
         <Content3>
           <div>
             <img src={thumbsUp} />
             <p className="title">동기</p>
           </div>
-          <span>
-            자취 생활로 인해 식비 부담이 커져 저렴한 가격에 맛있는 음식을 먹고자
-            함
-          </span>
+          <span>{motivation}</span>
         </Content3>
         <Content3>
           <div>
             <img src={wallet} />
-            <p className="title">배경</p>
+            <p className="title">소비 습관</p>
           </div>
-          <span>
-            용돈을 받아 생활하며, 식비를 절약하기 위해 할인 행사나 쿠폰을
-            적극적으로 활용함
-          </span>
+          <span>{consumptionHabit}</span>
         </Content3>
         <Content3>
           <div>
             <img src={smileFace} />
             <p className="title">성격</p>
           </div>
-          <span>
-            새로운 음식에 도전하는 것을 즐기며, 친구들과 함께 맛집을 찾아다니는
-            것을 좋아함
-          </span>
+          <span>{personality}</span>
         </Content3>
         <Content3>
           <div>
             <img src={pesiveFace} />
             <p className="title">페인포인트</p>
           </div>
-          <span>학교 앞 음식점들은 대체로 가격이 비싸 식비 부담이 큼</span>
+          <span>{painPoint}</span>
         </Content3>
       </ContentWrapper>
+      <Footer />
     </Frame>
   );
 };

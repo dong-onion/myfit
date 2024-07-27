@@ -62,15 +62,16 @@ import kpi from './kpi.png';
 import channel from './channel.png';
 import costStructure from './costStructure.png';
 import revenueSource from './revenueSource.png';
-import needs from './needs.png';
+import needsImg from './needs.png';
 import solutionVertical from './solutionVertical.png';
-import emotion from './emotion.png';
-import action from './action.png';
-import purpose from './purpose.png';
-import level from './level.png';
+import emotionImg from './emotion.png';
+import actionImg from './action.png';
+import purposeImg from './purpose.png';
+import levelImg from './level.png';
 import mainBgImg from './mainBgImg.png';
 import arrowRight from './arrowRight.png';
 import mainBg from './mainBg.png';
+import backArrowHover from './backArrowHover.png';
 export {
   logo,
   backArrow,
@@ -136,13 +137,14 @@ export {
   channel,
   costStructure,
   revenueSource,
-  needs,
+  needsImg,
   solutionVertical,
-  emotion,
-  action,
-  purpose,
-  level,
+  emotionImg,
+  actionImg,
+  purposeImg,
+  levelImg,
   mainBgImg,
   arrowRight,
   mainBg,
+  backArrowHover,
 };

@@ -83,15 +83,14 @@ const BarChart = ({ series }: Props) => {
   const maxColor = '#6F56FF';
   const minColor = '#FF6294';
 
-  // 기본 옵션 설정
-  const options: ChartOptions = {
+  const defaultOptions: ChartOptions = {
     colors: Array.from({ length: series[0].data.length }, () => defaultColor),
     chart: {
       toolbar: {
         show: false,
       },
       fontFamily: 'Pretendard, sans-serif',
-      foreColor: '#000000', // 타입스크립트의 `foreColor`는 필요하므로 추가함
+      foreColor: '#000000',
     },
     xaxis: {
       categories: [
@@ -148,23 +147,23 @@ const BarChart = ({ series }: Props) => {
     },
   };
 
-  const newColors = [...options.colors];
+  const newColors = [...defaultOptions.colors];
   newColors[maximumValueIndex] = maxColor;
   newColors[minimumValueIndex] = minColor;
 
   const newBackgroundColors = [
-    ...options.plotOptions.bar.colors.backgroundBarColors,
+    ...defaultOptions.plotOptions.bar.colors.backgroundBarColors,
   ];
   newBackgroundColors[minimumValueIndex] = minColor;
 
   const newOptions: ChartOptions = {
-    ...options,
+    ...defaultOptions,
     plotOptions: {
-      ...options.plotOptions,
+      ...defaultOptions.plotOptions,
       bar: {
-        ...options.plotOptions.bar,
+        ...defaultOptions.plotOptions.bar,
         colors: {
-          ...options.plotOptions.bar.colors,
+          ...defaultOptions.plotOptions.bar.colors,
           backgroundBarColors: newBackgroundColors,
         },
       },

@@ -23,6 +23,10 @@ import {
 
 export const queryKeys = {
   SWOT_ANALYSIS: 'swotAnalysis',
+  OVERALL_ANALYSIS: 'overallAnalysis',
+  PERSONA: 'persona',
+  BUSINESS_MODEL_CANVAS: 'businessModelCanvas',
+  CUSTOMER_JOURNEY_MAP: 'customerJourneyMap',
 };
 
 export const HEADER_HEIGHT = '60px';
@@ -129,4 +133,38 @@ export const WEAKNESS_TYPE_INFO: {
     footerBackground: weakneesTypeFooter2,
     serviceTool: [businessModelCanvas, serviceBlueprint],
   },
+};
+
+export const SUBCATEGORIES = [
+  '기존 아이디어 기술 고집',
+  '관련 지식 및 경험 부족',
+  '소극적 태도',
+  '사업 타당성 평가 부족',
+  '내부 환경 파악 부족',
+  '외부 환경 파악 부족',
+  '고객 니즈 파악 어려움',
+  '핵심 고객 정의 어려움',
+  '시장 세분화 어려움',
+  '사업 파악 부족',
+  '시장 정보 습득 부족',
+  '피드백 및 학습 부족',
+  '기술 개발 부족',
+  '전문인력 확보 부족',
+  '기업 운영의 어려움',
+  '관리 시스템 부족',
+];
+
+export const ROUTES_PATH = {
+  home: '/',
+  serviceRegistration: '/swot',
+  firstResult: '/swot/result',
+  testStart: '/type',
+  test: '/type/test',
+  secondResult: '/type/result',
+  persona: '/tools/psn',
+  busineesModelCanvas: '/tools/bmc',
+  customerJourneyMap: '/tools/cjm',
+  bluePrint: '/tools/blp',
+  systemMap: '/tools/stm',
+  benchmarking: '/tools/bcm',
 };

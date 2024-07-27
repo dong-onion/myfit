@@ -2,19 +2,21 @@ import React from 'react';
 import styled from 'styled-components';
 import Frame from '../components/Frame';
 import {
-  action,
-  businessCanvasInfo,
-  emotion,
-  level,
-  needs,
-  purpose,
+  actionImg,
+  customerJourneyMapInfo,
+  emotionImg,
+  levelImg,
+  needsImg,
+  purposeImg,
   solutionVertical,
 } from '@/assets';
 import ContentHeader from '../components/ContentHeader/indext';
+import { useCustomerJourneyMap } from '@/hooks/useCustomerJourneyMap';
 
 export const Container = styled.div`
   flex-direction: column;
   display: flex;
+  width: 100%;
   * {
     color: ${({ theme }) => theme.color.gray[0]};
   }
@@ -22,6 +24,7 @@ export const Container = styled.div`
 export const LevelContainer = styled.div`
   display: flex;
   margin-top: 63px;
+  width: 100%;
 
   & div {
     display: flex;
@@ -32,7 +35,7 @@ export const LevelContainer = styled.div`
   }
 
   & :nth-child(1) {
-    width: 114px;
+    width: 8%;
     height: 105px;
     margin-right: 14px;
     border-radius: 12px;
@@ -43,11 +46,16 @@ export const LevelContainer = styled.div`
       height: 61px;
       margin: 0;
       padding: 0;
+
+      &.solution {
+        width: 52px;
+        height: 60px;
+      }
     }
   }
 
   & :not(:nth-child(1)) {
-    width: 215px;
+    width: 15%;
     font-family: Pretendard-Medium;
     font-size: 18px;
     font-weight: 500;
@@ -127,149 +135,71 @@ export const NeedsContainer = styled(ActionContainer)``;
 export const SolutionContainer = styled(PurposeContainer)``;
 
 const CustomerJouneyMap = () => {
+  const serviceDescription = JSON.parse(
+    sessionStorage.getItem('serviceDescription') || '',
+  );
+  const { data, isError, isLoading, refetch } =
+    useCustomerJourneyMap(serviceDescription);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error...</div>;
+  }
+
   return (
-    <Frame src={businessCanvasInfo}>
+    <Frame src={customerJourneyMapInfo}>
       <ContentHeader />
       <Container>
         <LevelContainer>
           <div>
-            <img src={level} />
+            <img src={levelImg} />
           </div>
-          <div>1. 인지</div>
-          <div>2. 관심</div>
-          <div>3. 가입</div>
-          <div>4. 식단 추천</div>
-          <div>5. 평가</div>
+          {data?.map((item, index) => (
+            <div key={index}>{item.stepName}</div>
+          ))}
         </LevelContainer>
         <PurposeContainer>
           <div>
-            <img src={purpose} />
+            <img src={purposeImg} />
           </div>
-          <div>
-            서비스 존재
-            <br />
-            인지
-          </div>
-          <div>
-            서비스에 대한
-            <br />
-            관심 증가
-          </div>
-          <div>
-            서비스 이용을
-            <br />
-            위한 회원가입
-          </div>
-          <div>
-            맞춤형 식단
-            <br />
-            추천 받기
-          </div>
-          <div>
-            서비스에 대한
-            <br />
-            평가
-          </div>
+          {data?.map((item, index) => (
+            <div key={index}>{item.purpose}</div>
+          ))}
         </PurposeContainer>
         <ActionContainer>
           <div>
-            <img src={action} />
+            <img src={actionImg} />
           </div>
-          <div>
-            광고, SNS, 블로그
-            <br />
-            등을 통한 인지
-          </div>
-          <div>
-            웹사이트 방문,
-            <br />
-            정보 확인
-          </div>
-          <div>
-            앱 다운로드,
-            <br />
-            회원가입 진행
-          </div>
-          <div>
-            식습관 정보 입력 후<br />
-            추천 받기
-          </div>
-          <div>
-            설문조사 참여,
-            <br />
-            후기 작성
-          </div>
+          {data?.map((item, index) => (
+            <div key={index}>{item.action}</div>
+          ))}
         </ActionContainer>
         <EmotionContainer>
           <div>
-            <img src={emotion} />
+            <img src={emotionImg} />
           </div>
-          <div>호기심</div>
-          <div>흥미로움</div>
-          <div>기대감</div>
-          <div>만족감</div>
-          <div>만족감</div>
+          {data?.map((item, index) => (
+            <div key={index}>{item.emotion}</div>
+          ))}
         </EmotionContainer>
         <NeedsContainer>
           <div>
-            <img src={needs} />
+            <img src={needsImg} />
           </div>
-          <div>
-            건강한 식습관
-            <br />
-            정보 획득
-          </div>
-          <div>
-            건강한 식습관
-            <br />
-            유지에 필요한
-            <br /> 정보
-          </div>
-          <div>
-            서비스 이용
-            <br />
-            편리성
-          </div>
-          <div>
-            맞춤 식단
-            <br />
-            추천
-          </div>
-          <div>
-            서비스 개선에
-            <br />
-            도움이 되는
-            <br />
-            정보 제공
-          </div>
+          {data?.map((item, index) => (
+            <div key={index}>{item.need}</div>
+          ))}
         </NeedsContainer>
         <SolutionContainer>
           <div>
-            <img src={solutionVertical} />
+            <img className="solution" src={solutionVertical} />
           </div>
-          <div>
-            다양한 채널 광고
-            <br />및 홍보
-          </div>
-          <div>
-            사용자 친화적 <br />
-            UI/UX, <br />
-            다양한 콘텐츠 제공
-          </div>
-          <div>
-            간편한 가입 절차,
-            <br />
-            혜택 제공
-          </div>
-          <div>
-            사용자 식습관 기반 식단
-            <br /> 추천
-          </div>
-          <div>
-            설문조사 기능,
-            <br />
-            후기 작성 기능
-          </div>
+          {data?.map((item, index) => (
+            <div key={index}>{item.solution}</div>
+          ))}
         </SolutionContainer>
       </Container>
     </Frame>

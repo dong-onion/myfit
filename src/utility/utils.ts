@@ -40,7 +40,7 @@ export const parseSWOTAnalysis = (content: string): SWOTAnalysis | null => {
   };
 };
 
-interface Persona {
+export interface Persona {
   introduction: string; // 소개
   background: string; // 배경
   goal: string; // 목표
@@ -76,7 +76,7 @@ export const parsePersona = (content: string) => {
   return persona;
 };
 
-interface BMCanvas {
+export interface BMCanvas {
   problems: string[]; // 문제
   alternatives: string[]; // 현재 문제를 해결하고 있는 대안
   customerSegments: string[]; // 고객 세그먼트
@@ -90,6 +90,7 @@ interface BMCanvas {
   keyMetrics: string[]; // 핵심 지표
   competitiveAdvantage: string[]; // 경쟁 우위
 }
+
 //parseBMCanvas
 export const parseBMCanvas = (content: string) => {
   const contentArray = content.split('\n\n');
@@ -147,7 +148,7 @@ export const parseBMCanvas = (content: string) => {
   return bmCanvas;
 };
 
-interface CustomerJourneyMapItem {
+export interface CustomerJourneyMapItem {
   stepName: string;
   purpose: string;
   emotion: string;

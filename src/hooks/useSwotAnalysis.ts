@@ -12,7 +12,7 @@ interface SWOTAnalysisResponse {
 }
 
 export const useSWOTAnalysis = (serviceDescription: string, level: number) => {
-  const { data, isLoading, isError } = useQuery<SWOTAnalysis, Error>(
+  const { data, isLoading, isError, refetch } = useQuery<SWOTAnalysis, Error>(
     [queryKeys.SWOT_ANALYSIS, serviceDescription],
     () =>
       fetchSWOTAnalysis(serviceDescription, level).then(
@@ -33,5 +33,6 @@ export const useSWOTAnalysis = (serviceDescription: string, level: number) => {
     data,
     isLoading,
     isError,
+    refetch,
   };
 };

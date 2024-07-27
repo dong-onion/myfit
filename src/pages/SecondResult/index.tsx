@@ -3,18 +3,21 @@ import styled from 'styled-components';
 import BarChart from './components/BarChart';
 import { calculateScore } from '@/utility/utils';
 import {
+  ROUTES_PATH,
+  SUBCATEGORIES,
   WEAKNESS_TYPE,
   WEAKNESS_TYPE_INFO,
   WeaknessType,
 } from '@/utility/constants';
 import { recommendServiceTool, testResult, typeInfo } from '@/assets';
 import { Button } from '@/components';
+import { useOverallAnalysis } from '@/hooks/useOverallAnalysis';
+import { useNavigate } from 'react-router-dom';
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* height: 100%; */
 `;
 
 export const Header = styled.div<{ src: string }>`
@@ -44,8 +47,8 @@ export const Footer = styled.div<{ src: string }>`
 export const ChartContainer = styled.div`
   position: absolute;
   top: 50%;
-  right: 23%;
-  transform: translate(0%, -50%);
+  left: 50%;
+  transform: translate(-50%, -50%) translateX(63.5px);
   display: flex;
   gap: 24px;
 `;
@@ -59,7 +62,8 @@ export const ChartLabelContainer = styled.div`
 `;
 
 export const ChartLabel = styled.span<{ $bold: boolean }>`
-  font-family: Pretendard;
+  font-family: ${({ $bold }) =>
+    $bold ? 'Pretendard-Bold' : 'Pretendard-Light'};
   font-size: 15px;
   font-weight: ${({ $bold }) => ($bold ? 700 : 300)};
   line-height: 19.5px;
@@ -213,17 +217,29 @@ export const DownloadButtonText = styled(RetryButtonText)`
 `;
 
 const SecondResult = () => {
-  const getTestResult = (): number[] => {
-    return JSON.parse(sessionStorage.getItem('totalScores') ?? '');
-  };
-
-  const totalScores = getTestResult();
+  const navigate = useNavigate();
+  const serviceDescription = JSON.parse(
+    sessionStorage.getItem('serviceDescription') || '',
+  );
+  const totalScores = JSON.parse(sessionStorage.getItem('totalScores') ?? '');
   const chartData = calculateScore(totalScores);
+
   const getWeaknessType = (): WeaknessType => {
     const minIndex = chartData.indexOf(Math.min(...chartData));
 
     return WEAKNESS_TYPE[minIndex];
   };
+
+  const findThreeSmallestIndices = (scores: number[]) => {
+    const arrWithIndices = scores.map((value, index) => ({ index, value }));
+    const sortedScores = arrWithIndices.sort((a, b) => a.value - b.value);
+    const indices = sortedScores.slice(0, 3).map((item) => item.index);
+
+    return indices;
+  };
+  const categories = findThreeSmallestIndices(totalScores).map(
+    (index) => SUBCATEGORIES[index],
+  );
 
   const {
     title,
@@ -242,13 +258,31 @@ const SecondResult = () => {
     '경영 관리',
   ];
 
+  const {
+    data: result,
+    isLoading,
+    isError,
+    refetch,
+  } = useOverallAnalysis(serviceDescription, categories, title);
+
+  const handleServicToolImgClick = (tool: string) => {
+    console.log(tool);
+    if (tool === '/static/media/business_model_canvas.dc3bea32c4b53d3dcc7e.png')
+      return navigate(ROUTES_PATH.busineesModelCanvas);
+    if (tool === '/static/media/persona.e02c39fba4c7c55734ff.png')
+      return navigate(ROUTES_PATH.persona);
+
+    if (tool === '/static/media/customer_journey_map.e1efe6a2c919ef83d0d9.png')
+      return navigate(ROUTES_PATH.customerJourneyMap);
+  };
+
   return (
     <Container>
       <Header src={headerBackground}>
         <ChartContainer>
           {labelArray.map((label, index) => (
             <ChartLabelContainer key={index}>
-              <ChartLabel $bold={labelArray[index] === title}>
+              <ChartLabel $bold={labelArray[index] + ' ' + '부족' === title}>
                 {label}
               </ChartLabel>
             </ChartLabelContainer>
@@ -260,9 +294,7 @@ const SecondResult = () => {
         <TestResultImg src={testResult} />
         <TestResultTitle>AI가 서비스와 취약점을 분석했어요</TestResultTitle>
         <TestResultContentContainer>
-          <TestResultContentWrapper>
-            ** 데이터 바인딩**
-          </TestResultContentWrapper>
+          <TestResultContentWrapper>{result}</TestResultContentWrapper>
         </TestResultContentContainer>
       </TestResultSection>
       <TypeInfoSection>
@@ -284,7 +316,11 @@ const SecondResult = () => {
           </ServiceToolTitle>
           <ServiceToolContentImgWrapper>
             {serviceTool.map((tool, index) => (
-              <ServiceToolContentImg key={index} src={tool} />
+              <ServiceToolContentImg
+                onClick={() => handleServicToolImgClick(tool)}
+                key={index}
+                src={tool}
+              />
             ))}
           </ServiceToolContentImgWrapper>
         </ServiceToolSection>

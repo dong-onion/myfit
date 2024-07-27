@@ -5,7 +5,7 @@ import TypeInfoSection from '../TypeInfoSection';
 export const Container = styled.div`
   display: flex;
   background-color: ${({ theme }) => theme.color.bg[1]};
-  height: 1308px;
+  height: 100%;
 `;
 
 export const ContentsSection = styled.div`
@@ -14,6 +14,8 @@ export const ContentsSection = styled.div`
   flex-direction: column;
   background-color: ${({ theme }) => theme.color.bg[1]};
   padding: 0 8%;
+  height: 100%;
+  min-height: 1301px; // 여기를 조절 하면 됨
 `;
 
 interface Prop {

@@ -1,3 +1,4 @@
+import { backArrow, backArrowHover } from '@/assets';
 import { HEADER_HEIGHT } from '@/utility/constants';
 import styled from 'styled-components';
 
@@ -18,12 +19,21 @@ export const Logo = styled.img`
   object-fit: contain;
 `;
 
-export const BackArrow = styled.img`
+export const BackArrow = styled.div`
+  background-image: url(${backArrow});
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   position: absolute;
-  width: 24px;
-  height: 24px;
-  left: 51px;
-  top: 19px;
+  width: 43px;
+  height: 43px;
+  left: 30px;
+  top: 8.5px;
+  cursor: pointer;
+
+  &:hover {
+    background-image: url(${backArrowHover});
+  }
 `;
 
 export const OutletWrapper = styled.div`
