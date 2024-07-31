@@ -20,7 +20,7 @@ export const HeaderWrapper = styled.div`
   & > h2 {
     font-size: 28px;
     font-weight: 600;
-    font-family: 'Pretendard-SeimBold';
+    font-family: Pretendard-SeimBold;
     letter-spacing: -0.005em;
     color: ${({ theme }) => theme.color.gray[0]};
     margin-bottom: 15px;
@@ -81,7 +81,7 @@ export const AnalysisInfoContainer = styled.div`
 
 export const AnalysisInfoBoxWrapper = styled.div`
   width: 588px;
-  height: 300px;
+  height: 344px;
   border-radius: 12px;
   background-color: ${({ theme }) => theme.color.white[0]};
   padding: 40px 30px;
@@ -97,10 +97,9 @@ export const AnalysisInfoBoxWrapper = styled.div`
 export const AnalysisInfoBox = styled.div`
   width: 100%;
   height: calc(100% - 80px);
-  overflow: scroll;
   word-break: keep-all;
   white-space: pre-wrap;
-
+  overflow: hidden;
   & ul {
     padding-left: 28px;
   }

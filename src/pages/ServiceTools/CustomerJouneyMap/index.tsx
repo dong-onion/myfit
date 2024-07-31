@@ -5,6 +5,7 @@ import {
   actionImg,
   customerJourneyMapInfo,
   emotionImg,
+  hyperClova,
   levelImg,
   needsImg,
   purposeImg,
@@ -12,6 +13,7 @@ import {
 } from '@/assets';
 import ContentHeader from '../components/ContentHeader/indext';
 import { useCustomerJourneyMap } from '@/hooks/useCustomerJourneyMap';
+import Loading from './components/Loading';
 
 export const Container = styled.div`
   flex-direction: column;
@@ -25,6 +27,8 @@ export const LevelContainer = styled.div`
   display: flex;
   margin-top: 63px;
   width: 100%;
+  min-height: 105px;
+  word-break: keep-all;
 
   & div {
     display: flex;
@@ -35,8 +39,8 @@ export const LevelContainer = styled.div`
   }
 
   & :nth-child(1) {
-    width: 8%;
-    height: 105px;
+    width: 9%;
+    height: 100%;
     margin-right: 14px;
     border-radius: 12px;
 
@@ -55,13 +59,14 @@ export const LevelContainer = styled.div`
   }
 
   & :not(:nth-child(1)) {
-    width: 15%;
+    width: 18%;
     font-family: Pretendard-Medium;
     font-size: 18px;
     font-weight: 500;
     line-height: 27px;
     letter-spacing: -0.002em;
     text-align: center;
+    padding: 20px 21px;
   }
 
   & :nth-child(2) {
@@ -142,7 +147,7 @@ const CustomerJouneyMap = () => {
     useCustomerJourneyMap(serviceDescription);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading refetch={refetch} />;
   }
 
   if (isError) {
@@ -201,6 +206,16 @@ const CustomerJouneyMap = () => {
             <div key={index}>{item.solution}</div>
           ))}
         </SolutionContainer>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            marginTop: 20,
+            width: '100%',
+          }}
+        >
+          <img src={hyperClova} width={200} height={15} />
+        </div>
       </Container>
     </Frame>
   );

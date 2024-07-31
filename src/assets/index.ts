@@ -53,14 +53,14 @@ import thumbsUp from './thumbsUp.png';
 import wallet from './wallet.png';
 import smileFace from './smileFace.png';
 import pesiveFace from './pesiveFace.png';
-import problem from './problem.png';
-import solution from './solution.png';
-import valueProposition from './valueProposition.png';
-import competitiveAdvantage from './competitiveAdvantage.png';
-import customerGroup from './customerGroup.png';
-import kpi from './kpi.png';
-import channel from './channel.png';
-import costStructure from './costStructure.png';
+import problemImg from './problem.png';
+import solutionImg from './solution.png';
+import valuePropositionImg from './valueProposition.png';
+import competitiveAdvantageImg from './competitiveAdvantage.png';
+import customerGroupImg from './customerGroup.png';
+import kpiImg from './kpi.png';
+import channelImg from './channel.png';
+import costStructureImg from './costStructure.png';
 import revenueSource from './revenueSource.png';
 import needsImg from './needs.png';
 import solutionVertical from './solutionVertical.png';
@@ -72,6 +72,10 @@ import mainBgImg from './mainBgImg.png';
 import arrowRight from './arrowRight.png';
 import mainBg from './mainBg.png';
 import backArrowHover from './backArrowHover.png';
+import holdOnImg from './holdOnImg.png';
+import hyperClova from './hyperClova.png';
+import RetryButton from './RetryButton.png';
+import RetryBox from './RetryBox.png';
 export {
   logo,
   backArrow,
@@ -128,14 +132,14 @@ export {
   smileFace,
   pesiveFace,
   wallet,
-  problem,
-  solution,
-  valueProposition,
-  competitiveAdvantage,
-  customerGroup,
-  kpi,
-  channel,
-  costStructure,
+  problemImg,
+  solutionImg,
+  valuePropositionImg,
+  competitiveAdvantageImg,
+  customerGroupImg,
+  kpiImg,
+  channelImg,
+  costStructureImg,
   revenueSource,
   needsImg,
   solutionVertical,
@@ -147,4 +151,8 @@ export {
   arrowRight,
   mainBg,
   backArrowHover,
+  holdOnImg,
+  hyperClova,
+  RetryButton,
+  RetryBox,
 };

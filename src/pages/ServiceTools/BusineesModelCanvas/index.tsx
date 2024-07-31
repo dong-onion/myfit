@@ -1,8 +1,22 @@
 import React from 'react';
 import Frame from '../components/Frame';
-import { businessCanvasInfo, costStructure, problem } from '@/assets';
+import {
+  businessCanvasInfo,
+  costStructureImg,
+  problemImg,
+  solutionImg,
+  valuePropositionImg,
+  competitiveAdvantageImg,
+  customerGroupImg,
+  kpiImg,
+  revenueSource,
+  channelImg,
+  hyperClova,
+} from '@/assets';
 import styled from 'styled-components';
 import ContentHeader from '../components/ContentHeader/indext';
+import { useBusinessModelCanvas } from '@/hooks/useBusineesModelCanvas';
+import Loading from './components/Loading';
 
 const GridContainer = styled.div`
   display: grid;
@@ -143,39 +157,123 @@ export const FlexContainer = styled.div`
 `;
 
 const BusineesModelCanvas = () => {
+  const serviceDescription = JSON.parse(
+    sessionStorage.getItem('serviceDescription') || '',
+  );
+  const { data, isError, isLoading, refetch } =
+    useBusinessModelCanvas(serviceDescription);
+  const {
+    problems = [''],
+    alternatives = [''],
+    customerSegments = [''],
+    earlyAdopters = [''],
+    valuePropositions = [''],
+    highConcept = [''],
+    solution = [''],
+    channels = [''],
+    revenueStreams = [''],
+    costStructure = [''],
+    keyMetrics = [''],
+    competitiveAdvantage = [''],
+  } = data || {};
+
+  if (isLoading) {
+    return <Loading refetch={refetch} />;
+  }
+
+  if (isError) {
+    return <div>Error...</div>;
+  }
+
   return (
     <Frame src={businessCanvasInfo}>
       <ContentHeader />
       <GridContainer>
         <A className="grid">
-          <img src={problem} />
+          <img src={problemImg} />
           <ul>
-            <li>
-              현대인들은 바쁜 일상으로 인해 건강한 식습관을 유지하기 어렵습니다.
-            </li>
-            <li>
-              건강한 식습관을 유지하고 싶지만, 시간과 노력이 많이 필요합니다.
-            </li>
+            {problems.map((problem, index) => (
+              <li key={index}>{problem}</li>
+            ))}
           </ul>
         </A>
-        <B className="grid">B</B>
-        <C className="grid">C</C>
-        <D className="grid">D</D>
-        <E className="grid">E</E>
-        <F className="grid">F</F>
-        <G className="grid">G</G>
+        <B className="grid">
+          <img src={solutionImg} />
+          <ul>
+            {solution.map((solution, index) => (
+              <li key={index}>{solution}</li>
+            ))}
+          </ul>
+        </B>
+        <C className="grid">
+          <img src={valuePropositionImg} />
+          <ul>
+            {valuePropositions.map((valueProposition, index) => (
+              <li key={index}>{valueProposition}</li>
+            ))}
+          </ul>
+        </C>
+        <D className="grid">
+          <img src={competitiveAdvantageImg} />
+          <ul>
+            {competitiveAdvantage.map((competitiveAdvantage, index) => (
+              <li key={index}>{competitiveAdvantage}</li>
+            ))}
+          </ul>
+        </D>
+        <E className="grid">
+          <img src={customerGroupImg} />
+          <ul>
+            {customerSegments.map((customerSegment, index) => (
+              <li key={index}>{customerSegment}</li>
+            ))}
+          </ul>
+        </E>
+        <F className="grid">
+          <img src={kpiImg} />
+          <ul>
+            {keyMetrics.map((keyMetric, index) => (
+              <li key={index}>{keyMetric}</li>
+            ))}
+          </ul>
+        </F>
+        <G className="grid">
+          <img src={channelImg} />
+          <ul>
+            {channels.map((channel, index) => (
+              <li key={index}>{channel}</li>
+            ))}
+          </ul>
+        </G>
       </GridContainer>
       <FlexContainer>
         <div>
-          <img src={costStructure} />
+          <img src={costStructureImg} />
           <ul>
-            <li>식재료 구매 비용</li>
-            <li>인건비</li>
-            <li>마케팅 비용</li>
+            {costStructure.map((costStructure, index) => (
+              <li key={index}>{costStructure}</li>
+            ))}
           </ul>
         </div>
-        <div></div>
+        <div>
+          <img src={revenueSource} />
+          <ul>
+            {revenueStreams.map((revenueStream, index) => (
+              <li key={index}>{revenueStream}</li>
+            ))}
+          </ul>
+        </div>
       </FlexContainer>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+          marginTop: 20,
+          width: '100%',
+        }}
+      >
+        <img src={hyperClova} width={200} height={15} />
+      </div>
     </Frame>
   );
 };

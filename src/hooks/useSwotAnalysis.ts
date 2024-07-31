@@ -12,21 +12,19 @@ interface SWOTAnalysisResponse {
 }
 
 export const useSWOTAnalysis = (serviceDescription: string, level: number) => {
-  const { data, isLoading, isError, refetch } = useQuery<SWOTAnalysis, Error>(
-    [queryKeys.SWOT_ANALYSIS, serviceDescription],
-    () =>
-      fetchSWOTAnalysis(serviceDescription, level).then(
-        (data: SWOTAnalysisResponse) => {
-          const parsedData = parseSWOTAnalysis(data.result.message.content);
-          if (!parsedData) {
-            throw new Error('Failed to parse SWOT Analysis');
-          }
-          return parsedData;
-        },
-      ),
-    {
-      staleTime: 1000 * 60 * 5,
-    },
+  const { data, isLoading, isError, refetch, isRefetching } = useQuery<
+    SWOTAnalysis,
+    Error
+  >([queryKeys.SWOT_ANALYSIS, serviceDescription], () =>
+    fetchSWOTAnalysis(serviceDescription, level).then(
+      (data: SWOTAnalysisResponse) => {
+        const parsedData = parseSWOTAnalysis(data.result.message.content);
+        if (!parsedData) {
+          throw new Error('Failed to parse SWOT Analysis');
+        }
+        return parsedData;
+      },
+    ),
   );
 
   return {
@@ -34,5 +32,6 @@ export const useSWOTAnalysis = (serviceDescription: string, level: number) => {
     isLoading,
     isError,
     refetch,
+    isRefetching,
   };
 };

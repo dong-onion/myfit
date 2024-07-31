@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   bullseye,
+  hyperClova,
   personaContent1,
   personaInfo,
   pesiveFace,
@@ -15,6 +16,7 @@ import ContentHeader from '../components/ContentHeader/indext';
 import ContentBox from '../components/ContentBox';
 import Frame from '../components/Frame';
 import { usePersona } from '@/hooks/usePersona';
+import Loading from './components/Loading';
 
 export const Content1 = styled(ContentBox)`
   margin-top: 60px;
@@ -123,7 +125,7 @@ const Persona = () => {
   } = data || {};
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading refetch={refetch} />;
   }
 
   if (isError) {
@@ -192,6 +194,16 @@ const Persona = () => {
           <span>{painPoint}</span>
         </Content3>
       </ContentWrapper>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+          marginTop: 20,
+          width: '100%',
+        }}
+      >
+        <img src={hyperClova} width={200} height={15} />
+      </div>
       <Footer />
     </Frame>
   );

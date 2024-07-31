@@ -1,82 +1,100 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import * as S from '../FirstResult.style';
-import { readingGlasses, strategy1, strategy2, strategy3 } from '@/assets';
-import { Skeleton } from '@/components';
+import { HoldOn, Skeleton, SkeletonWrapper } from '@/components';
+import Retry from '@/components/Retry/Retry';
 
-const Loading = () => {
+const Loading = ({ refetch }: { refetch: any }) => {
+  const [showRetryButtton, setShowRetryButton] = useState<boolean>(false);
+  useEffect(() => {
+    const timer: NodeJS.Timeout | undefined = setTimeout(() => {
+      setShowRetryButton(true);
+    }, 30000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <S.Container>
-      <S.InnerContainer>
+    <div
+      style={{
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        paddingBottom: 225,
+      }}
+    >
+      <div style={{ width: '100%', maxWidth: 1200 }}>
+        {!showRetryButtton ? (
+          <HoldOn top={203} />
+        ) : (
+          <Retry
+            top={203}
+            refetch={refetch}
+            setShowRetryButton={setShowRetryButton}
+          />
+        )}
         <S.HeaderWrapper>
-          <h2>서비스 SWOT 분석과 성장 전략을 제안해드려요!</h2>
-          {/* <span className="title">{serviceDescription}&nbsp;</span> */}
-          {/* <span>분석 결과</span> */}
-          <Skeleton width={605} height={40} repeat={1} />
+          <Skeleton width={612} height={28} style={{ marginBottom: 20 }} />
+          <Skeleton width={605} height={40} />
         </S.HeaderWrapper>
-        <S.SummaryContainer>
-          <S.SummaryWrapper>
-            {/* {result} */}
-            <Skeleton width={900} height={30} repeat={1} />
-            <Skeleton width={800} height={30} repeat={1} />
-            <Skeleton width={700} height={30} repeat={1} />
-          </S.SummaryWrapper>
-        </S.SummaryContainer>
-        <S.AnalysisTitle>SWOT 분석</S.AnalysisTitle>
+        <SkeletonWrapper
+          width={1200}
+          height={176}
+          style={{ padding: 32.5 }}
+          $isGray
+        >
+          <Skeleton width={996} height={24} $isGray={false} />
+          <Skeleton width={1077} height={24} $isGray={false} />
+        </SkeletonWrapper>
+        <Skeleton
+          width={155}
+          height={32}
+          style={{ marginTop: 32, marginBottom: 30 }}
+        />
         <S.AnalysisInfoContainer>
           {[1, 2, 3, 4].map((item, index) => (
-            <S.AnalysisInfoBox key={index}>
-              {/* <img src={item.imgSrc} alt={item.alt} /> */}
-              <ul>
-                {/* {item.data &&
-                  item.data.map((item: string, index: number) => (
-                    <li key={index}>{item}</li>
-                  ))} */}
-                <S.SkeletonList>
-                  <Skeleton width={400} height={31} repeat={1} />
-                </S.SkeletonList>
-                <S.SkeletonList>
-                  <Skeleton width={500} height={31} repeat={1} />
-                </S.SkeletonList>
-                <S.SkeletonList>
-                  <Skeleton width={200} height={31} repeat={1} />
-                </S.SkeletonList>
-                <S.SkeletonList>
-                  <Skeleton width={300} height={31} repeat={1} />
-                </S.SkeletonList>
-              </ul>
-            </S.AnalysisInfoBox>
+            <SkeletonWrapper
+              key={index}
+              width={588}
+              height={344}
+              style={{ padding: '41px 31px' }}
+              $isGray
+            >
+              <Skeleton width={82} height={35} $isGray={false} />
+              <Skeleton
+                width={467}
+                height={22}
+                style={{ marginTop: 19, marginBottom: 12 }}
+                $isGray={false}
+              />
+              <Skeleton width={379} height={22} $isGray={false} />
+            </SkeletonWrapper>
+          ))}
+          <Skeleton
+            width={368}
+            height={32}
+            style={{ marginTop: 80, marginBottom: 40 }}
+          />
+          {Array.from({ length: 3 }).map((_, index) => (
+            <SkeletonWrapper
+              key={index}
+              width={1200}
+              height={100}
+              style={{
+                padding: '32px 40px',
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                gap: 20,
+              }}
+              $isGray
+            >
+              <Skeleton width={82} height={36} $isGray={false} />
+              <Skeleton width={751} height={20} $isGray={false} />
+            </SkeletonWrapper>
           ))}
         </S.AnalysisInfoContainer>
-        <S.ServiceGrowthstrategyTitle>
-          서비스 성장 전략 제안
-        </S.ServiceGrowthstrategyTitle>
-        <S.StrategyWrapper>
-          <S.Strategy>
-            <img src={strategy1} alt="strategy1" />
-            {/* <span>{strategy?.[0]}</span> */}
-            <Skeleton width={900} height={21} repeat={1} />
-          </S.Strategy>
-          <S.Strategy>
-            <img src={strategy2} alt="strategy2" />
-            {/* <span>{strategy?.[1]}</span> */}
-            <Skeleton width={900} height={21} repeat={1} />
-          </S.Strategy>
-          <S.Strategy>
-            <img src={strategy3} alt="strategy3" />
-            {/* <span>{strategy?.[2]}</span> */}
-            <Skeleton width={900} height={21} repeat={1} />
-          </S.Strategy>
-        </S.StrategyWrapper>
-      </S.InnerContainer>
-      <S.TestNavBar>
-        <S.TestNavTitle>
-          내 서비스의 <span className="bold">부족한 점</span>은 뭘까?
-        </S.TestNavTitle>
-        <S.TestNavButton type="button">
-          취약점 파악하기 <S.ButtonIcon src={readingGlasses} />{' '}
-        </S.TestNavButton>
-      </S.TestNavBar>
-    </S.Container>
+      </div>
+    </div>
   );
 };
 

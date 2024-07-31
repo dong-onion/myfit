@@ -4,18 +4,18 @@ import * as S from './Skeleton.style';
 interface Props {
   width: string | number;
   height: string | number;
-  repeat: number;
+  $isGray?: boolean;
+  style?: React.CSSProperties;
 }
 
-const Skeleton = ({ width, height, repeat }: Props) => {
-  const repeatArr = Array.from({ length: repeat }, (_, index) => index);
-
+const Skeleton = ({ width, height, $isGray = true, style }: Props) => {
   return (
-    <>
-      {repeatArr.map((num) => (
-        <S.SkeletonContainer key={num} width={width} height={height} />
-      ))}
-    </>
+    <S.SkeletonContainer
+      $isGray={$isGray}
+      width={width}
+      height={height}
+      style={style}
+    />
   );
 };
 

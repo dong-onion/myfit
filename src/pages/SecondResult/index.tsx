@@ -9,10 +9,16 @@ import {
   WEAKNESS_TYPE_INFO,
   WeaknessType,
 } from '@/utility/constants';
-import { recommendServiceTool, testResult, typeInfo } from '@/assets';
+import {
+  hyperClova,
+  recommendServiceTool,
+  testResult,
+  typeInfo,
+} from '@/assets';
 import { Button } from '@/components';
 import { useOverallAnalysis } from '@/hooks/useOverallAnalysis';
 import { useNavigate } from 'react-router-dom';
+import Loading from './components/Loading';
 
 export const Container = styled.div`
   display: flex;
@@ -79,8 +85,10 @@ export const TestResultSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 1200px;
 `;
 export const TestResultImg = styled.img`
+  align-self: flex-start;
   width: 164px;
   height: 46px;
 `;
@@ -93,6 +101,7 @@ export const TestResultTitle = styled.p`
   letter-spacing: -0.012em;
   text-align: left;
   color: ${({ theme }) => theme.color.gray[0]};
+  align-self: flex-start;
 `;
 export const TestResultContentContainer = styled.div`
   width: 100%;
@@ -119,7 +128,9 @@ export const TestResultContentWrapper = styled.div`
   color: ${({ theme }) => theme.color.gray[0]};
 `;
 
-export const TypeInfoSection = styled(TestResultSection)``;
+export const TypeInfoSection = styled(TestResultSection)`
+  margin-top: 110px;
+`;
 export const TypeInfoImg = styled(TestResultImg)``;
 export const TypeInfoTitle = styled(TestResultTitle)`
   & .emphasis {
@@ -133,7 +144,7 @@ export const TypeInfoSubTitle = styled.p`
   font-weight: 600;
   line-height: 22px;
   letter-spacing: -0.005em;
-  color: ${({ theme }) => theme.color.gray[0]};
+  align-self: flex-start;
 `;
 export const TypeInfoContentImg = styled.img`
   margin-top: 20px;
@@ -266,7 +277,6 @@ const SecondResult = () => {
   } = useOverallAnalysis(serviceDescription, categories, title);
 
   const handleServicToolImgClick = (tool: string) => {
-    console.log(tool);
     if (tool === '/static/media/business_model_canvas.dc3bea32c4b53d3dcc7e.png')
       return navigate(ROUTES_PATH.busineesModelCanvas);
     if (tool === '/static/media/persona.e02c39fba4c7c55734ff.png')
@@ -275,6 +285,14 @@ const SecondResult = () => {
     if (tool === '/static/media/customer_journey_map.e1efe6a2c919ef83d0d9.png')
       return navigate(ROUTES_PATH.customerJourneyMap);
   };
+
+  if (isLoading) {
+    return <Loading refetch={refetch} />;
+  }
+
+  if (isError) {
+    return <div>Error...</div>;
+  }
 
   return (
     <Container>
@@ -296,7 +314,14 @@ const SecondResult = () => {
         <TestResultContentContainer>
           <TestResultContentWrapper>{result}</TestResultContentWrapper>
         </TestResultContentContainer>
+        <img
+          src={hyperClova}
+          width={200}
+          height={15}
+          style={{ alignSelf: 'flex-end', marginTop: 20 }}
+        />
       </TestResultSection>
+
       <TypeInfoSection>
         <TypeInfoImg src={typeInfo} />
         <TypeInfoTitle>

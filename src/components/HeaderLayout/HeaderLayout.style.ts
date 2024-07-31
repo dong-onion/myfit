@@ -14,9 +14,10 @@ export const Container = styled.div`
 `;
 
 export const Logo = styled.img`
-  width: 105px;
-  height: 23px;
+  width: 145px;
+  height: 43px;
   object-fit: contain;
+  padding: 10px 20px;
 `;
 
 export const BackArrow = styled.div`

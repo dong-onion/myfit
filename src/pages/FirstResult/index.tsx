@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
+  hyperClova,
   readingGlasses,
   strategy1,
   strategy2,
@@ -15,25 +16,24 @@ import { useNavigate } from 'react-router-dom';
 import Loading from './components/Loading';
 
 const FirstResult = () => {
-  const level = Number(JSON.parse(sessionStorage.getItem('level') || '0'));
+  const navigate = useNavigate();
 
   const serviceDescription = JSON.parse(
     sessionStorage.getItem('serviceDescription') || '',
   );
+  const level = Number(JSON.parse(sessionStorage.getItem('level') || '0'));
 
-  const navigate = useNavigate();
-
-  const { data, isLoading, isError } = useSWOTAnalysis(
+  const { data, isLoading, isError, refetch } = useSWOTAnalysis(
     serviceDescription,
     level,
   );
 
   if (isLoading) {
-    return <Loading />;
+    return <Loading refetch={refetch} />;
   }
 
   if (isError) {
-    return <div>Error...</div>;
+    refetch();
   }
 
   const { strength, weakness, opportunity, threat, result, strategy } =
@@ -94,6 +94,11 @@ const FirstResult = () => {
             <span>{strategy?.[2]}</span>
           </S.Strategy>
         </S.StrategyWrapper>
+        <div
+          style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 20 }}
+        >
+          <img src={hyperClova} width={200} height={15} />
+        </div>
       </S.InnerContainer>
       <S.TestNavBar>
         <S.TestNavTitle>

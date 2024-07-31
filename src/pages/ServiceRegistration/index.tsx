@@ -234,7 +234,7 @@ const ServiceRegistration = () => {
             <InputWrapper>
               <InputTitle>서비스명</InputTitle>
               <Input
-                placeholder="독거 노인들을 위한 식료품 배달 서비스"
+                placeholder="20대 여성을 위한 와인 구독 서비스"
                 maxLength={30}
                 onChange={handleInputChange}
                 value={serviceDescription}

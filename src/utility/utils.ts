@@ -9,10 +9,10 @@ export interface SWOTAnalysis {
 
 // SWOT 분석 결과를 파싱하는 함수
 export const parseSWOTAnalysis = (content: string): SWOTAnalysis | null => {
-  const contentArray = content.split('\n\n');
+  let contentArray = content.split('\n\n');
   if (contentArray.length !== 6) {
-    console.error('SWOT Analysis content is not in the right format');
-    return null;
+    // 뒤에서부터 6개의 element를 가져옴
+    contentArray = contentArray.slice(-6);
   }
 
   return {
@@ -32,7 +32,7 @@ export const parseSWOTAnalysis = (content: string): SWOTAnalysis | null => {
       .split('\n')
       .slice(1)
       .map((threat) => threat.trim().slice(2)),
-    result: contentArray[4].slice(2).trim(),
+    result: contentArray[4].split('\n')[1].trim(),
     strategy: contentArray[5]
       .split('\n')
       .slice(1)
@@ -61,7 +61,11 @@ export const parsePersona = (content: string) => {
   // - 성격 정보 : 계획적이고 꼼꼼한 성격으로, 일정이나 식단 등을 체계적으로 관리하고자 함
   // - 페인 포인트 : 혼자서 운동 계획을 세우고 실행하는 것이 어렵고, 의지가 부족하여 중도 포기하는 경우가 많음
   // - 페르소나 선정 이유 : 다이어트를 결심한 사람들 중에서 가장 일반적인 유형이며, 이들이 겪는 페인 포인트를 해결해 줄 수 있음
-  const contentArray = content.split('\n');
+  let contentArray = content.split('\n');
+  if (contentArray.length !== 8) {
+    // 뒤에서부터 8개의 element를 가져옴
+    contentArray = contentArray.slice(-8);
+  }
   const persona: Persona = {
     introduction: contentArray[0].split(':')[1].trim(),
     background: contentArray[1].split(':')[1].trim(),
@@ -93,7 +97,13 @@ export interface BMCanvas {
 
 //parseBMCanvas
 export const parseBMCanvas = (content: string) => {
-  const contentArray = content.split('\n\n');
+  let contentArray = content.split('\n\n');
+
+  if (contentArray.length !== 12) {
+    // 뒤에서부터 12개의 element를 가져옴
+    contentArray = contentArray.slice(-12);
+  }
+
   const bmCanvas: BMCanvas = {
     problems: contentArray[0]
       .split('\n')
@@ -193,7 +203,13 @@ export const parseCustomerJourneyMap = (content: string) => {
   // - 행동 : 추가 결제하거나 갱신하여 서비스 계속 이용
   // - 니즈 : 꾸준한 동기부여
   // - 솔루션 : 목표 달성 시 보상 제공, 챌린지 프로그램 운영
-  const contentArray = content.split('\n\n');
+  let contentArray = content.split('\n\n');
+
+  if (contentArray.length !== 5) {
+    // 뒤에서부터 5개의 element를 가져옴
+    contentArray = contentArray.slice(-5);
+  }
+
   const customerJourneyMap: CustomerJourneyMapItem[] = contentArray.map(
     (step) => {
       const stepArray = step.split('\n');
