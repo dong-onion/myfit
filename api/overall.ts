@@ -1,13 +1,11 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import axios from 'axios';
 
-export const API_URL =
-  'https://clovastudio.stream.ntruss.com/testapp/v1/chat-completions/HCX-003';
+export const API_URL = process.env.REACT_APP_API_URL;
 export const HEADERS = {
-  'X-NCP-CLOVASTUDIO-API-KEY':
-    'NTA0MjU2MWZlZTcxNDJiY8fwswjOopDqr75p2g5JJCDKUgw0DjuqdI/p3XyI+x4T',
-  'X-NCP-APIGW-API-KEY': 'WqDLRGl7mz79mruN8azOuq4UWxpdT6SP6FAuv4RT',
-  'X-NCP-CLOVASTUDIO-REQUEST-ID': '943f9d7f-0dd2-44fe-a5a0-9d2bbc416e73',
+  'X-NCP-CLOVASTUDIO-API-KEY': process.env.REACT_APP_CLOVA_STUDIO_API_KEY,
+  'X-NCP-APIGW-API-KEY': process.env.REACT_APP_APIGW_API_KEY,
+  'X-NCP-CLOVASTUDIO-REQUEST-ID': process.env.REACT_APP_CLOVASTUDIO_REQUEST_ID,
   'Content-Type': 'application/json',
 };
 
