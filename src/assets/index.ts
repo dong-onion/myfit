@@ -76,6 +76,12 @@ import holdOnImg from './holdOnImg.png';
 import hyperClova from './hyperClova.png';
 import RetryButton from './RetryButton.png';
 import RetryBox from './RetryBox.png';
+import supportProcessImg from './supportProcessImg.png';
+import nonf2fServiceUsersImg from './nonf2fServiceUsersImg.png';
+import f2fServiceUsersImg from './f2fServiceUsersImg.png';
+import userActiveImg from './userActiveImg.png';
+import contactImg from './contactImg.png';
+import curvedImg1 from './curvedImg1.png';
 export {
   logo,
   backArrow,
@@ -155,4 +161,10 @@ export {
   hyperClova,
   RetryButton,
   RetryBox,
+  supportProcessImg,
+  nonf2fServiceUsersImg,
+  f2fServiceUsersImg,
+  userActiveImg,
+  contactImg,
+  curvedImg1,
 };
