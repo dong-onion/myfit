@@ -82,6 +82,14 @@ import f2fServiceUsersImg from './f2fServiceUsersImg.png';
 import userActiveImg from './userActiveImg.png';
 import contactImg from './contactImg.png';
 import curvedImg1 from './curvedImg1.png';
+import curvedImg4 from './curvedImg4.png';
+import curvedImg2 from './curvedImg2.png';
+import curvedImg3 from './curvedImg3.png';
+import systemMapActivity from './systemMapActivity.png';
+import systemMapaStakeholders from './systemMapaStakeholders.png';
+import systemMapInfra from './systemMapInfra.png';
+import systemMapProduct from './systemMapProduct.png';
+
 export {
   logo,
   backArrow,
@@ -167,4 +175,11 @@ export {
   userActiveImg,
   contactImg,
   curvedImg1,
+  curvedImg4,
+  curvedImg2,
+  curvedImg3,
+  systemMapActivity,
+  systemMapaStakeholders,
+  systemMapInfra,
+  systemMapProduct,
 };
