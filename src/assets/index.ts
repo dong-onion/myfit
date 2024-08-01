@@ -81,6 +81,7 @@ import nonf2fServiceUsersImg from './nonf2fServiceUsersImg.png';
 import f2fServiceUsersImg from './f2fServiceUsersImg.png';
 import userActiveImg from './userActiveImg.png';
 import contactImg from './contactImg.png';
+import curvedImg1 from './curvedImg1.png';
 export {
   logo,
   backArrow,
@@ -165,4 +166,5 @@ export {
   f2fServiceUsersImg,
   userActiveImg,
   contactImg,
+  curvedImg1,
 };

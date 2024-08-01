@@ -2,17 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import Frame from '../components/Frame';
 import {
-  actionImg,
   contactImg,
   customerJourneyMapInfo,
-  emotionImg,
   f2fServiceUsersImg,
   hyperClova,
   levelImg,
-  needsImg,
   nonf2fServiceUsersImg,
-  purposeImg,
-  solutionVertical,
   supportProcessImg,
   userActiveImg,
 } from '@/assets';
