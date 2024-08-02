@@ -154,9 +154,7 @@ const Persona = () => {
             <img src={readingGlassesLeft} />
             <p className="title">배경</p>
           </div>
-          <ContentInfo>
-            <span>{background}</span>
-          </ContentInfo>
+          <span>{background}</span>
         </Content3>
         <Content3>
           <div>

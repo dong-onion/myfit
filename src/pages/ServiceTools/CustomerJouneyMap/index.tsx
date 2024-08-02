@@ -40,7 +40,6 @@ export const LevelContainer = styled.div`
 
   & :nth-child(1) {
     width: 9%;
-    height: 100%;
     margin-right: 14px;
     border-radius: 12px;
 
@@ -139,6 +138,10 @@ export const EmotionContainer = styled(PurposeContainer)``;
 export const NeedsContainer = styled(ActionContainer)``;
 export const SolutionContainer = styled(PurposeContainer)``;
 
+export const ImgContainer = styled.div`
+  min-height: 150px;
+`;
+
 const CustomerJouneyMap = () => {
   const serviceDescription = JSON.parse(
     sessionStorage.getItem('serviceDescription') || '',
@@ -159,49 +162,49 @@ const CustomerJouneyMap = () => {
       <ContentHeader />
       <Container>
         <LevelContainer>
-          <div>
+          <ImgContainer style={{ height: '105px' }}>
             <img src={levelImg} />
-          </div>
+          </ImgContainer>
           {data?.map((item, index) => (
             <div key={index}>{item.stepName}</div>
           ))}
         </LevelContainer>
         <PurposeContainer>
-          <div>
+          <ImgContainer>
             <img src={purposeImg} />
-          </div>
+          </ImgContainer>
           {data?.map((item, index) => (
             <div key={index}>{item.purpose}</div>
           ))}
         </PurposeContainer>
         <ActionContainer>
-          <div>
+          <ImgContainer>
             <img src={actionImg} />
-          </div>
+          </ImgContainer>
           {data?.map((item, index) => (
             <div key={index}>{item.action}</div>
           ))}
         </ActionContainer>
         <EmotionContainer>
-          <div>
+          <ImgContainer>
             <img src={emotionImg} />
-          </div>
+          </ImgContainer>
           {data?.map((item, index) => (
             <div key={index}>{item.emotion}</div>
           ))}
         </EmotionContainer>
         <NeedsContainer>
-          <div>
+          <ImgContainer>
             <img src={needsImg} />
-          </div>
+          </ImgContainer>
           {data?.map((item, index) => (
             <div key={index}>{item.need}</div>
           ))}
         </NeedsContainer>
         <SolutionContainer>
-          <div>
+          <ImgContainer>
             <img className="solution" src={solutionVertical} />
-          </div>
+          </ImgContainer>
           {data?.map((item, index) => (
             <div key={index}>{item.solution}</div>
           ))}

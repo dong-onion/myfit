@@ -9,6 +9,7 @@ import {
   customerJourneyMapInfo,
   systemMapActivity,
   systemMapaStakeholders,
+  systemMapInfo,
   systemMapInfra,
   systemMapProduct,
 } from '@/assets';
@@ -61,7 +62,9 @@ export const ContentBox1 = styled.div`
   background-color: ${({ theme }) => theme.color.white[0]};
 
   & img {
-    height: 36px;
+    max-height: 36px;
+    object-fit: contain;
+    width: 81%;
   }
 
   & ul {
@@ -100,7 +103,7 @@ export const CurveImage = styled.img`
 
 const SystemMap = () => {
   return (
-    <Frame src={customerJourneyMapInfo}>
+    <Frame height={1364} src={systemMapInfo}>
       <ContentHeader />
       <Container>
         <MapContainer>
