@@ -5,7 +5,6 @@ import TypeInfoSection from '../TypeInfoSection';
 export const Container = styled.div`
   display: flex;
   background-color: ${({ theme }) => theme.color.bg[1]};
-  height: 100%;
 `;
 
 export const ContentsSection = styled.div`
@@ -21,12 +20,13 @@ export const ContentsSection = styled.div`
 interface Prop {
   src: string;
   children: ReactNode;
+  height?: number;
 }
 
-const Frame = ({ src, children }: Prop) => {
+const Frame = ({ src, children, height = 1301 }: Prop) => {
   return (
     <Container>
-      <TypeInfoSection src={src}></TypeInfoSection>
+      <TypeInfoSection height={height} src={src}></TypeInfoSection>
       <ContentsSection>{children}</ContentsSection>
     </Container>
   );

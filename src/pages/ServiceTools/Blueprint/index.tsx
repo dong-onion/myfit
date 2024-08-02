@@ -40,7 +40,6 @@ export const LevelContainer = styled.div`
 
   & :nth-child(1) {
     width: 9%;
-    height: 100%;
     margin-right: 14px;
     border-radius: 12px;
 
@@ -215,7 +214,11 @@ const Blueprint = () => {
         </NeedsContainer>
         <SolutionContainer>
           <div>
-            <img className="process" src={supportProcessImg} />
+            <img
+              className="process"
+              src={supportProcessImg}
+              style={{ backgroundColor: 'transparent' }}
+            />
           </div>
           {data?.map((item, index) => (
             <div key={index}>{item.solution}</div>

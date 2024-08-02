@@ -17,8 +17,7 @@ const GlobalStyle = createGlobalStyle`
     word-break: keep-all;
     white-space: pre-wrap;
   }
-  html, body{
-    height: 100%;
+  html, body{    
   }
   ul, li {
     margin: 0;

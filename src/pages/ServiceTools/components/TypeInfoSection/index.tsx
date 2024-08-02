@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 480px;
+  max-width: 480px;
   background-color: #f5f6fa;
   display: flex;
   justify-content: flex-start;
@@ -14,10 +14,15 @@ export const TypeInfoImg = styled.img<{ src: string }>`
   max-width: 480px;
 `;
 
-const TypeInfoSection = ({ src }: { src: string }) => {
+interface Props {
+  src: string;
+  height?: number;
+}
+
+const TypeInfoSection = ({ src, height = 1301 }: Props) => {
   return (
     <Container>
-      <TypeInfoImg src={src}></TypeInfoImg>
+      <TypeInfoImg height={height} src={src}></TypeInfoImg>
     </Container>
   );
 };

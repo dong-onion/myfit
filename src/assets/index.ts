@@ -89,6 +89,15 @@ import systemMapActivity from './systemMapActivity.png';
 import systemMapaStakeholders from './systemMapaStakeholders.png';
 import systemMapInfra from './systemMapInfra.png';
 import systemMapProduct from './systemMapProduct.png';
+import benchmarkingProduct from './benchmarkingProduct.png';
+import benchmarkingResult from './benchmarkingResult.png';
+import benchmarkingPrice from './benchmarkingPrice.png';
+import benchmarkingSkill from './benchmarkingSkill.png';
+import benchmarkingFeedback from './benchmarkingFeedback.png';
+import benchmarkingStructure from './benchmarkingStructure.png';
+import benchmarkingStrategy from './benchmarkingStrategy.png';
+import benchmarkingService from './benchmarkingService.png';
+import benchmarkingMarketing from './benchmarkingMarketing.png';
 
 export {
   logo,
@@ -182,4 +191,13 @@ export {
   systemMapaStakeholders,
   systemMapInfra,
   systemMapProduct,
+  benchmarkingProduct,
+  benchmarkingResult,
+  benchmarkingPrice,
+  benchmarkingSkill,
+  benchmarkingFeedback,
+  benchmarkingStructure,
+  benchmarkingStrategy,
+  benchmarkingService,
+  benchmarkingMarketing,
 };
