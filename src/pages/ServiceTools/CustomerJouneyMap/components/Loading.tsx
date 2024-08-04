@@ -6,7 +6,7 @@ import Retry from '@/components/Retry/Retry';
 
 const Container = styled.div`
   width: 100%;
-  height: 100dvh;
+  height: 1301px;
   display: flex;
 `;
 

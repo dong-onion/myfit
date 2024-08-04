@@ -6,7 +6,7 @@ import Retry from '@/components/Retry/Retry';
 
 const Container = styled.div`
   width: 100%;
-  height: 100dvh;
+  height: 1301px;
   display: flex;
 `;
 
@@ -42,12 +42,13 @@ const Loading = ({ refetch }: { refetch: any }) => {
       )}
       <TypeInfoLoading />
       <ContentWrapper>
+        <Skeleton width={600} height={44} style={{ marginTop: 60 }} />
         <div
           style={{
             display: 'flex',
             width: '100%',
             height: 724,
-            marginTop: 180,
+            marginTop: 72,
             gap: 14,
           }}
         >
