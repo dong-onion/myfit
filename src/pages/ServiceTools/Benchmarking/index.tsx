@@ -101,7 +101,7 @@ const Benchmarking = () => {
     benchmarkingFeedback,
     benchmarkingStructure,
   ];
-  return <Loading />;
+
   return (
     <Frame src={benchmarkingInfo} height={1916}>
       <ContentHeader />

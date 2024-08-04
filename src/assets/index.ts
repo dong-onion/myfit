@@ -102,6 +102,7 @@ import skeletonCurvedImg1 from './skeletonCurvedImg1.png';
 import skeletonCurvedImg2 from './skeletonCurvedImg2.png';
 import skeletonCurvedImg3 from './skeletonCurvedImg3.png';
 import skeletonCurvedImg4 from './skeletonCurvedImg4.png';
+import serviceRegistrationBackground from './serviceRegistrationBackground.png';
 
 export {
   logo,
@@ -208,4 +209,5 @@ export {
   skeletonCurvedImg2,
   skeletonCurvedImg3,
   skeletonCurvedImg4,
+  serviceRegistrationBackground,
 };

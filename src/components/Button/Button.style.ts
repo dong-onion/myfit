@@ -27,6 +27,7 @@ export const Button = styled.button`
   &:disabled {
     cursor: auto;
     background-color: ${({ theme }) => theme.color.gray[3]};
+    box-shadow: none;
   }
   &:disabled:hover {
     transform: none;
