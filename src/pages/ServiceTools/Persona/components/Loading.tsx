@@ -6,7 +6,7 @@ import Retry from '@/components/Retry/Retry';
 
 const Container = styled.div`
   width: 100%;
-  height: 100%;
+  height: 1300px;
   display: flex;
 `;
 
@@ -16,6 +16,7 @@ const ContentWrapper = styled.div`
   padding-right: 8%;
   flex-direction: column;
   width: 100%;
+  height: 100%;
 `;
 
 const Loading = ({ refetch }: { refetch: any }) => {

@@ -1,11 +1,15 @@
 import { Skeleton, SkeletonWrapper } from '@/components';
 import React from 'react';
 
-const TypeInfoLoading = () => {
+interface Props {
+  height?: number;
+}
+
+const TypeInfoLoading = ({ height = 1300 }: Props) => {
   return (
     <SkeletonWrapper
       width="480px"
-      height="100dvh"
+      height={`${height}px`}
       $isGray
       style={{ padding: '60px 30px' }}
     >

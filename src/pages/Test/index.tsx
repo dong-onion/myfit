@@ -28,7 +28,7 @@ export const QuestionsWrapper = styled.div`
   position: absolute;
   align-items: center;
   top: 68px;
-  gap: 20%;
+  gap: 10%;
 `;
 
 export const QuestionContainer = styled.div<{ $isFocused: boolean }>`
@@ -37,7 +37,6 @@ export const QuestionContainer = styled.div<{ $isFocused: boolean }>`
   height: 214px;
   position: relative;
   display: flex;
-  gap: 100px;
   justify-content: center;
   opacity: ${({ $isFocused }) => ($isFocused ? 1 : 0.3)};
   // blur 처리

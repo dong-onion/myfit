@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Frame from '../components/Frame';
 import {
+  blueprintInfo,
   contactImg,
   customerJourneyMapInfo,
   f2fServiceUsersImg,
@@ -170,7 +171,7 @@ const Blueprint = () => {
   }
 
   return (
-    <Frame src={customerJourneyMapInfo}>
+    <Frame src={blueprintInfo}>
       <ContentHeader />
       <Container>
         <LevelContainer>

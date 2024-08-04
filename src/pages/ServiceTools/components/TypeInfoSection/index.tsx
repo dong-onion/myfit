@@ -7,11 +7,12 @@ export const Container = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  height: 100%;
+  /* height: 100%; */
 `;
 
 export const TypeInfoImg = styled.img<{ src: string }>`
   max-width: 480px;
+  height: 100%;
 `;
 
 interface Props {
