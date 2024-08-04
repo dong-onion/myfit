@@ -168,3 +168,9 @@ export const ROUTES_PATH = {
   systemMap: '/tools/stm',
   benchmarking: '/tools/bcm',
 };
+
+export const SESSION_KEYS = {
+  serviceDescription: 'serviceDescription',
+  level: 'level',
+  totalScores: 'totalScores',
+};

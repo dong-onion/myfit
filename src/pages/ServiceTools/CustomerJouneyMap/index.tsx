@@ -14,6 +14,7 @@ import {
 import ContentHeader from '../components/ContentHeader/indext';
 import { useCustomerJourneyMap } from '@/hooks/useCustomerJourneyMap';
 import Loading from './components/Loading';
+import { SESSION_KEYS } from '@/utility/constants';
 
 export const Container = styled.div`
   flex-direction: column;
@@ -144,7 +145,7 @@ export const ImgContainer = styled.div`
 
 const CustomerJouneyMap = () => {
   const serviceDescription = JSON.parse(
-    sessionStorage.getItem('serviceDescription') || '',
+    sessionStorage.getItem(SESSION_KEYS.serviceDescription) || '',
   );
   const { data, isError, isLoading, refetch } =
     useCustomerJourneyMap(serviceDescription);

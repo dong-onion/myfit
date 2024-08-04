@@ -1,20 +1,31 @@
+import { SESSION_KEYS } from '@/utility/constants';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export const useAccessControl = () => {
-  const [isValidSession, setIsValidSession] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const description = sessionStorage.getItem('serviceDescription');
-    const level = sessionStorage.getItem('level');
+  const serviceDescriptionRaw = sessionStorage.getItem(
+    SESSION_KEYS.serviceDescription,
+  );
+  const levelRaw = sessionStorage.getItem(SESSION_KEYS.level);
 
-    if (description === null || level === null) {
-      navigate('/');
-    } else {
-      setIsValidSession(true);
-    }
-  }, []);
+  if (!serviceDescriptionRaw || !levelRaw) {
+    navigate('/');
+    return { isValidSession: false };
+  }
 
-  return { isValidSession };
+  let serviceDescription;
+  let level;
+
+  try {
+    serviceDescription = JSON.parse(serviceDescriptionRaw);
+    level = Number(JSON.parse(levelRaw));
+  } catch (e) {
+    console.error('Failed to parse session storage items:', e);
+    navigate('/');
+    return { isValidSession: false };
+  }
+
+  return { isValidSession: true, serviceDescription, level };
 };

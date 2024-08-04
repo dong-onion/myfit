@@ -17,6 +17,7 @@ import ContentBox from '../components/ContentBox';
 import Frame from '../components/Frame';
 import { usePersona } from '@/hooks/usePersona';
 import Loading from './components/Loading';
+import { SESSION_KEYS } from '@/utility/constants';
 
 export const Content1 = styled(ContentBox)`
   margin-top: 60px;
@@ -110,7 +111,7 @@ export const Footer = styled.div`
 
 const Persona = () => {
   const serviceDescription = JSON.parse(
-    sessionStorage.getItem('serviceDescription') || '',
+    sessionStorage.getItem(SESSION_KEYS.serviceDescription) || '',
   );
   const { data, isError, isLoading, refetch } = usePersona(serviceDescription);
   const {

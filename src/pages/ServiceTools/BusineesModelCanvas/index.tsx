@@ -17,6 +17,7 @@ import styled from 'styled-components';
 import ContentHeader from '../components/ContentHeader/indext';
 import { useBusinessModelCanvas } from '@/hooks/useBusineesModelCanvas';
 import Loading from './components/Loading';
+import { SESSION_KEYS } from '@/utility/constants';
 
 const GridContainer = styled.div`
   display: grid;
@@ -158,7 +159,7 @@ export const FlexContainer = styled.div`
 
 const BusineesModelCanvas = () => {
   const serviceDescription = JSON.parse(
-    sessionStorage.getItem('serviceDescription') || '',
+    sessionStorage.getItem(SESSION_KEYS.serviceDescription) || '',
   );
   const { data, isError, isLoading, refetch } =
     useBusinessModelCanvas(serviceDescription);

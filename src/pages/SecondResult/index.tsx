@@ -4,6 +4,7 @@ import BarChart from './components/BarChart';
 import { calculateScore } from '@/utility/utils';
 import {
   ROUTES_PATH,
+  SESSION_KEYS,
   SUBCATEGORIES,
   WEAKNESS_TYPE,
   WEAKNESS_TYPE_INFO,
@@ -230,9 +231,11 @@ export const DownloadButtonText = styled(RetryButtonText)`
 const SecondResult = () => {
   const navigate = useNavigate();
   const serviceDescription = JSON.parse(
-    sessionStorage.getItem('serviceDescription') || '',
+    sessionStorage.getItem(SESSION_KEYS.serviceDescription) || '',
   );
-  const totalScores = JSON.parse(sessionStorage.getItem('totalScores') ?? '');
+  const totalScores = JSON.parse(
+    sessionStorage.getItem(SESSION_KEYS.totalScores) ?? '',
+  );
   const chartData = calculateScore(totalScores);
 
   const getWeaknessType = (): WeaknessType => {

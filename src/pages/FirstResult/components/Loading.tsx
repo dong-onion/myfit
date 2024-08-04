@@ -3,7 +3,7 @@ import * as S from '../FirstResult.style';
 import { HoldOn, Skeleton, SkeletonWrapper } from '@/components';
 import Retry from '@/components/Retry/Retry';
 
-const Loading = ({ refetch }: { refetch: any }) => {
+const Loading = ({ refetch }: { refetch?: any }) => {
   const [showRetryButtton, setShowRetryButton] = useState<boolean>(false);
   useEffect(() => {
     const timer: NodeJS.Timeout | undefined = setTimeout(() => {

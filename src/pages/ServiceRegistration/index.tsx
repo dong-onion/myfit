@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { levelSeed, levelSprout, levelTree } from '@/assets';
 import { Button } from '@/components';
 import { useNavigate } from 'react-router-dom';
+import { SESSION_KEYS } from '@/utility/constants';
 
 export const Container = styled.div`
   display: flex;
@@ -200,9 +201,9 @@ const ServiceRegistration = () => {
   const navigate = useNavigate();
 
   const handleCompleteButtonClick = () => {
-    sessionStorage.setItem('level', JSON.stringify(level) || '');
+    sessionStorage.setItem(SESSION_KEYS.level, JSON.stringify(level) || '');
     sessionStorage.setItem(
-      'serviceDescription',
+      SESSION_KEYS.serviceDescription,
       JSON.stringify(serviceDescription),
     );
     navigate('./result');

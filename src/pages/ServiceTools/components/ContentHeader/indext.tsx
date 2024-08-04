@@ -1,3 +1,4 @@
+import { SESSION_KEYS } from '@/utility/constants';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -88,7 +89,7 @@ export const ContentTitle = styled.div`
 
 const ContentHeader = () => {
   const serviceDescription = JSON.parse(
-    sessionStorage.getItem('serviceDescription') || '',
+    sessionStorage.getItem(SESSION_KEYS.serviceDescription) || '',
   );
   return (
     <Container>

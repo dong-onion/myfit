@@ -48,7 +48,7 @@ const Retry = ({
   setShowRetryButton,
 }: {
   top: number;
-  refetch: any;
+  refetch?: any;
   setShowRetryButton: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const handleButtonClick = () => {

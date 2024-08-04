@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import RatingCheckbox from './components/RatingCheckbox';
 import ProgressBar from './components/ProgressBar';
 import { Button } from '@/components';
-import { QUESTIONS } from '@/utility/constants';
+import { QUESTIONS, SESSION_KEYS } from '@/utility/constants';
 import { useNavigate } from 'react-router-dom';
 
 export const Container = styled.div`
@@ -178,7 +178,10 @@ const Test = () => {
 
   const handleSubmitt = () => {
     // 세션 스토리지로 totalScores 저장
-    sessionStorage.setItem('totalScores', JSON.stringify(totalScores));
+    sessionStorage.setItem(
+      SESSION_KEYS.totalScores,
+      JSON.stringify(totalScores),
+    );
     navigate('/type/result');
   };
 

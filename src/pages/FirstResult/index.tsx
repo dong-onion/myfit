@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {
   hyperClova,
   readingGlasses,
@@ -18,19 +18,15 @@ import { useAccessControl } from '@/hooks/useAccessControl';
 
 const FirstResult = () => {
   const navigate = useNavigate();
-  const { isValidSession } = useAccessControl();
+  const { isValidSession, serviceDescription, level } = useAccessControl();
+
   if (!isValidSession) {
-    return null;
+    return <Loading />;
   }
 
-  const serviceDescription = JSON.parse(
-    sessionStorage.getItem('serviceDescription') || '',
-  );
-  const level = Number(JSON.parse(sessionStorage.getItem('level') || '0'));
-
   const { data, isLoading, isError, refetch } = useSWOTAnalysis(
-    serviceDescription,
-    level,
+    serviceDescription as string,
+    level as number,
   );
 
   if (isLoading) {
@@ -57,7 +53,7 @@ const FirstResult = () => {
 
   return (
     <S.Container>
-      {/* <S.InnerContainer>
+      <S.InnerContainer>
         <S.HeaderWrapper>
           <h2>서비스 SWOT 분석과 성장 전략을 제안해드려요!</h2>
           <span className="title">{serviceDescription}&nbsp;</span>
@@ -112,7 +108,7 @@ const FirstResult = () => {
         <S.TestNavButton type="button" onClick={handleClickTestNavButton}>
           취약점 파악하기 <S.ButtonIcon src={readingGlasses} />{' '}
         </S.TestNavButton>
-      </S.TestNavBar> */}
+      </S.TestNavBar>
     </S.Container>
   );
 };
