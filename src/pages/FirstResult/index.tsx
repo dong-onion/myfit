@@ -14,22 +14,11 @@ import * as S from './FirstResult.style';
 import { useSWOTAnalysis } from '@/hooks/useSwotAnalysis';
 import { useNavigate } from 'react-router-dom';
 import Loading from './components/Loading';
+import { useAccessControl } from '@/hooks/useAccessControl';
 
 const FirstResult = () => {
-  const [isValidSession, setIsValidSession] = useState<boolean>(false);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const description = sessionStorage.getItem('serviceDescription');
-    const level = sessionStorage.getItem('level');
-
-    if (description === null || level === null) {
-      navigate('/');
-    } else {
-      setIsValidSession(true);
-    }
-  }, []);
-
+  const { isValidSession } = useAccessControl();
   if (!isValidSession) {
     return null;
   }
