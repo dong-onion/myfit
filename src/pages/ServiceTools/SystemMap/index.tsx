@@ -6,7 +6,6 @@ import {
   curvedImg2,
   curvedImg3,
   curvedImg4,
-  customerJourneyMapInfo,
   systemMapActivity,
   systemMapaStakeholders,
   systemMapInfo,
