@@ -12,10 +12,9 @@ import {
   benchmarkingSkill,
   benchmarkingStrategy,
   benchmarkingStructure,
-  customerJourneyMapInfo,
-  systemMapActivity,
 } from '@/assets';
 import styled from 'styled-components';
+import Loading from './components/Loading';
 
 export const Container = styled.div`
   flex-direction: column;
@@ -102,7 +101,7 @@ const Benchmarking = () => {
     benchmarkingFeedback,
     benchmarkingStructure,
   ];
-
+  return <Loading />;
   return (
     <Frame src={benchmarkingInfo} height={1916}>
       <ContentHeader />
@@ -118,7 +117,6 @@ const Benchmarking = () => {
               <ul>
                 <li>국내 1위 핫도그 프랜차이즈 브랜드</li>
                 <li>2023년 기준 매장 수 1,500개</li>
-                이상
               </ul>
             </ContentWrapper>
           ))}

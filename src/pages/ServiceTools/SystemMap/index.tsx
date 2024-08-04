@@ -13,6 +13,7 @@ import {
   systemMapProduct,
 } from '@/assets';
 import ContentHeader from '../components/ContentHeader/indext';
+import Loading from './components/Loading';
 
 export const Container = styled.div`
   flex-direction: column;
