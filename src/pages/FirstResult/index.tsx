@@ -14,9 +14,14 @@ import * as S from './FirstResult.style';
 import { useSWOTAnalysis } from '@/hooks/useSwotAnalysis';
 import { useNavigate } from 'react-router-dom';
 import Loading from './components/Loading';
+import { useAccessControl } from '@/hooks/useAccessControl';
 
 const FirstResult = () => {
   const navigate = useNavigate();
+  const { isValidSession } = useAccessControl();
+  if (!isValidSession) {
+    return null;
+  }
 
   const serviceDescription = JSON.parse(
     sessionStorage.getItem('serviceDescription') || '',
@@ -52,7 +57,7 @@ const FirstResult = () => {
 
   return (
     <S.Container>
-      <S.InnerContainer>
+      {/* <S.InnerContainer>
         <S.HeaderWrapper>
           <h2>서비스 SWOT 분석과 성장 전략을 제안해드려요!</h2>
           <span className="title">{serviceDescription}&nbsp;</span>
@@ -107,7 +112,7 @@ const FirstResult = () => {
         <S.TestNavButton type="button" onClick={handleClickTestNavButton}>
           취약점 파악하기 <S.ButtonIcon src={readingGlasses} />{' '}
         </S.TestNavButton>
-      </S.TestNavBar>
+      </S.TestNavBar> */}
     </S.Container>
   );
 };
