@@ -1,5 +1,5 @@
 import { useAccessControl } from '@/hooks/useAccessControl';
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../FirstResult/components/Loading';
 import { useSWOTAnalysis } from '@/hooks/useSwotAnalysis';
@@ -25,8 +25,10 @@ import {
   mainContentStmHover,
   mainContentBmcHover,
   mainContentTestHover,
+  editImg,
 } from '@/assets';
 import styled from 'styled-components';
+import { Modal } from '@/components';
 
 export const Container = styled.div`
   width: 100%;
@@ -80,8 +82,9 @@ export const SummaryContainer = styled.div`
 export const SummaryTitleWrapper = styled.div`
   display: flex;
   align-items: center;
+  position: relative;
 
-  & > div {
+  & > .level {
     margin-left: 10px;
     width: 96px;
     height: 38px;
@@ -110,6 +113,21 @@ export const SummaryTitleWrapper = styled.div`
 
     color: ${({ theme }) => theme.color.primary[0]};
   }
+`;
+export const EditWrapper = styled.div`
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: -6px;
+  right: -6px;
+`;
+export const EditImg = styled.img`
+  width: 28px;
+  height: 28px;
 `;
 
 export const SummaryContent = styled.div`
@@ -229,16 +247,26 @@ const Main = () => {
     { src: mainContentTest, hoverSrc: mainContentTestHover },
   ];
 
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const handleModalOpen = () => {
+    setModalVisible(true);
+  };
+  const handleModalClose = () => {
+    setModalVisible(false);
+  };
   return (
     <Container>
       <InnerContainer>
         <HeaderTitle>창업 아이템이 고민이신가요?</HeaderTitle>
         <HeaderSubTitle>마이핏이 당신의 마켓핏을 점검해드릴게요</HeaderSubTitle>
-
+        {modalVisible && <Modal onClose={handleModalClose} />}
         <SummaryContainer>
           <SummaryTitleWrapper>
             <span>20대 여성을 위한 와인 구독 서비스</span>
-            <div>씨앗단계</div>
+            <div className="level">씨앗단계</div>
+            <EditWrapper onClick={handleModalOpen}>
+              <EditImg src={editImg} alt="edit" />
+            </EditWrapper>
           </SummaryTitleWrapper>
           <SummaryContent>
             <span>
