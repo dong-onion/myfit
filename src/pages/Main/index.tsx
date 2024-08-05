@@ -33,7 +33,6 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  /* height: 1577px; */
   padding-bottom: 177px;
   background-image: url(${mainBackground});
   background-repeat: no-repeat;
@@ -266,28 +265,6 @@ const Main = () => {
               />
             ))}
           </ContentSectionWrapper>
-          {/* <ContentSectionWrapper style={{ marginTop: 24 }}>
-            <ContentImg
-              src={mainContentBlp}
-              hoverSrc={mainContentSwotHover}
-              alt="mainContentBlp"
-            />
-            <ContentImg
-              src={mainContentStm}
-              hoverSrc={mainContentSwotHover}
-              alt="mainContentStm"
-            />
-            <ContentImg
-              src={mainContentBcm}
-              hoverSrc={mainContentSwotHover}
-              alt="mainContentBcm"
-            />
-            <ContentImg
-              src={mainContentTest}
-              hoverSrc={mainContentSwotHover}
-              alt="mainContentTest"
-            />
-          </ContentSectionWrapper> */}
         </ContentSectionContainer>
       </InnerContainer>
     </Container>
