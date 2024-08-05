@@ -292,7 +292,6 @@ const Modal = ({ onClose }: Props) => {
   const [level, setLevel] = useState<number | null>(null);
   const [serviceDescription, setServiceDescription] = useState<string>('');
   const [inputFocus, setInputFocus] = useState<boolean>(false);
-  const navigate = useNavigate();
 
   const handleCompleteButtonClick = () => {
     sessionStorage.setItem(SESSION_KEYS.level, JSON.stringify(level) || '');
@@ -300,7 +299,7 @@ const Modal = ({ onClose }: Props) => {
       SESSION_KEYS.serviceDescription,
       JSON.stringify(serviceDescription),
     );
-    //navigate('./result');
+    onClose();
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

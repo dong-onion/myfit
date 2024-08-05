@@ -268,7 +268,7 @@ const ServiceRegistration = () => {
       SESSION_KEYS.serviceDescription,
       JSON.stringify(serviceDescription),
     );
-    navigate('./result');
+    navigate('/main');
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

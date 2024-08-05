@@ -1,5 +1,5 @@
 import { useAccessControl } from '@/hooks/useAccessControl';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../FirstResult/components/Loading';
 import { useSWOTAnalysis } from '@/hooks/useSwotAnalysis';
@@ -14,10 +14,6 @@ import {
   mainContentSwot,
   mainContentTest,
   mainContentSwotHover,
-  swotOpportunity,
-  swotStrength,
-  swotThreat,
-  swotWeakness,
   mainContentBcmHover,
   mainContentBlpHover,
   mainContentPsnHover,
@@ -29,6 +25,18 @@ import {
 } from '@/assets';
 import styled from 'styled-components';
 import { Modal, Spinner } from '@/components';
+import { useQueryClient } from 'react-query';
+import { queryKeys } from '@/utility/constants';
+import {
+  fetchBusinessModelCanvas,
+  fetchCustomerJourneyMap,
+  fetchPersona,
+} from '@/clovaAI/api';
+import {
+  parseBMCanvas,
+  parseCustomerJourneyMap,
+  parsePersona,
+} from '@/utility/utils';
 
 export const Container = styled.div`
   width: 100%;
@@ -203,59 +211,112 @@ export const ContentImg = styled.img<{ src: string; hoverSrc: string }>`
 `;
 
 const Main = () => {
-  // const navigate = useNavigate();
-  // const { isValidSession, serviceDescription, level } = useAccessControl();
-
-  // if (!isValidSession) {
-  //   return <Loading />;
-  // }
-
-  // const { data, isLoading, isError, refetch } = useSWOTAnalysis(
-  //   serviceDescription as string,
-  //   level as number,
-  // );
-
-  // if (isLoading) {
-  //   return <Loading refetch={refetch} />;
-  // }
-
-  // if (isError) {
-  //   refetch();
-  // }
-
-  // const { strength, weakness, opportunity, threat, result, strategy } =
-  //   data || {};
-
-  // const swotData = [
-  //   { imgSrc: swotStrength, alt: 'swotStrength', data: strength },
-  //   { imgSrc: swotWeakness, alt: 'swotWeakness', data: weakness },
-  //   { imgSrc: swotOpportunity, alt: 'swotOpportunity', data: opportunity },
-  //   { imgSrc: swotThreat, alt: 'swotThreat', data: threat },
-  // ];
-
-  const handleClickTestNavButton = () => {
-    // navigate('/type');
-  };
-
-  const mainContentImgs = [
-    { src: mainContentSwot, hoverSrc: mainContentSwotHover },
-    { src: mainContentPsn, hoverSrc: mainContentPsnHover },
-    { src: mainContentCjm, hoverSrc: mainContentCjmHover },
-    { src: mainContentBmc, hoverSrc: mainContentBmcHover },
-    { src: mainContentBlp, hoverSrc: mainContentBlpHover },
-    { src: mainContentStm, hoverSrc: mainContentStmHover },
-    { src: mainContentBcm, hoverSrc: mainContentBcmHover },
-    { src: mainContentTest, hoverSrc: mainContentTestHover },
-  ];
-
+  const navigate = useNavigate();
   const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const levelData = ['씨앗단계', '새싹단계', '나무단계'];
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await Promise.all([
+          queryClient.prefetchQuery(
+            [queryKeys.PERSONA, serviceDescription],
+            () =>
+              fetchPersona(serviceDescription).then((res) =>
+                parsePersona(res.result.message.content),
+              ),
+            { staleTime: 1000 * 60 * 3 },
+          ),
+          queryClient.prefetchQuery(
+            [queryKeys.CUSTOMER_JOURNEY_MAP, serviceDescription],
+            () =>
+              fetchCustomerJourneyMap(serviceDescription).then((res) =>
+                parseCustomerJourneyMap(res.result.message.content),
+              ),
+            { staleTime: 1000 * 60 * 3 },
+          ),
+          queryClient.prefetchQuery(
+            [queryKeys.BUSINESS_MODEL_CANVAS, serviceDescription],
+            () =>
+              fetchBusinessModelCanvas(serviceDescription).then((res) =>
+                parseBMCanvas(res.result.message.content),
+              ),
+            { staleTime: 1000 * 60 * 3 },
+          ),
+        ]);
+        console.log('All data prefetched');
+      } catch (error) {
+        console.error('Error prefetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, [queryClient]);
+  const mainContentImgs = [
+    {
+      src: mainContentSwot,
+      hoverSrc: mainContentSwotHover,
+      onClick: () => navigate('/swot'),
+    },
+    {
+      src: mainContentPsn,
+      hoverSrc: mainContentPsnHover,
+      onClick: () => navigate('/tools/psn'),
+    },
+    {
+      src: mainContentCjm,
+      hoverSrc: mainContentCjmHover,
+      onClick: () => navigate('/tools/cjm'),
+    },
+    {
+      src: mainContentBmc,
+      hoverSrc: mainContentBmcHover,
+      onClick: () => navigate('/tools/bmc'),
+    },
+    {
+      src: mainContentBlp,
+      hoverSrc: mainContentBlpHover,
+      onClick: () => navigate('/tools/blp'),
+    },
+    {
+      src: mainContentStm,
+      hoverSrc: mainContentStmHover,
+      onClick: () => navigate('/tools/stm'),
+    },
+    {
+      src: mainContentBcm,
+      hoverSrc: mainContentBcmHover,
+      onClick: () => navigate('/tools/bcm'),
+    },
+    {
+      src: mainContentTest,
+      hoverSrc: mainContentTestHover,
+      onClick: () => navigate('/type'),
+    },
+  ];
+  const { level, serviceDescription } = useAccessControl();
+  if (level === null || serviceDescription === null) {
+    return <Loading />;
+  }
+
+  const { data, isLoading, isError, refetch } = useSWOTAnalysis(
+    serviceDescription,
+    level,
+  );
+
+  if (isError) {
+    refetch();
+  }
+
+  const { result } = data || {};
+
   const handleModalOpen = () => {
     setModalVisible(true);
   };
   const handleModalClose = () => {
     setModalVisible(false);
   };
-  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   return (
     <Container>
@@ -265,29 +326,14 @@ const Main = () => {
         {modalVisible && <Modal onClose={handleModalClose} />}
         <SummaryContainer>
           <SummaryTitleWrapper>
-            <span>20대 여성을 위한 와인 구독 서비스</span>
-            <div className="level">씨앗단계</div>
+            <span>{serviceDescription}</span>
+            <div className="level">{levelData[level]}</div>
             <EditWrapper onClick={handleModalOpen}>
               <EditImg src={editImg} alt="edit" />
             </EditWrapper>
           </SummaryTitleWrapper>
 
-          {isLoading ? (
-            <Spinner />
-          ) : (
-            <SummaryContent>
-              <span>
-                20대 여성을 위한 와인 구독 서비스는 와인에 대한 전문 지식과
-                다양한 와인을 제공하는 것이 강점입니다.
-                <br />
-                하지만 와인에 대한 관심이 적은 20대 여성이 주요 고객층이라는
-                점과 경쟁 업체의 등장이 약점입니다.
-                <br />
-                와인 구독 서비스 시장의 성장과 와인에 대한 인식 변화는 기회이며,
-                경제적 상황 악화와 경쟁 업체의 마케팅 강화는 위협입니다.
-              </span>
-            </SummaryContent>
-          )}
+          {isLoading ? <Spinner /> : <SummaryContent>{result}</SummaryContent>}
         </SummaryContainer>
         <ContentSectionContainer>
           <h2>마이핏이 추천해요</h2>
@@ -298,6 +344,7 @@ const Main = () => {
                 src={item.src}
                 hoverSrc={item.hoverSrc}
                 alt="mainContentImg"
+                onClick={item.onClick}
               />
             ))}
           </ContentSectionWrapper>

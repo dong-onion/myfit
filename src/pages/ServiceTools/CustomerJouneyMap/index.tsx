@@ -174,9 +174,8 @@ const CustomerJouneyMap = () => {
           <ImgContainer>
             <img src={purposeImg} />
           </ImgContainer>
-          {data?.map((item, index) => (
-            <div key={index}>{item.purpose}</div>
-          ))}
+          {data &&
+            data.map((item, index) => <div key={index}>{item.purpose}</div>)}
         </PurposeContainer>
         <ActionContainer>
           <ImgContainer>

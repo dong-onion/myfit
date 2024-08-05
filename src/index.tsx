@@ -5,6 +5,8 @@ import { ThemeProvider } from 'styled-components';
 import { theme } from './styles/theme';
 import GlobalStyle from './styles/GlobalStyle';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+
 import './assets/fonts/Font.css';
 
 const root = ReactDOM.createRoot(
@@ -16,6 +18,7 @@ root.render(
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <App />
+      <ReactQueryDevtools />
     </ThemeProvider>
   </QueryClientProvider>,
 );
