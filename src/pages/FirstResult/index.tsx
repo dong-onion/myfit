@@ -15,7 +15,6 @@ import { useSWOTAnalysis } from '@/hooks/useSwotAnalysis';
 import { useNavigate } from 'react-router-dom';
 import Loading from './components/Loading';
 import { useAccessControl } from '@/hooks/useAccessControl';
-import { SESSION_KEYS } from '@/utility/constants';
 
 const FirstResult = () => {
   const navigate = useNavigate();

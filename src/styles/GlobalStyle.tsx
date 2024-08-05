@@ -8,7 +8,7 @@ const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
   }
   body {    
-    font-family: 'Pretendard-Regular', 'Pretendard-Light','Pretendard-Medium', 'Pretendard-SemiBold', 'Pretendard-Bold', 'Pretendard-ExtraBold', sans-serif;
+    font-family: 'Pretendard-Regular', 'Pretendard-Light','Pretendard-Medium', 'Pretendard-SemiBold', 'Pretendard-Bold', 'Pretendard-ExtraBold', 'Montserrat-Light', 'Montserrat-Regular','Montserrat-Medium','Montserrat-SemiBold', 'Montserrat-Bold', 'Montserrat-ExtraBold', sans-serif;
     margin: 0;
     padding:0;
   }

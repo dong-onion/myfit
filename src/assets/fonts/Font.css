@@ -28,3 +28,34 @@
   font-weight: 800;
   src: url('./Pretendard-ExtraBold.woff') format('woff');
 }
+
+@font-face {
+  font-family: 'Montserrat-Light';
+  font-weight: 300;
+  src: url('./Montserrat-Light.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Montserrat-Regular';
+  font-weight: 400;
+  src: url('./Montserrat-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Montserrat-Medium';
+  font-weight: 500;
+  src: url('./Montserrat-Medium.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Montserrat-SemiBold';
+  font-weight: 600;
+  src: url('./Montserrat-SemiBold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Montserrat-Bold';
+  font-weight: 700;
+  src: url('./Montserrat-Bold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Montserrat-ExtraBold';
+  font-weight: 800;
+  src: url('./Montserrat-ExtraBold.ttf') format('truetype');
+}

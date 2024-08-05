@@ -36,11 +36,13 @@ const Bar = styled.div<{ $progress: number }>`
 
 const ProgressText = styled.span`
   margin-left: 10px;
-  font-family: Montserrat;
-  font-size: 24px;
+  font-family: Montserrat-SemiBold;
+  font-size: 20px;
   font-weight: 600;
-  font-family: 'Pretendard-SemiBold';
+  line-height: 20px;
   letter-spacing: -0.005em;
+  text-align: right;
+
   color: ${({ theme }) => theme.color.gray[0]};
 `;
 

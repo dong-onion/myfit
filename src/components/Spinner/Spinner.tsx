@@ -1,11 +1,6 @@
 import React from 'react';
-import { BounceLoader, FadeLoader, PulseLoader } from 'react-spinners';
-import styled, { keyframes } from 'styled-components';
-
-const spin = keyframes`
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-`;
+import { BeatLoader } from 'react-spinners';
+import styled from 'styled-components';
 
 const SpinnerContainer = styled.div`
   display: flex;
@@ -21,7 +16,7 @@ const SpinnerContainer = styled.div`
 const Spinner = () => {
   return (
     <SpinnerContainer>
-      <BounceLoader size={50} color="#4865FF" />
+      <BeatLoader size={20} color="#4FC0FE" />
     </SpinnerContainer>
   );
 };
