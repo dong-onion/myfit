@@ -316,9 +316,13 @@ const Modal = ({ onClose }: Props) => {
   const handleClickLevelBox = (level: number) => {
     setLevel(level);
   };
+
+  const handleContentClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
   return (
     <ModalOverlay onClick={onClose}>
-      <ModalContent>
+      <ModalContent onClick={handleContentClick}>
         <ModalCloseButtonWrapper onClick={onClose}>
           <ModalCloseButton src={modalCloseBtn} />
         </ModalCloseButtonWrapper>

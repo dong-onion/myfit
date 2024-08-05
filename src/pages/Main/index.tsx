@@ -28,7 +28,7 @@ import {
   editImg,
 } from '@/assets';
 import styled from 'styled-components';
-import { Modal } from '@/components';
+import { Modal, Spinner } from '@/components';
 
 export const Container = styled.div`
   width: 100%;
@@ -78,6 +78,7 @@ export const SummaryContainer = styled.div`
   border: 1px solid #ffffff99;
   border-radius: 12px;
   box-shadow: 20px 30px 60px 0px #3952ff1a;
+  position: relative;
 `;
 export const SummaryTitleWrapper = styled.div`
   display: flex;
@@ -254,6 +255,8 @@ const Main = () => {
   const handleModalClose = () => {
     setModalVisible(false);
   };
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
   return (
     <Container>
       <InnerContainer>
@@ -268,18 +271,23 @@ const Main = () => {
               <EditImg src={editImg} alt="edit" />
             </EditWrapper>
           </SummaryTitleWrapper>
-          <SummaryContent>
-            <span>
-              20대 여성을 위한 와인 구독 서비스는 와인에 대한 전문 지식과 다양한
-              와인을 제공하는 것이 강점입니다.
-              <br />
-              하지만 와인에 대한 관심이 적은 20대 여성이 주요 고객층이라는 점과
-              경쟁 업체의 등장이 약점입니다.
-              <br />
-              와인 구독 서비스 시장의 성장과 와인에 대한 인식 변화는 기회이며,
-              경제적 상황 악화와 경쟁 업체의 마케팅 강화는 위협입니다.
-            </span>
-          </SummaryContent>
+
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <SummaryContent>
+              <span>
+                20대 여성을 위한 와인 구독 서비스는 와인에 대한 전문 지식과
+                다양한 와인을 제공하는 것이 강점입니다.
+                <br />
+                하지만 와인에 대한 관심이 적은 20대 여성이 주요 고객층이라는
+                점과 경쟁 업체의 등장이 약점입니다.
+                <br />
+                와인 구독 서비스 시장의 성장과 와인에 대한 인식 변화는 기회이며,
+                경제적 상황 악화와 경쟁 업체의 마케팅 강화는 위협입니다.
+              </span>
+            </SummaryContent>
+          )}
         </SummaryContainer>
         <ContentSectionContainer>
           <h2>마이핏이 추천해요</h2>
