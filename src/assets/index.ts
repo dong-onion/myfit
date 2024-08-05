@@ -103,6 +103,23 @@ import skeletonCurvedImg2 from './skeletonCurvedImg2.png';
 import skeletonCurvedImg3 from './skeletonCurvedImg3.png';
 import skeletonCurvedImg4 from './skeletonCurvedImg4.png';
 import serviceRegistrationBackground from './serviceRegistrationBackground.png';
+import mainBackground from './mainBackground.png';
+import mainContentSwot from './mainContentSwot.png';
+import mainContentPsn from './mainContentPsn.png';
+import mainContentBmc from './mainContentBmc.png';
+import mainContentCjm from './mainContentCjm.png';
+import mainContentBlp from './mainContentBlp.png';
+import mainContentStm from './mainContentStm.png';
+import mainContentBcm from './mainContentBcm.png';
+import mainContentTest from './mainContentTest.png';
+import mainContentSwotHover from './mainContentSwotHover.png';
+import mainContentPsnHover from './mainContentPsnHover.png';
+import mainContentBmcHover from './mainContentBmcHover.png';
+import mainContentCjmHover from './mainContentCjmHover.png';
+import mainContentBlpHover from './mainContentBlpHover.png';
+import mainContentStmHover from './mainContentStmHover.png';
+import mainContentBcmHover from './mainContentBcmHover.png';
+import mainContentTestHover from './mainContentTestHover.png';
 
 export {
   logo,
@@ -210,4 +227,21 @@ export {
   skeletonCurvedImg3,
   skeletonCurvedImg4,
   serviceRegistrationBackground,
+  mainBackground,
+  mainContentSwot,
+  mainContentPsn,
+  mainContentBmc,
+  mainContentCjm,
+  mainContentBlp,
+  mainContentStm,
+  mainContentBcm,
+  mainContentTest,
+  mainContentSwotHover,
+  mainContentPsnHover,
+  mainContentBmcHover,
+  mainContentCjmHover,
+  mainContentBlpHover,
+  mainContentStmHover,
+  mainContentBcmHover,
+  mainContentTestHover,
 };

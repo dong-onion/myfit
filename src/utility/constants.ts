@@ -167,6 +167,7 @@ export const ROUTES_PATH = {
   bluePrint: '/tools/blp',
   systemMap: '/tools/stm',
   benchmarking: '/tools/bcm',
+  main: '/main',
 };
 
 export const SESSION_KEYS = {
