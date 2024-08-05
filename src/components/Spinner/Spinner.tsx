@@ -1,5 +1,5 @@
 import React from 'react';
-import { FadeLoader, PulseLoader } from 'react-spinners';
+import { BounceLoader, FadeLoader, PulseLoader } from 'react-spinners';
 import styled, { keyframes } from 'styled-components';
 
 const spin = keyframes`
@@ -21,7 +21,7 @@ const SpinnerContainer = styled.div`
 const Spinner = () => {
   return (
     <SpinnerContainer>
-      <PulseLoader size={10} color="#4865FF" />
+      <BounceLoader size={50} color="#4865FF" />
     </SpinnerContainer>
   );
 };

@@ -347,25 +347,6 @@ const Modal = ({ onClose }: Props) => {
                 최대 30자까지 입력 가능합니다
               </CharacterLimitMessage>
             </InputWrapper>
-            {/* <ExampleConainer>
-              <ExampleWrapper>
-                <Example onClick={handleClickExample1}>
-                  사회초년생을 위한 소액 투자 관리 앱
-                </Example>
-                <Example onClick={handleClickExample2}>
-                  4050대를 위한 영양제 추천 서비스
-                </Example>
-              </ExampleWrapper>
-              <ExampleWrapper>
-                <Example onClick={handleClickExample3}>
-                  대학교 앞 핫도그 가게
-                </Example>
-                <Example onClick={handleClickExample4}>
-                  30대 직장인을 위한 디지털 운동 기기
-                </Example>
-              </ExampleWrapper>
-            </ExampleConainer> */}
-
             <LevelWrapper>
               <LevelTitle>창업 단계</LevelTitle>
               <LevelBox

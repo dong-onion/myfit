@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   hyperClova,
   readingGlasses,
@@ -15,18 +15,20 @@ import { useSWOTAnalysis } from '@/hooks/useSwotAnalysis';
 import { useNavigate } from 'react-router-dom';
 import Loading from './components/Loading';
 import { useAccessControl } from '@/hooks/useAccessControl';
+import { SESSION_KEYS } from '@/utility/constants';
 
 const FirstResult = () => {
   const navigate = useNavigate();
-  const { isValidSession, serviceDescription, level } = useAccessControl();
 
-  if (!isValidSession) {
+  const { level, serviceDescription } = useAccessControl();
+
+  if (level === null || serviceDescription === null) {
     return <Loading />;
   }
 
   const { data, isLoading, isError, refetch } = useSWOTAnalysis(
-    serviceDescription as string,
-    level as number,
+    serviceDescription,
+    level,
   );
 
   if (isLoading) {
