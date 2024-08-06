@@ -159,7 +159,7 @@ export const SUBCATEGORIES = [
 
 export const ROUTES_PATH = {
   home: '/',
-  serviceRegistration: '/swot',
+  serviceRegistration: '/search',
   firstResult: '/swot/result',
   testStart: '/type',
   test: '/type/test',
@@ -170,6 +170,7 @@ export const ROUTES_PATH = {
   bluePrint: '/tools/blp',
   systemMap: '/tools/stm',
   benchmarking: '/tools/bcm',
+  swot: '/tools/swot',
   main: '/main',
 };
 

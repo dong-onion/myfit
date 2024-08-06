@@ -102,7 +102,7 @@ export const DownloadButton = styled.div`
   cursor: pointer;
   border: none;
   &:hover {
-    background: linear-gradient(90deg, #4865ff 0%, #6f56ff 100%);
+    background: #647cff;
   }
 
   & img {

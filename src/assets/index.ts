@@ -7,6 +7,7 @@ import levelTree from './level_tree.png';
 import swotStrength from './swot_strength.png';
 import swotWeakness from './swot_weakness.png';
 import swotOpportunity from './swot_opportunity.png';
+import swotSuggestion from './swot_suggestion.png';
 import swotThreat from './swot_threat.png';
 import strategy1 from './strategy1.png';
 import strategy2 from './strategy2.png';
@@ -17,6 +18,7 @@ import testStartBackground from './test_start_background.png';
 import entrepreneurshipInfo from './entrepreneurship_info.png';
 import marketFeasibilityInfo from './marketfeasibility_info.png';
 import customerDefinitionInfo from './customerdefinition_info.png';
+import swotInfo from './swotInfo.png';
 import objectiveInformationInfo from './objectiveinformation_info.png';
 import technologicalCompetitivenessInfo from './technologicalcompetitiveness_info.png';
 import managementInfo from './management_info.png';
@@ -250,4 +252,6 @@ export {
   editImg,
   modalCloseBtn,
   editImgBlue,
+  swotSuggestion,
+  swotInfo,
 };

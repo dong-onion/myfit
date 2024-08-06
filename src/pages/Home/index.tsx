@@ -3,6 +3,7 @@ import { Button } from '@/components';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { arrowRight, mainBg } from '@/assets';
+import { ROUTES_PATH } from '@/utility/constants';
 
 export const Container = styled.div`
   width: 100dvw;
@@ -68,7 +69,7 @@ export const Test = styled.button``;
 const Home = () => {
   const navigate = useNavigate();
   const handleButtonClick = () => {
-    navigate('/swot');
+    navigate(ROUTES_PATH.serviceRegistration);
   };
   return (
     <Container>

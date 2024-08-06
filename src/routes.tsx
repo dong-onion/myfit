@@ -20,6 +20,7 @@ import {
 } from './pages/ServiceTools';
 import { ROUTES_PATH } from './utility/constants';
 import Main from './pages/Main';
+import Swot from './pages/ServiceTools/Swot';
 
 export const routes: RouteObject[] = [
   {
@@ -48,6 +49,7 @@ export const routes: RouteObject[] = [
       { path: ROUTES_PATH.systemMap, element: <SystemMap /> },
       { path: ROUTES_PATH.benchmarking, element: <Benchmarking /> },
       { path: ROUTES_PATH.main, element: <Main /> },
+      { path: ROUTES_PATH.swot, element: <Swot /> },
     ],
   },
 ];
