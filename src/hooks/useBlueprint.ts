@@ -12,7 +12,7 @@ interface SWOTAnalysisResponse {
 }
 
 export const useBlueprint = (serviceDescription: string) => {
-  const { data, isLoading, isError, refetch } = useQuery<
+  const { data, isLoading, isError, refetch, isRefetching } = useQuery<
     BlueprintItem[],
     Error
   >(
@@ -35,5 +35,6 @@ export const useBlueprint = (serviceDescription: string) => {
     isLoading,
     isError,
     refetch,
+    isRefetching,
   };
 };

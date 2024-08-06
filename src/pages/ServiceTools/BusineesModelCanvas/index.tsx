@@ -161,7 +161,7 @@ const BusineesModelCanvas = () => {
   const serviceDescription = JSON.parse(
     sessionStorage.getItem(SESSION_KEYS.serviceDescription) || '',
   );
-  const { data, isError, isLoading, refetch } =
+  const { data, isError, isLoading, refetch, isRefetching } =
     useBusinessModelCanvas(serviceDescription);
   const {
     problems = [''],
@@ -178,7 +178,7 @@ const BusineesModelCanvas = () => {
     competitiveAdvantage = [''],
   } = data || {};
 
-  if (isLoading) {
+  if (isLoading || isRefetching) {
     return <Loading refetch={refetch} />;
   }
 

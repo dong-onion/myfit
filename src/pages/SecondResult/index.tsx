@@ -13,6 +13,7 @@ import {
 import {
   hyperClova,
   recommendServiceTool,
+  refreshIcon,
   testResult,
   typeInfo,
 } from '@/assets';
@@ -93,6 +94,11 @@ export const TestResultImg = styled.img`
   width: 164px;
   height: 46px;
 `;
+export const TestResultTitleWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
 export const TestResultTitle = styled.p`
   margin-top: 10px;
   font-family: Pretendard-SemiBold;
@@ -102,8 +108,9 @@ export const TestResultTitle = styled.p`
   letter-spacing: -0.012em;
   text-align: left;
   color: ${({ theme }) => theme.color.gray[0]};
-  align-self: flex-start;
+  align-self: flex-end;
 `;
+
 export const TestResultContentContainer = styled.div`
   width: 100%;
   padding: 32.5px;
@@ -154,6 +161,40 @@ export const TypeInfoContentImg = styled.img`
   flex-grow: 1;
   height: 384px;
   object-fit: contain;
+`;
+
+export const RefreshButton = styled.div`
+  display: flex;
+  gap: 10px;
+  width: 141px;
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ theme }) => theme.color.white[0]};
+  border-radius: 9px;
+  cursor: pointer;
+  border: 1px solid ${({ theme }) => theme.color.primary[1]};
+
+  &:hover {
+    background-color: ${({ theme }) => theme.color.bg[1]};
+  }
+
+  & img {
+    width: 24px;
+    height: 24px;
+  }
+
+  & span {
+    font-family: Pretendard-SemiBold;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 18px;
+    letter-spacing: -0.002em;
+    text-align: left;
+
+    color: ${({ theme }) => theme.color.primary[0]};
+  }
 `;
 
 export const ServiceToolSection = styled(TestResultSection)`
@@ -284,9 +325,14 @@ const SecondResult = () => {
       return navigate(ROUTES_PATH.busineesModelCanvas);
     if (tool === '/static/media/persona.e02c39fba4c7c55734ff.png')
       return navigate(ROUTES_PATH.persona);
-
     if (tool === '/static/media/customer_journey_map.e1efe6a2c919ef83d0d9.png')
       return navigate(ROUTES_PATH.customerJourneyMap);
+    if (tool === '/static/media/benchmarking.c493336ab4b3f7fad3b4.png')
+      return navigate(ROUTES_PATH.benchmarking);
+    if (tool === '/static/media/service_blueprint.ee75cd205568887a725a.png')
+      return navigate(ROUTES_PATH.bluePrint);
+    if (tool === '/static/media/system_map.1cb0a035920306ea42eb.png')
+      return navigate(ROUTES_PATH.systemMap);
   };
 
   if (isLoading) {
@@ -296,6 +342,10 @@ const SecondResult = () => {
   if (isError) {
     return <div>Error...</div>;
   }
+
+  const handleRetryButtonClick = () => {
+    navigate('/type/test');
+  };
 
   return (
     <Container>
@@ -313,7 +363,14 @@ const SecondResult = () => {
       </Header>
       <TestResultSection>
         <TestResultImg src={testResult} />
-        <TestResultTitle>AI가 서비스와 취약점을 분석했어요</TestResultTitle>
+        <TestResultTitleWrapper>
+          <TestResultTitle>AI가 서비스와 취약점을 분석했어요</TestResultTitle>
+          <RefreshButton onClick={() => refetch()}>
+            <img src={refreshIcon} />
+            <span>재생성</span>
+          </RefreshButton>
+        </TestResultTitleWrapper>
+
         <TestResultContentContainer>
           <TestResultContentWrapper>{result}</TestResultContentWrapper>
         </TestResultContentContainer>
@@ -352,14 +409,14 @@ const SecondResult = () => {
             ))}
           </ServiceToolContentImgWrapper>
         </ServiceToolSection>
-        {/* <BuutonWrapper>
-          <RetryButton type="button">
+        <BuutonWrapper>
+          <RetryButton onClick={handleRetryButtonClick} type="button">
             <RetryButtonText>다시 테스트 하기</RetryButtonText>
           </RetryButton>
           <DownloadButton type="button">
             <DownloadButtonText>점검 결과 다운로드</DownloadButtonText>
           </DownloadButton>
-        </BuutonWrapper> */}
+        </BuutonWrapper>
       </Footer>
     </Container>
   );

@@ -12,7 +12,10 @@ interface SWOTAnalysisResponse {
 }
 
 export const useSystemMap = (serviceDescription: string) => {
-  const { data, isLoading, isError, refetch } = useQuery<SystemMapItem, Error>(
+  const { data, isLoading, isError, refetch, isRefetching } = useQuery<
+    SystemMapItem,
+    Error
+  >(
     [queryKeys.SYSTEM_MAP, serviceDescription],
     () =>
       fetchSystemMap(serviceDescription).then((data: SWOTAnalysisResponse) => {
@@ -32,5 +35,6 @@ export const useSystemMap = (serviceDescription: string) => {
     isLoading,
     isError,
     refetch,
+    isRefetching,
   };
 };

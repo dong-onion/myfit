@@ -15,7 +15,7 @@ interface SWOTAnalysisResponse {
 }
 
 export const useCustomerJourneyMap = (serviceDescription: string) => {
-  const { data, isLoading, isError, refetch } = useQuery<
+  const { data, isLoading, isError, refetch, isRefetching } = useQuery<
     CustomerJourneyMapItem[],
     Error
   >(
@@ -42,5 +42,6 @@ export const useCustomerJourneyMap = (serviceDescription: string) => {
     isLoading,
     isError,
     refetch,
+    isRefetching,
   };
 };

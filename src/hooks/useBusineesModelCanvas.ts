@@ -12,7 +12,10 @@ interface SWOTAnalysisResponse {
 }
 
 export const useBusinessModelCanvas = (serviceDescription: string) => {
-  const { data, isLoading, isError, refetch } = useQuery<BMCanvas, Error>(
+  const { data, isLoading, isError, refetch, isRefetching } = useQuery<
+    BMCanvas,
+    Error
+  >(
     [queryKeys.BUSINESS_MODEL_CANVAS, serviceDescription],
     () =>
       fetchBusinessModelCanvas(serviceDescription).then(
@@ -34,5 +37,6 @@ export const useBusinessModelCanvas = (serviceDescription: string) => {
     isLoading,
     isError,
     refetch,
+    isRefetching,
   };
 };

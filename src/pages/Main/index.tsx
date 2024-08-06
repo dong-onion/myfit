@@ -179,7 +179,7 @@ export const ContentSectionWrapper = styled.div`
   gap: 24px;
   flex-wrap: wrap;
 `;
-export const ContentImg = styled.img<{ src: string; hoverSrc: string }>`
+export const ContentImg = styled.img<{ src: string; hoversrc: string }>`
   src: ${({ src }) => src};
   width: 282px;
   height: 282px;
@@ -187,7 +187,7 @@ export const ContentImg = styled.img<{ src: string; hoverSrc: string }>`
   cursor: pointer;
 
   &:hover {
-    content: url(${(props) => props.hoverSrc});
+    content: url(${(props) => props.hoversrc});
     transition: 0.25s;
     box-shadow: 0 0.5em 0.5em -0.4em ${({ theme }) => theme.color.gray[3]};
     transform: translateY(-0.25em);
@@ -256,42 +256,42 @@ const Main = () => {
   const mainContentImgs = [
     {
       src: mainContentSwot,
-      hoverSrc: mainContentSwotHover,
+      hoversrc: mainContentSwotHover,
       onClick: () => navigate('/swot'),
     },
     {
       src: mainContentPsn,
-      hoverSrc: mainContentPsnHover,
+      hoversrc: mainContentPsnHover,
       onClick: () => navigate('/tools/psn'),
     },
     {
       src: mainContentCjm,
-      hoverSrc: mainContentCjmHover,
+      hoversrc: mainContentCjmHover,
       onClick: () => navigate('/tools/cjm'),
     },
     {
       src: mainContentBmc,
-      hoverSrc: mainContentBmcHover,
+      hoversrc: mainContentBmcHover,
       onClick: () => navigate('/tools/bmc'),
     },
     {
       src: mainContentBlp,
-      hoverSrc: mainContentBlpHover,
+      hoversrc: mainContentBlpHover,
       onClick: () => navigate('/tools/blp'),
     },
     {
       src: mainContentStm,
-      hoverSrc: mainContentStmHover,
+      hoversrc: mainContentStmHover,
       onClick: () => navigate('/tools/stm'),
     },
     {
       src: mainContentBcm,
-      hoverSrc: mainContentBcmHover,
+      hoversrc: mainContentBcmHover,
       onClick: () => navigate('/tools/bcm'),
     },
     {
       src: mainContentTest,
-      hoverSrc: mainContentTestHover,
+      hoversrc: mainContentTestHover,
       onClick: () => navigate('/type'),
     },
   ];
@@ -342,7 +342,7 @@ const Main = () => {
               <ContentImg
                 key={index}
                 src={item.src}
-                hoverSrc={item.hoverSrc}
+                hoversrc={item.hoversrc}
                 alt="mainContentImg"
                 onClick={item.onClick}
               />

@@ -120,14 +120,14 @@ export const WEAKNESS_TYPE_INFO: {
     contentInfo: objectiveInformationInfo,
     headerBackground: objectiveInformationHeader,
     footerBackground: weakneesTypeFooter1,
-    serviceTool: [businessModelCanvas, systemMap],
+    serviceTool: [benchmarking, systemMap],
   },
   TECHNOLOGICALCOMPETITIVENESS: {
     title: '기술 경쟁력 부족',
     contentInfo: technologicalCompetitivenessInfo,
     headerBackground: technologicalCompetitivenessHeader,
     footerBackground: weakneesTypeFooter2,
-    serviceTool: [businessModelCanvas, serviceBlueprint],
+    serviceTool: [benchmarking, serviceBlueprint],
   },
   MANAGEMENT: {
     title: '경영 관리 부족',
