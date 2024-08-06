@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import BarChart from './components/BarChart';
-import { calculateScore } from '@/utility/utils';
+import { calculateScore, loadPageToPdf } from '@/utility/utils';
 import {
   ROUTES_PATH,
   SESSION_KEYS,
@@ -26,6 +26,13 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+export const DownloadWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 `;
 
 export const Header = styled.div<{ src: string }>`
@@ -108,7 +115,7 @@ export const TestResultTitle = styled.p`
   letter-spacing: -0.012em;
   text-align: left;
   color: ${({ theme }) => theme.color.gray[0]};
-  align-self: flex-end;
+  align-self: flex-start;
 `;
 
 export const TestResultContentContainer = styled.div`
@@ -271,6 +278,7 @@ export const DownloadButtonText = styled(RetryButtonText)`
 
 const SecondResult = () => {
   const navigate = useNavigate();
+  const donwloadRef = useRef<HTMLDivElement>(null);
   const serviceDescription = JSON.parse(
     sessionStorage.getItem(SESSION_KEYS.serviceDescription) || '',
   );
@@ -347,77 +355,87 @@ const SecondResult = () => {
     navigate('/type/test');
   };
 
+  const handleClickDownloadButton = () => {
+    if (!donwloadRef.current) {
+      alert('다운로드할 수 없습니다.');
+      return;
+    }
+    loadPageToPdf(donwloadRef.current, '테스트 결과');
+  };
+
   return (
     <Container>
-      <Header src={headerBackground}>
-        <ChartContainer>
-          {labelArray.map((label, index) => (
-            <ChartLabelContainer key={index}>
-              <ChartLabel $bold={labelArray[index] + ' ' + '부족' === title}>
-                {label}
-              </ChartLabel>
-            </ChartLabelContainer>
-          ))}
-          <BarChart series={[{ data: chartData }]} />
-        </ChartContainer>
-      </Header>
-      <TestResultSection>
-        <TestResultImg src={testResult} />
-        <TestResultTitleWrapper>
-          <TestResultTitle>AI가 서비스와 취약점을 분석했어요</TestResultTitle>
-          <RefreshButton onClick={() => refetch()}>
-            <img src={refreshIcon} />
-            <span>재생성</span>
-          </RefreshButton>
-        </TestResultTitleWrapper>
-
-        <TestResultContentContainer>
-          <TestResultContentWrapper>{result}</TestResultContentWrapper>
-        </TestResultContentContainer>
-        <img
-          src={hyperClova}
-          width={200}
-          height={15}
-          style={{ alignSelf: 'flex-end', marginTop: 20 }}
-        />
-      </TestResultSection>
-
-      <TypeInfoSection>
-        <TypeInfoImg src={typeInfo} />
-        <TypeInfoTitle>
-          <span className="emphasis">{title}</span> 유형은 무엇인가요?
-        </TypeInfoTitle>
-        <TypeInfoSubTitle>
-          초기 창업가의 경험부족으로 합리적 의사결정에 어려움을 겪는 경우에요.
-          아래와 같은 경우가 있을 수 있어요.
-        </TypeInfoSubTitle>
-        <TypeInfoContentImg src={contentInfo} />
-      </TypeInfoSection>
-      <Footer src={footerBackground}>
-        <ServiceToolSection>
-          <ServiceToolImg src={recommendServiceTool} />
-          <ServiceToolTitle>
-            나의 서비스를 AI 툴킷에 적용해 다음 전략을 확인해 보세요
-          </ServiceToolTitle>
-          <ServiceToolContentImgWrapper>
-            {serviceTool.map((tool, index) => (
-              <ServiceToolContentImg
-                onClick={() => handleServicToolImgClick(tool)}
-                key={index}
-                src={tool}
-              />
+      <DownloadWrapper ref={donwloadRef}>
+        <Header src={headerBackground}>
+          <ChartContainer>
+            {labelArray.map((label, index) => (
+              <ChartLabelContainer key={index}>
+                <ChartLabel $bold={labelArray[index] + ' ' + '부족' === title}>
+                  {label}
+                </ChartLabel>
+              </ChartLabelContainer>
             ))}
-          </ServiceToolContentImgWrapper>
-        </ServiceToolSection>
-        <BuutonWrapper>
-          <RetryButton onClick={handleRetryButtonClick} type="button">
-            <RetryButtonText>다시 테스트 하기</RetryButtonText>
-          </RetryButton>
-          <DownloadButton type="button">
-            <DownloadButtonText>점검 결과 다운로드</DownloadButtonText>
-          </DownloadButton>
-        </BuutonWrapper>
-      </Footer>
+            <BarChart series={[{ data: chartData }]} />
+          </ChartContainer>
+        </Header>
+        <TestResultSection>
+          <TestResultImg src={testResult} />
+          <TestResultTitleWrapper>
+            <TestResultTitle>AI가 서비스와 취약점을 분석했어요</TestResultTitle>
+            <RefreshButton onClick={() => refetch()}>
+              <img src={refreshIcon} />
+              <span>재생성</span>
+            </RefreshButton>
+          </TestResultTitleWrapper>
+
+          <TestResultContentContainer>
+            <TestResultContentWrapper>{result}</TestResultContentWrapper>
+          </TestResultContentContainer>
+          <img
+            src={hyperClova}
+            width={200}
+            height={15}
+            style={{ alignSelf: 'flex-end', marginTop: 20 }}
+          />
+        </TestResultSection>
+
+        <TypeInfoSection>
+          <TypeInfoImg src={typeInfo} />
+          <TypeInfoTitle>
+            <span className="emphasis">{title}</span> 유형은 무엇인가요?
+          </TypeInfoTitle>
+          <TypeInfoSubTitle>
+            초기 창업가의 경험부족으로 합리적 의사결정에 어려움을 겪는 경우에요.
+            아래와 같은 경우가 있을 수 있어요.
+          </TypeInfoSubTitle>
+          <TypeInfoContentImg src={contentInfo} />
+        </TypeInfoSection>
+        <Footer src={footerBackground}>
+          <ServiceToolSection>
+            <ServiceToolImg src={recommendServiceTool} />
+            <ServiceToolTitle>
+              나의 서비스를 AI 툴킷에 적용해 다음 전략을 확인해 보세요
+            </ServiceToolTitle>
+            <ServiceToolContentImgWrapper>
+              {serviceTool.map((tool, index) => (
+                <ServiceToolContentImg
+                  onClick={() => handleServicToolImgClick(tool)}
+                  key={index}
+                  src={tool}
+                />
+              ))}
+            </ServiceToolContentImgWrapper>
+          </ServiceToolSection>
+          <BuutonWrapper>
+            <RetryButton onClick={handleRetryButtonClick} type="button">
+              <RetryButtonText>다시 테스트 하기</RetryButtonText>
+            </RetryButton>
+            <DownloadButton type="button" onClick={handleClickDownloadButton}>
+              <DownloadButtonText>점검 결과 다운로드</DownloadButtonText>
+            </DownloadButton>
+          </BuutonWrapper>
+        </Footer>
+      </DownloadWrapper>
     </Container>
   );
 };

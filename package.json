@@ -14,6 +14,8 @@
     "apexcharts": "^3.51.0",
     "axios": "^1.7.2",
     "dotenv": "^16.4.5",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
     "react": "^18.1.0",
     "react-apexcharts": "^1.4.1",
     "react-dom": "^18.1.0",

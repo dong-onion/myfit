@@ -10,7 +10,6 @@ export const fetchSWOTAnalysis = async (
   level: number,
 ) => {
   try {
-    console.log('run');
     const response = await axios.get(
       API_URL +
         `/api/swot?serviceDescription=${serviceDescription}&level=${level}`,

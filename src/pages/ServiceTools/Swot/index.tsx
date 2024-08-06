@@ -96,8 +96,6 @@ export const DirectionSuggestionsWrapper = styled.div`
 `;
 
 const Swot = () => {
-  const navigate = useNavigate();
-
   const { level, serviceDescription } = useAccessControl();
 
   if (level === null || serviceDescription === null) {
