@@ -18,6 +18,7 @@ import Frame from '../components/Frame';
 import { usePersona } from '@/hooks/usePersona';
 import Loading from './components/Loading';
 import { SESSION_KEYS } from '@/utility/constants';
+import usePreloadImage from '@/hooks/usePreloadImage';
 
 export const Content1 = styled(ContentBox)`
   margin-top: 60px;
@@ -110,6 +111,7 @@ export const Footer = styled.div`
 `;
 
 const Persona = () => {
+  const { imagesLoaded } = usePreloadImage([personaInfo]);
   const serviceDescription = JSON.parse(
     sessionStorage.getItem(SESSION_KEYS.serviceDescription) || '',
   );
@@ -135,7 +137,7 @@ const Persona = () => {
     return <div>Error...</div>;
   }
 
-  return (
+  return !imagesLoaded ? null : (
     <Frame src={personaInfo}>
       <ContentHeader refetch={refetch} />
       <Content1>

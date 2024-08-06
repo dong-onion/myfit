@@ -14,6 +14,7 @@ import Frame from '../components/Frame';
 import ContentHeader from '../components/ContentHeader/indext';
 import styled from 'styled-components';
 import Loading from './components/Loading';
+import usePreloadImage from '@/hooks/usePreloadImage';
 
 export const Container = styled.div`
   flex-direction: column;
@@ -97,6 +98,7 @@ export const DirectionSuggestionsWrapper = styled.div`
 
 const Swot = () => {
   const { level, serviceDescription } = useAccessControl();
+  const { imagesLoaded } = usePreloadImage([swotInfo]);
 
   if (level === null || serviceDescription === null) {
     return <Loading />;
@@ -130,7 +132,7 @@ const Swot = () => {
     { imgSrc: swotThreat, alt: 'swotThreat', data: threat },
   ];
 
-  return (
+  return !imagesLoaded ? null : (
     <Frame src={swotInfo}>
       <ContentHeader refetch={refetch} />
       <Container>

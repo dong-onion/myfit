@@ -4,7 +4,6 @@ import Frame from '../components/Frame';
 import {
   blueprintInfo,
   contactImg,
-  customerJourneyMapInfo,
   f2fServiceUsersImg,
   hyperClova,
   levelImg,
@@ -13,11 +12,10 @@ import {
   userActiveImg,
 } from '@/assets';
 import ContentHeader from '../components/ContentHeader/indext';
-import { useCustomerJourneyMap } from '@/hooks/useCustomerJourneyMap';
 import Loading from './components/Loading';
 import { SESSION_KEYS } from '@/utility/constants';
-import { fetchBlueprint } from '@/clovaAI/api';
 import { useBlueprint } from '@/hooks/useBlueprint';
+import usePreloadImage from '@/hooks/usePreloadImage';
 
 export const Container = styled.div`
   flex-direction: column;
@@ -161,6 +159,9 @@ const Blueprint = () => {
   const serviceDescription = JSON.parse(
     sessionStorage.getItem(SESSION_KEYS.serviceDescription) || '',
   );
+
+  const { imagesLoaded } = usePreloadImage([blueprintInfo]);
+
   const { data, isError, isLoading, refetch, isRefetching } =
     useBlueprint(serviceDescription);
 
@@ -172,7 +173,7 @@ const Blueprint = () => {
     return <div>Error...</div>;
   }
 
-  return (
+  return !imagesLoaded ? null : (
     <Frame src={blueprintInfo}>
       <ContentHeader />
       <Container>

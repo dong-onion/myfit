@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import {
   levelSeed,
@@ -9,6 +9,7 @@ import {
 import { Button } from '@/components';
 import { useNavigate } from 'react-router-dom';
 import { HEADER_HEIGHT, SESSION_KEYS } from '@/utility/constants';
+import usePreloadImage from '@/hooks/usePreloadImage';
 
 export const Container = styled.div`
   background-image: url(${serviceRegistrationBackground});
@@ -262,17 +263,7 @@ const ServiceRegistration = () => {
   const [inputFocus, setInputFocus] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  const preloadImages = (imagePaths: string[]) => {
-    const images = [];
-    for (let i = 0; i < imagePaths.length; i++) {
-      images[i] = new Image();
-      images[i].src = imagePaths[i];
-    }
-  };
-
-  useEffect(() => {
-    preloadImages([serviceRegistrationBackground]);
-  }, []);
+  const { imagesLoaded } = usePreloadImage([serviceRegistrationBackground]);
 
   const handleCompleteButtonClick = () => {
     sessionStorage.setItem(SESSION_KEYS.level, JSON.stringify(level) || '');
@@ -317,7 +308,7 @@ const ServiceRegistration = () => {
     setInputFocus(true);
   };
 
-  return (
+  return !imagesLoaded ? null : (
     <>
       <Container>
         <Wrapper>

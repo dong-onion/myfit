@@ -17,6 +17,7 @@ import styled from 'styled-components';
 import Loading from './components/Loading';
 import { SESSION_KEYS } from '@/utility/constants';
 import { useBenchmark } from '@/hooks/useBenchmark';
+import usePreloadImage from '@/hooks/usePreloadImage';
 
 export const Container = styled.div`
   flex-direction: column;
@@ -107,6 +108,7 @@ const Benchmarking = () => {
   const serviceDescription = JSON.parse(
     sessionStorage.getItem(SESSION_KEYS.serviceDescription) || '',
   );
+  const { imagesLoaded } = usePreloadImage([benchmarkingInfo]);
   const { data, isError, isLoading, refetch } =
     useBenchmark(serviceDescription);
 
@@ -120,7 +122,7 @@ const Benchmarking = () => {
 
   console.log(data);
 
-  return (
+  return !imagesLoaded ? null : (
     <Frame src={benchmarkingInfo} height={1916}>
       <ContentHeader />
       <Container>

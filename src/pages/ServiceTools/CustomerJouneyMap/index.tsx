@@ -15,6 +15,7 @@ import ContentHeader from '../components/ContentHeader/indext';
 import { useCustomerJourneyMap } from '@/hooks/useCustomerJourneyMap';
 import Loading from './components/Loading';
 import { SESSION_KEYS } from '@/utility/constants';
+import usePreloadImage from '@/hooks/usePreloadImage';
 
 export const Container = styled.div`
   flex-direction: column;
@@ -147,6 +148,7 @@ const CustomerJouneyMap = () => {
   const serviceDescription = JSON.parse(
     sessionStorage.getItem(SESSION_KEYS.serviceDescription) || '',
   );
+  const { imagesLoaded } = usePreloadImage([customerJourneyMapInfo]);
   const { data, isError, isLoading, refetch, isRefetching } =
     useCustomerJourneyMap(serviceDescription);
 
@@ -158,7 +160,7 @@ const CustomerJouneyMap = () => {
     return <div>Error...</div>;
   }
 
-  return (
+  return imagesLoaded ? null : (
     <Frame src={customerJourneyMapInfo}>
       <ContentHeader refetch={refetch} />
       <Container>

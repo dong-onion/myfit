@@ -16,6 +16,7 @@ import ContentHeader from '../components/ContentHeader/indext';
 import Loading from './components/Loading';
 import { useSystemMap } from '@/hooks/useSystemMap';
 import { SESSION_KEYS } from '@/utility/constants';
+import usePreloadImage from '@/hooks/usePreloadImage';
 
 export const Container = styled.div`
   flex-direction: column;
@@ -107,6 +108,7 @@ const SystemMap = () => {
   const serviceDescription = JSON.parse(
     sessionStorage.getItem(SESSION_KEYS.serviceDescription) || '',
   );
+  const { imagesLoaded } = usePreloadImage([systemMapInfo]);
   const { data, isError, isLoading, refetch, isRefetching } =
     useSystemMap(serviceDescription);
 
@@ -126,7 +128,7 @@ const SystemMap = () => {
     summary = [],
   } = data || {};
 
-  return (
+  return !imagesLoaded ? null : (
     <Frame height={1364} src={systemMapInfo}>
       <ContentHeader />
       <Container>

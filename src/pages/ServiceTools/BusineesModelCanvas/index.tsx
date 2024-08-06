@@ -18,6 +18,7 @@ import ContentHeader from '../components/ContentHeader/indext';
 import { useBusinessModelCanvas } from '@/hooks/useBusineesModelCanvas';
 import Loading from './components/Loading';
 import { SESSION_KEYS } from '@/utility/constants';
+import usePreloadImage from '@/hooks/usePreloadImage';
 
 const GridContainer = styled.div`
   display: grid;
@@ -161,15 +162,15 @@ const BusineesModelCanvas = () => {
   const serviceDescription = JSON.parse(
     sessionStorage.getItem(SESSION_KEYS.serviceDescription) || '',
   );
+
+  const { imagesLoaded } = usePreloadImage([businessCanvasInfo]);
+
   const { data, isError, isLoading, refetch, isRefetching } =
     useBusinessModelCanvas(serviceDescription);
   const {
     problems = [''],
-    alternatives = [''],
     customerSegments = [''],
-    earlyAdopters = [''],
     valuePropositions = [''],
-    highConcept = [''],
     solution = [''],
     channels = [''],
     revenueStreams = [''],
@@ -186,7 +187,7 @@ const BusineesModelCanvas = () => {
     return <div>Error...</div>;
   }
 
-  return (
+  return !imagesLoaded ? null : (
     <Frame src={businessCanvasInfo}>
       <ContentHeader refetch={refetch} />
       <GridContainer>

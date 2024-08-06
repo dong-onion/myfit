@@ -22,6 +22,7 @@ import {
   mainContentBmcHover,
   mainContentTestHover,
   editImg,
+  testStartBackground,
 } from '@/assets';
 import styled from 'styled-components';
 import { Modal, Spinner } from '@/components';
@@ -37,6 +38,7 @@ import {
   parseCustomerJourneyMap,
   parsePersona,
 } from '@/utility/utils';
+import usePreloadImage from '@/hooks/usePreloadImage';
 
 export const Container = styled.div`
   width: 100%;
@@ -215,7 +217,25 @@ const Main = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const levelData = ['씨앗단계', '새싹단계', '나무단계'];
   const queryClient = useQueryClient();
-
+  const { imagesLoaded } = usePreloadImage([
+    mainBackground,
+    mainContentBcm,
+    mainContentBlp,
+    mainContentBmc,
+    mainContentCjm,
+    mainContentPsn,
+    mainContentStm,
+    mainContentSwot,
+    mainContentTest,
+    mainContentSwotHover,
+    mainContentPsnHover,
+    mainContentCjmHover,
+    mainContentBmcHover,
+    mainContentBlpHover,
+    mainContentStmHover,
+    mainContentBcmHover,
+    mainContentTestHover,
+  ]);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -250,14 +270,13 @@ const Main = () => {
         console.error('Error prefetching data:', error);
       }
     };
-
     fetchData();
   }, [queryClient]);
   const mainContentImgs = [
     {
       src: mainContentSwot,
       hoversrc: mainContentSwotHover,
-      onClick: () => navigate('/swot'),
+      onClick: () => navigate('/tools/psn'),
     },
     {
       src: mainContentPsn,
@@ -318,7 +337,7 @@ const Main = () => {
     setModalVisible(false);
   };
 
-  return (
+  return !imagesLoaded ? null : (
     <Container>
       <InnerContainer>
         <HeaderTitle>창업 아이템이 고민이신가요?</HeaderTitle>

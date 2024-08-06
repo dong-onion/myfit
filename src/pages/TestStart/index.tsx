@@ -4,6 +4,7 @@ import { HEADER_HEIGHT } from '@/utility/constants';
 import { lessThan1Minute, testStartBackground } from '@/assets';
 import { Button } from '@/components';
 import { useNavigate } from 'react-router-dom';
+import usePreloadImage from '@/hooks/usePreloadImage';
 
 export const Container = styled.div`
   display: flex;
@@ -72,10 +73,11 @@ export const ButtonText = styled.span`
 
 const TestStart = () => {
   const navigate = useNavigate();
+  const { imagesLoaded } = usePreloadImage([testStartBackground]);
   const handleClickStartButton = () => {
     navigate('./test');
   };
-  return (
+  return !imagesLoaded ? null : (
     <Container>
       <Title>창업 유형 테스트</Title>
       <MainDescripiton>나는 어떤 창업가일까?</MainDescripiton>
