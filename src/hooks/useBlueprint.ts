@@ -16,7 +16,7 @@ export const useBlueprint = (serviceDescription: string) => {
     BlueprintItem[],
     Error
   >(
-    [queryKeys.CUSTOMER_JOURNEY_MAP, serviceDescription],
+    [queryKeys.BLUEPRINT, serviceDescription],
     () =>
       fetchBlueprint(serviceDescription).then((data: SWOTAnalysisResponse) => {
         const parsedData = parseBlueprint(data.result.message.content);

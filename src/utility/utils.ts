@@ -265,12 +265,43 @@ export const parseBlueprint = (content: string) => {
   return result;
 };
 
+export interface SystemMapItem {
+  coreOrganizationAndProducts: string[];
+  stakeholders: string[];
+  keyEventsAndActivities: string[];
+  keyResourcesAndInfrastructure: string[];
+  summary: string[];
+}
+
 export const parseSystemMap = (content: string) => {
-  return JSON.parse(content);
+  const parsedData = JSON.parse(content);
+
+  function sliceStringToArray(str: string): string[] {
+    return str
+      .split('\n')
+      .map((s) => (s.startsWith('- ') ? s.substring(2).trim() : s.trim()))
+      .filter((s) => s.length > 0);
+  }
+
+  const result = {
+    coreOrganizationAndProducts: sliceStringToArray(
+      parsedData['중심 조직 및 제품'],
+    ),
+    stakeholders: sliceStringToArray(parsedData['이해관계자']),
+    keyEventsAndActivities: sliceStringToArray(
+      parsedData['주요 이벤트 및 활동'],
+    ),
+    keyResourcesAndInfrastructure: sliceStringToArray(
+      parsedData['핵심 자원 및 인프라'],
+    ),
+    summary: sliceStringToArray(parsedData['요약']),
+  };
+
+  return result;
 };
 
 export const parseBenchmark = (content: string) => {
-  return JSON.parse(content);
+  return content;
 };
 
 // totalscore 배열을 받아서 타입 별로 평균 계산하는 함수

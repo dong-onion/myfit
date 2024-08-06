@@ -172,8 +172,6 @@ const Blueprint = () => {
     return <div>Error...</div>;
   }
 
-  console.log(data);
-
   return (
     <Frame src={blueprintInfo}>
       <ContentHeader />

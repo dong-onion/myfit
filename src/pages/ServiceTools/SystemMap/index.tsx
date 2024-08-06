@@ -14,6 +14,8 @@ import {
 } from '@/assets';
 import ContentHeader from '../components/ContentHeader/indext';
 import Loading from './components/Loading';
+import { useSystemMap } from '@/hooks/useSystemMap';
+import { SESSION_KEYS } from '@/utility/constants';
 
 export const Container = styled.div`
   flex-direction: column;
@@ -102,6 +104,28 @@ export const CurveImage = styled.img`
 `;
 
 const SystemMap = () => {
+  const serviceDescription = JSON.parse(
+    sessionStorage.getItem(SESSION_KEYS.serviceDescription) || '',
+  );
+  const { data, isError, isLoading, refetch } =
+    useSystemMap(serviceDescription);
+
+  if (isLoading) {
+    return <Loading refetch={refetch} />;
+  }
+
+  if (isError) {
+    return <div>Error...</div>;
+  }
+
+  const {
+    coreOrganizationAndProducts = [],
+    stakeholders = [],
+    keyEventsAndActivities = [],
+    keyResourcesAndInfrastructure = [],
+    summary = [],
+  } = data || {};
+
   return (
     <Frame height={1364} src={systemMapInfo}>
       <ContentHeader />
@@ -112,10 +136,11 @@ const SystemMap = () => {
             <ContentBox1>
               <img src={systemMapActivity} />
               <ul>
-                <li>재료 구매 및 핫도그 제작</li>
-                <li>학교 앞에서 핫도그 판매</li>
-                <li>학교 주변에서 홍보 및 판촉 행사 고객</li>
-                <li>응대 및 피드백 수집</li>
+                {keyEventsAndActivities.map(
+                  (activity: string, index: number) => (
+                    <li key={index}>{activity}</li>
+                  ),
+                )}
               </ul>
             </ContentBox1>
             <CurveImage src={curvedImg2} />
@@ -123,35 +148,41 @@ const SystemMap = () => {
           <MapWrapper2>
             <ContentBox2>
               <img src={systemMapProduct} />
+              <ul>
+                {coreOrganizationAndProducts.map(
+                  (product: string, index: number) => (
+                    <li key={index}>{product}</li>
+                  ),
+                )}
+              </ul>
             </ContentBox2>
             <ContentBox3>
               <ul>
-                <li>
-                  고객의 구매는 핫도그 장사 조직의 매출과 수익에 직접적인 영향을
-                  미침
-                </li>
-                <li>
-                  재정적 기관의 자금 지원은 핫도그 장사 조직의 운영에 필수적임
-                </li>
-                <li>
-                  컨설턴트의 경영 전략은 핫도그 장사 조직의 성과를 향상시키는 데
-                  중요한 역할을 함
-                </li>
-                <li>
-                  공급자의 핫도그 재료 품질은 핫도그 제품의 맛과 품질에 영향을
-                  미침
-                </li>
-                <li>판매자의 고객 서비스는 고객 만족도에 영향을 미침</li>
+                {summary.map((item: string, index: number) => (
+                  <li key={index}>{item}</li>
+                ))}
               </ul>
             </ContentBox3>
             <ContentBox2>
               <img src={systemMapaStakeholders} />
+              <ul>
+                {stakeholders.map((stakeholder: string, index: number) => (
+                  <li key={index}>{stakeholder}</li>
+                ))}
+              </ul>
             </ContentBox2>
           </MapWrapper2>
           <MapWrapper3>
             <CurveImage src={curvedImg3} />
             <ContentBox1>
               <img src={systemMapInfra} />
+              <ul>
+                {keyResourcesAndInfrastructure.map(
+                  (infra: string, index: number) => (
+                    <li key={index}>{infra}</li>
+                  ),
+                )}
+              </ul>
             </ContentBox1>
             <CurveImage src={curvedImg4} />
           </MapWrapper3>

@@ -112,3 +112,35 @@ export const fetchBlueprint = async (serviceDescription: string) => {
     throw new Error('Failed to get blueprint: ' + (error as Error).message);
   }
 };
+
+export const fetchSystemMap = async (serviceDescription: string) => {
+  try {
+    const response = await axios.get(
+      API_URL + `/api/system-map?serviceDescription=${serviceDescription}`,
+      {
+        headers: HEADERS,
+      },
+    );
+
+    console.log('response', response.data);
+    return response.data;
+  } catch (error) {
+    throw new Error('Failed to get system-map: ' + (error as Error).message);
+  }
+};
+
+export const fetchBenchmark = async (serviceDescription: string) => {
+  try {
+    const response = await axios.get(
+      API_URL + `/api/benchmark?serviceDescription=${serviceDescription}`,
+      {
+        headers: HEADERS,
+      },
+    );
+
+    console.log('response', response.data);
+    return response.data;
+  } catch (error) {
+    throw new Error('Failed to get benchmark: ' + (error as Error).message);
+  }
+};

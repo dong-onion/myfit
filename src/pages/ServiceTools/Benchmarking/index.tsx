@@ -15,6 +15,8 @@ import {
 } from '@/assets';
 import styled from 'styled-components';
 import Loading from './components/Loading';
+import { SESSION_KEYS } from '@/utility/constants';
+import { useBenchmark } from '@/hooks/useBenchmark';
 
 export const Container = styled.div`
   flex-direction: column;
@@ -101,6 +103,22 @@ const Benchmarking = () => {
     benchmarkingFeedback,
     benchmarkingStructure,
   ];
+
+  const serviceDescription = JSON.parse(
+    sessionStorage.getItem(SESSION_KEYS.serviceDescription) || '',
+  );
+  const { data, isError, isLoading, refetch } =
+    useBenchmark(serviceDescription);
+
+  if (isLoading) {
+    return <Loading refetch={refetch} />;
+  }
+
+  if (isError) {
+    return <div>Error...</div>;
+  }
+
+  console.log(data);
 
   return (
     <Frame src={benchmarkingInfo} height={1916}>

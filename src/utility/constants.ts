@@ -27,6 +27,9 @@ export const queryKeys = {
   PERSONA: 'persona',
   BUSINESS_MODEL_CANVAS: 'businessModelCanvas',
   CUSTOMER_JOURNEY_MAP: 'customerJourneyMap',
+  BLUEPRINT: 'blueprint',
+  SYSTEM_MAP: 'systemMap',
+  BENCHMARK: 'benchmark',
 };
 
 export const HEADER_HEIGHT = '60px';
