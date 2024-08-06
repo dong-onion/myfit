@@ -6,7 +6,7 @@ import { arrowRight, mainBg } from '@/assets';
 import { ROUTES_PATH } from '@/utility/constants';
 
 export const Container = styled.div`
-  width: 100dvw;
+  width: 100%;
   background-image: url(${mainBg});
   background-repeat: no-repeat;
   background-position: center;

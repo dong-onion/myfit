@@ -23,9 +23,12 @@ import { useNavigate } from 'react-router-dom';
 import Loading from './components/Loading';
 
 export const Container = styled.div`
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 1920px;
 `;
 
 export const DownloadWrapper = styled.div`
@@ -33,6 +36,7 @@ export const DownloadWrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  justify-content: center;
 `;
 
 export const Header = styled.div<{ src: string }>`

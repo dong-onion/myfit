@@ -7,7 +7,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   height: ${HEADER_HEIGHT};
-  width: 100dvw;
+  width: 100%;
   border-bottom: 1px solid ${({ theme }) => theme.color.gray[4]};
   position: relative;
   z-index: 1000;
