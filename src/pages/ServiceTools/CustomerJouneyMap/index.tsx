@@ -160,7 +160,7 @@ const CustomerJouneyMap = () => {
 
   return (
     <Frame src={customerJourneyMapInfo}>
-      <ContentHeader />
+      <ContentHeader refetch={refetch} />
       <Container>
         <LevelContainer>
           <ImgContainer style={{ height: '105px' }}>

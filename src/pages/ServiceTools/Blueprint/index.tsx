@@ -16,6 +16,8 @@ import ContentHeader from '../components/ContentHeader/indext';
 import { useCustomerJourneyMap } from '@/hooks/useCustomerJourneyMap';
 import Loading from './components/Loading';
 import { SESSION_KEYS } from '@/utility/constants';
+import { fetchBlueprint } from '@/clovaAI/api';
+import { useBlueprint } from '@/hooks/useBlueprint';
 
 export const Container = styled.div`
   flex-direction: column;
@@ -160,7 +162,7 @@ const Blueprint = () => {
     sessionStorage.getItem(SESSION_KEYS.serviceDescription) || '',
   );
   const { data, isError, isLoading, refetch } =
-    useCustomerJourneyMap(serviceDescription);
+    useBlueprint(serviceDescription);
 
   if (isLoading) {
     return <Loading refetch={refetch} />;
@@ -169,6 +171,8 @@ const Blueprint = () => {
   if (isError) {
     return <div>Error...</div>;
   }
+
+  console.log(data);
 
   return (
     <Frame src={blueprintInfo}>
@@ -179,7 +183,7 @@ const Blueprint = () => {
             <img src={levelImg} />
           </div>
           {data?.map((item, index) => (
-            <div key={index}>{item.stepName}</div>
+            <div key={index}>{item.level}</div>
           ))}
         </LevelContainer>
         <PurposeContainer>
@@ -187,7 +191,7 @@ const Blueprint = () => {
             <img src={contactImg} />
           </div>
           {data?.map((item, index) => (
-            <div key={index}>{item.purpose}</div>
+            <div key={index}>{item.touchPoint}</div>
           ))}
         </PurposeContainer>
         <ActionContainer>
@@ -203,7 +207,7 @@ const Blueprint = () => {
             <img className="f2f" src={f2fServiceUsersImg} />
           </div>
           {data?.map((item, index) => (
-            <div key={index}>{item.emotion}</div>
+            <div key={index}>{item.f2f}</div>
           ))}
         </EmotionContainer>
         <NeedsContainer>
@@ -211,7 +215,7 @@ const Blueprint = () => {
             <img className="f2f" src={nonf2fServiceUsersImg} />
           </div>
           {data?.map((item, index) => (
-            <div key={index}>{item.need}</div>
+            <div key={index}>{item.nonef2f}</div>
           ))}
         </NeedsContainer>
         <SolutionContainer>
@@ -223,7 +227,7 @@ const Blueprint = () => {
             />
           </div>
           {data?.map((item, index) => (
-            <div key={index}>{item.solution}</div>
+            <div key={index}>{item.process}</div>
           ))}
         </SolutionContainer>
         <div

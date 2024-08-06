@@ -122,6 +122,7 @@ import mainContentBcmHover from './mainContentBcmHover.png';
 import mainContentTestHover from './mainContentTestHover.png';
 import editImg from './editImg.png';
 import modalCloseBtn from './modalCloseBtn.png';
+import editImgBlue from './editImgBlue.png';
 
 export {
   logo,
@@ -248,4 +249,5 @@ export {
   mainContentTestHover,
   editImg,
   modalCloseBtn,
+  editImgBlue,
 };

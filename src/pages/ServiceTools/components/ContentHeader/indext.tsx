@@ -1,5 +1,12 @@
+import { downloadIcon, editImgBlue, refreshIcon } from '@/assets';
 import { SESSION_KEYS } from '@/utility/constants';
+import { BMCanvas, Persona } from '@/utility/utils';
 import React from 'react';
+import {
+  QueryObserverResult,
+  RefetchOptions,
+  RefetchQueryFilters,
+} from 'react-query';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -8,92 +15,137 @@ export const Container = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
-  //
+  height: 56px;
+  align-items: center;
+`;
+
+export const TitleWrapper = styled.div`
+  background-color: #dde4ff;
+  width: 67%;
+  height: 56px;
+  border-radius: 9px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 export const ContentTitle = styled.div`
   //공통 컴포넌트
   font-family: Pretendard-Bold;
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 700;
-  line-height: 44.8px;
+  line-height: 33.6px;
   letter-spacing: -0.012em;
+  text-align: left;
+
   color: ${({ theme }) => theme.color.primary[0]};
 `;
 
-// export const ContentButtonContainer = styled.div`
-//   display: flex;
-//   gap: 10px;
-// `;
+export const EditImg = styled.img`
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+`;
 
-// export const RefreshButton = styled.div`
-//   //공통 컴포넌트
-//   width: 146px;
-//   height: 56px;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   background-color: ${({ theme }) => theme.color.bg[1]};
-//   border-radius: 9px;
-//   cursor: pointer;
-//   border: 1px solid ${({ theme }) => theme.color.primary[1]};
+export const ContentButtonContainer = styled.div`
+  display: flex;
+  gap: 10px;
+`;
 
-//   &:hover {
-//     background-color: ${({ theme }) => theme.color.white[0]};
-//   }
+export const RefreshButton = styled.div`
+  //공통 컴포넌트
+  display: flex;
+  gap: 10px;
+  width: 141px;
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ theme }) => theme.color.bg[1]};
+  border-radius: 9px;
+  cursor: pointer;
+  border: 1px solid ${({ theme }) => theme.color.primary[1]};
 
-//   & img {
-//     width: 24px;
-//     height: 24px;
-//   }
+  &:hover {
+    background-color: ${({ theme }) => theme.color.white[0]};
+  }
 
-//   & span {
-//     font-family: Pretendard-SemiBold;
-//     font-size: 20px;
-//     font-weight: 600;
-//     line-height: 20px;
-//     letter-spacing: -0.002em;
-//     color: ${({ theme }) => theme.color.primary[0]};
-//   }
-// `;
+  & img {
+    width: 24px;
+    height: 24px;
+  }
 
-// export const DownloadButton = styled.div`
-//   //공통 컴포넌트
-//   width: 164px;
-//   height: 56px;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   background-color: ${({ theme }) => theme.color.primary[0]};
-//   border-radius: 9px;
-//   cursor: pointer;
-//   border: none;
-//   &:hover {
-//     background: linear-gradient(90deg, #4865ff 0%, #6f56ff 100%);
-//   }
+  & span {
+    font-family: Pretendard-SemiBold;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 18px;
+    letter-spacing: -0.002em;
+    text-align: left;
 
-//   & img {
-//     width: 24px;
-//     height: 24px;
-//   }
+    color: ${({ theme }) => theme.color.primary[0]};
+  }
+`;
 
-//   & span {
-//     font-family: Pretendard-SemiBold;
-//     font-size: 20px;
-//     font-weight: 600;
-//     line-height: 20px;
-//     letter-spacing: -0.002em;
-//     color: ${({ theme }) => theme.color.white[0]};
-//   }
-// `;
+export const DownloadButton = styled.div`
+  //공통 컴포넌트
+  display: flex;
+  gap: 10px;
+  width: 157px;
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ theme }) => theme.color.primary[0]};
+  border-radius: 9px;
+  cursor: pointer;
+  border: none;
+  &:hover {
+    background: linear-gradient(90deg, #4865ff 0%, #6f56ff 100%);
+  }
 
-const ContentHeader = () => {
+  & img {
+    width: 18px;
+    height: 18px;
+  }
+
+  & span {
+    font-family: Pretendard-SemiBold;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 18px;
+    letter-spacing: -0.002em;
+    text-align: center;
+
+    color: ${({ theme }) => theme.color.white[0]};
+  }
+`;
+
+interface Props {
+  refetch?: any;
+}
+
+const ContentHeader = ({ refetch }: Props) => {
   const serviceDescription = JSON.parse(
     sessionStorage.getItem(SESSION_KEYS.serviceDescription) || '',
   );
   return (
     <Container>
-      <ContentTitle>{serviceDescription}</ContentTitle>
+      <TitleWrapper>
+        <ContentTitle>{serviceDescription}</ContentTitle>
+        <EditImg src={editImgBlue} />
+      </TitleWrapper>
+      <ContentButtonContainer>
+        <RefreshButton onClick={refetch}>
+          <img src={refreshIcon} />
+          <span>재생성</span>
+        </RefreshButton>
+        <DownloadButton>
+          <img src={downloadIcon} />
+          <span>다운로드</span>
+        </DownloadButton>
+      </ContentButtonContainer>
     </Container>
   );
 };

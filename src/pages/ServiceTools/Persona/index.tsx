@@ -114,7 +114,8 @@ const Persona = () => {
     sessionStorage.getItem(SESSION_KEYS.serviceDescription) || '',
   );
 
-  const { data, isError, isLoading, refetch } = usePersona(serviceDescription);
+  const { data, isError, isLoading, refetch, isRefetching } =
+    usePersona(serviceDescription);
   const {
     introduction = '',
     background = '',
@@ -126,7 +127,7 @@ const Persona = () => {
     reason = '',
   } = data || {};
 
-  if (isLoading) {
+  if (isLoading || isRefetching) {
     return <Loading refetch={refetch} />;
   }
 
@@ -136,7 +137,7 @@ const Persona = () => {
 
   return (
     <Frame src={personaInfo}>
-      <ContentHeader />
+      <ContentHeader refetch={refetch} />
       <Content1>
         <img src={personaContent1} alt="personaContent1"></img>
         <span>{introduction}</span>

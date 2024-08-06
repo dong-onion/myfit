@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 import { queryKeys } from '@/utility/constants';
-import { fetchPersona } from '@/clovaAI/api';
-import { parsePersona, Persona } from '@/utility/utils';
+import { fetchBlueprint } from '@/clovaAI/api';
+import { BlueprintItem, parseBlueprint } from '@/utility/utils';
 
 interface SWOTAnalysisResponse {
   result: {
@@ -11,15 +11,15 @@ interface SWOTAnalysisResponse {
   };
 }
 
-export const usePersona = (serviceDescription: string) => {
-  const { data, isLoading, isError, refetch, isRefetching } = useQuery<
-    Persona,
+export const useBlueprint = (serviceDescription: string) => {
+  const { data, isLoading, isError, refetch } = useQuery<
+    BlueprintItem[],
     Error
   >(
-    [queryKeys.PERSONA, serviceDescription],
+    [queryKeys.CUSTOMER_JOURNEY_MAP, serviceDescription],
     () =>
-      fetchPersona(serviceDescription).then((data: SWOTAnalysisResponse) => {
-        const parsedData = parsePersona(data.result.message.content);
+      fetchBlueprint(serviceDescription).then((data: SWOTAnalysisResponse) => {
+        const parsedData = parseBlueprint(data.result.message.content);
         if (!parsedData) {
           throw new Error('Failed to parse SWOT Analysis');
         }
@@ -35,6 +35,5 @@ export const usePersona = (serviceDescription: string) => {
     isLoading,
     isError,
     refetch,
-    isRefetching,
   };
 };

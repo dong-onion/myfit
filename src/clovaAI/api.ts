@@ -74,7 +74,7 @@ export const fetchBusinessModelCanvas = async (serviceDescription: string) => {
     console.log('response', response.data);
     return response.data;
   } catch (error) {
-    throw new Error('Failed to get persona: ' + (error as Error).message);
+    throw new Error('Failed to get bmCanvas: ' + (error as Error).message);
   }
 };
 
@@ -91,6 +91,24 @@ export const fetchCustomerJourneyMap = async (serviceDescription: string) => {
     console.log('response', response.data);
     return response.data;
   } catch (error) {
-    throw new Error('Failed to get persona: ' + (error as Error).message);
+    throw new Error(
+      'Failed to get customerJourneyMap: ' + (error as Error).message,
+    );
+  }
+};
+
+export const fetchBlueprint = async (serviceDescription: string) => {
+  try {
+    const response = await axios.get(
+      API_URL + `/api/blueprint?serviceDescription=${serviceDescription}`,
+      {
+        headers: HEADERS,
+      },
+    );
+
+    console.log('response', response.data);
+    return response.data;
+  } catch (error) {
+    throw new Error('Failed to get blueprint: ' + (error as Error).message);
   }
 };

@@ -188,7 +188,7 @@ const BusineesModelCanvas = () => {
 
   return (
     <Frame src={businessCanvasInfo}>
-      <ContentHeader />
+      <ContentHeader refetch={refetch} />
       <GridContainer>
         <A className="grid">
           <img src={problemImg} />

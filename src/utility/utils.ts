@@ -228,6 +228,51 @@ export const parseCustomerJourneyMap = (content: string) => {
   return customerJourneyMap;
 };
 
+interface BlueprintRawItem {
+  단계: string;
+  터치포인트: string;
+  사용자_행동: string;
+  가시선_위_상호작용: string;
+  가시선_아래_상호작용: string;
+  지원_프로세스: string;
+}
+
+export interface BlueprintItem {
+  level: string;
+  touchPoint: string;
+  action: string;
+  f2f: string;
+  nonef2f: string;
+  process: string;
+}
+
+export const parseBlueprint = (content: string) => {
+  const parsedData = JSON.parse(content);
+
+  // 서비스 단계를 추출
+  const serviceStages = parsedData['서비스_단계'];
+
+  // 결과 배열 생성
+  const result = serviceStages.map((item: BlueprintRawItem) => ({
+    level: item.단계,
+    touchPoint: item.터치포인트,
+    action: item.사용자_행동,
+    f2f: item.가시선_위_상호작용,
+    nonef2f: item.가시선_아래_상호작용,
+    process: item.지원_프로세스,
+  }));
+
+  return result;
+};
+
+export const parseSystemMap = (content: string) => {
+  return JSON.parse(content);
+};
+
+export const parseBenchmark = (content: string) => {
+  return JSON.parse(content);
+};
+
 // totalscore 배열을 받아서 타입 별로 평균 계산하는 함수
 export const calculateScore = (totalScores: number[]): number[] => {
   const entrepreneurship =
