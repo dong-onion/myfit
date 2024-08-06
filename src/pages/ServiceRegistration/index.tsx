@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {
   levelSeed,
@@ -261,6 +261,18 @@ const ServiceRegistration = () => {
   const [serviceDescription, setServiceDescription] = useState<string>('');
   const [inputFocus, setInputFocus] = useState<boolean>(false);
   const navigate = useNavigate();
+
+  const preloadImages = (imagePaths: string[]) => {
+    const images = [];
+    for (let i = 0; i < imagePaths.length; i++) {
+      images[i] = new Image();
+      images[i].src = imagePaths[i];
+    }
+  };
+
+  useEffect(() => {
+    preloadImages([serviceRegistrationBackground]);
+  }, []);
 
   const handleCompleteButtonClick = () => {
     sessionStorage.setItem(SESSION_KEYS.level, JSON.stringify(level) || '');
