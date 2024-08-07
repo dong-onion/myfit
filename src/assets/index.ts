@@ -125,6 +125,7 @@ import mainContentTestHover from './mainContentTestHover.png';
 import editImg from './editImg.png';
 import modalCloseBtn from './modalCloseBtn.png';
 import editImgBlue from './editImgBlue.png';
+import folderIconBlue from './folderIconBlue.png';
 
 export {
   logo,
@@ -254,4 +255,5 @@ export {
   editImgBlue,
   swotSuggestion,
   swotInfo,
+  folderIconBlue,
 };

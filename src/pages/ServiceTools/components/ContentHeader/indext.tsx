@@ -42,6 +42,10 @@ export const EditImg = styled.img`
   width: 24px;
   height: 24px;
   cursor: pointer;
+  &:active {
+    transition: all 0.1s;
+    transform: scale(0.95);
+  }
 `;
 
 export const ContentButtonContainer = styled.div`
@@ -64,6 +68,11 @@ export const RefreshButton = styled.div`
 
   &:hover {
     background-color: ${({ theme }) => theme.color.white[0]};
+  }
+
+  &:active {
+    transition: all 0.2s;
+    transform: scale(0.95);
   }
 
   & img {
@@ -97,6 +106,9 @@ export const DownloadButton = styled.div`
   border: none;
   &:hover {
     background: #647cff;
+  }
+  &:active {
+    transform: scale(0.95);
   }
 
   & img {

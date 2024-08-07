@@ -142,6 +142,11 @@ export const EditWrapper = styled.div`
   position: absolute;
   top: -6px;
   right: -6px;
+
+  &:active {
+    transition: all 0.1s;
+    transform: scale(0.95);
+  }
 `;
 export const EditImg = styled.img`
   width: 28px;

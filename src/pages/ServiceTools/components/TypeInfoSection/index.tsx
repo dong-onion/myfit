@@ -1,5 +1,8 @@
+import { folderIconBlue } from '@/assets';
+import { Button } from '@/components';
 import { SERVICE_TOOL_INFO, ServiceTool } from '@/utility/constants';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Container = styled.div<{ height?: number }>`
@@ -77,6 +80,35 @@ export const PurposeWrapper = styled.div`
 
 export const TipWrapper = styled(PurposeWrapper)``;
 
+export const SeeAllToolsButton = styled(Button)`
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: #f5f6fa;
+  align-self: flex-start;
+  width: 227px;
+  height: 56px;
+  border: 1px solid ${({ theme }) => theme.color.primary[0]};
+  border-radius: 8px;
+  & img {
+    width: 24px;
+    height: 24px;
+  }
+
+  & span {
+    font-family: Pretendard-SemiBold;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 18px;
+    letter-spacing: -0.002em;
+    text-align: center;
+
+    color: ${({ theme }) => theme.color.primary[0]};
+  }
+`;
+
 interface Props {
   src: string;
   height?: number;
@@ -84,6 +116,10 @@ interface Props {
 }
 
 const TypeInfoSection = ({ type, src, height = 1301 }: Props) => {
+  const navigate = useNavigate();
+  const handleButtonClick = () => {
+    navigate('/main');
+  };
   const { title, titleContent, purposeContent, tipContent } =
     SERVICE_TOOL_INFO[type];
   return (
@@ -101,6 +137,10 @@ const TypeInfoSection = ({ type, src, height = 1301 }: Props) => {
         <h1>팁</h1>
         <span>{tipContent}</span>
       </TipWrapper>
+      <SeeAllToolsButton type="button" onClick={handleButtonClick}>
+        <img src={folderIconBlue} alt="icon" />
+        <span>전체 도구 확인하기</span>
+      </SeeAllToolsButton>
     </Container>
   );
 };
