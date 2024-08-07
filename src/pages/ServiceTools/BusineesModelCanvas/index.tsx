@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Frame from '../components/Frame';
 import {
   businessCanvasInfo,
@@ -19,6 +19,10 @@ import { useBusinessModelCanvas } from '@/hooks/useBusineesModelCanvas';
 import Loading from './components/Loading';
 import { SESSION_KEYS } from '@/utility/constants';
 import usePreloadImage from '@/hooks/usePreloadImage';
+
+export const DownloadWrapper = styled.div`
+  display: flex;
+`;
 
 const GridContainer = styled.div`
   display: grid;
@@ -163,6 +167,8 @@ const BusineesModelCanvas = () => {
     sessionStorage.getItem(SESSION_KEYS.serviceDescription) || '',
   );
 
+  const downloadRef = useRef<HTMLDivElement>(null);
+
   const { imagesLoaded } = usePreloadImage([businessCanvasInfo]);
 
   const { data, isError, isLoading, refetch, isRefetching } =
@@ -188,95 +194,101 @@ const BusineesModelCanvas = () => {
   }
 
   return !imagesLoaded ? null : (
-    <Frame src={businessCanvasInfo}>
-      <ContentHeader refetch={refetch} />
-      <GridContainer>
-        <A className="grid">
-          <img src={problemImg} />
-          <ul>
-            {problems.map((problem, index) => (
-              <li key={index}>{problem}</li>
-            ))}
-          </ul>
-        </A>
-        <B className="grid">
-          <img src={solutionImg} />
-          <ul>
-            {solution.map((solution, index) => (
-              <li key={index}>{solution}</li>
-            ))}
-          </ul>
-        </B>
-        <C className="grid">
-          <img src={valuePropositionImg} />
-          <ul>
-            {valuePropositions.map((valueProposition, index) => (
-              <li key={index}>{valueProposition}</li>
-            ))}
-          </ul>
-        </C>
-        <D className="grid">
-          <img src={competitiveAdvantageImg} />
-          <ul>
-            {competitiveAdvantage.map((competitiveAdvantage, index) => (
-              <li key={index}>{competitiveAdvantage}</li>
-            ))}
-          </ul>
-        </D>
-        <E className="grid">
-          <img src={customerGroupImg} />
-          <ul>
-            {customerSegments.map((customerSegment, index) => (
-              <li key={index}>{customerSegment}</li>
-            ))}
-          </ul>
-        </E>
-        <F className="grid">
-          <img src={kpiImg} />
-          <ul>
-            {keyMetrics.map((keyMetric, index) => (
-              <li key={index}>{keyMetric}</li>
-            ))}
-          </ul>
-        </F>
-        <G className="grid">
-          <img src={channelImg} />
-          <ul>
-            {channels.map((channel, index) => (
-              <li key={index}>{channel}</li>
-            ))}
-          </ul>
-        </G>
-      </GridContainer>
-      <FlexContainer>
-        <div>
-          <img src={costStructureImg} />
-          <ul>
-            {costStructure.map((costStructure, index) => (
-              <li key={index}>{costStructure}</li>
-            ))}
-          </ul>
+    <DownloadWrapper ref={downloadRef}>
+      <Frame type="bcm" src={businessCanvasInfo}>
+        <ContentHeader
+          downloadRef={downloadRef}
+          title="마이핏_비즈니스_모델_캔버스"
+          refetch={refetch}
+        />
+        <GridContainer>
+          <A className="grid">
+            <img src={problemImg} />
+            <ul>
+              {problems.map((problem, index) => (
+                <li key={index}>{problem}</li>
+              ))}
+            </ul>
+          </A>
+          <B className="grid">
+            <img src={solutionImg} />
+            <ul>
+              {solution.map((solution, index) => (
+                <li key={index}>{solution}</li>
+              ))}
+            </ul>
+          </B>
+          <C className="grid">
+            <img src={valuePropositionImg} />
+            <ul>
+              {valuePropositions.map((valueProposition, index) => (
+                <li key={index}>{valueProposition}</li>
+              ))}
+            </ul>
+          </C>
+          <D className="grid">
+            <img src={competitiveAdvantageImg} />
+            <ul>
+              {competitiveAdvantage.map((competitiveAdvantage, index) => (
+                <li key={index}>{competitiveAdvantage}</li>
+              ))}
+            </ul>
+          </D>
+          <E className="grid">
+            <img src={customerGroupImg} />
+            <ul>
+              {customerSegments.map((customerSegment, index) => (
+                <li key={index}>{customerSegment}</li>
+              ))}
+            </ul>
+          </E>
+          <F className="grid">
+            <img src={kpiImg} />
+            <ul>
+              {keyMetrics.map((keyMetric, index) => (
+                <li key={index}>{keyMetric}</li>
+              ))}
+            </ul>
+          </F>
+          <G className="grid">
+            <img src={channelImg} />
+            <ul>
+              {channels.map((channel, index) => (
+                <li key={index}>{channel}</li>
+              ))}
+            </ul>
+          </G>
+        </GridContainer>
+        <FlexContainer>
+          <div>
+            <img src={costStructureImg} />
+            <ul>
+              {costStructure.map((costStructure, index) => (
+                <li key={index}>{costStructure}</li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <img src={revenueSource} />
+            <ul>
+              {revenueStreams.map((revenueStream, index) => (
+                <li key={index}>{revenueStream}</li>
+              ))}
+            </ul>
+          </div>
+        </FlexContainer>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            marginTop: 20,
+            width: '100%',
+          }}
+        >
+          <img src={hyperClova} width={200} height={15} />
         </div>
-        <div>
-          <img src={revenueSource} />
-          <ul>
-            {revenueStreams.map((revenueStream, index) => (
-              <li key={index}>{revenueStream}</li>
-            ))}
-          </ul>
-        </div>
-      </FlexContainer>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-          marginTop: 20,
-          width: '100%',
-        }}
-      >
-        <img src={hyperClova} width={200} height={15} />
-      </div>
-    </Frame>
+      </Frame>
+    </DownloadWrapper>
   );
 };
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import Frame from '../components/Frame';
 import {
@@ -17,6 +17,10 @@ import Loading from './components/Loading';
 import { useSystemMap } from '@/hooks/useSystemMap';
 import { SESSION_KEYS } from '@/utility/constants';
 import usePreloadImage from '@/hooks/usePreloadImage';
+
+export const DownloadWrapper = styled.div`
+  display: flex;
+`;
 
 export const Container = styled.div`
   flex-direction: column;
@@ -105,14 +109,13 @@ export const CurveImage = styled.img`
 `;
 
 const SystemMap = () => {
+  const downloadRef = useRef<HTMLDivElement>(null);
   const serviceDescription = JSON.parse(
     sessionStorage.getItem(SESSION_KEYS.serviceDescription) || '',
   );
   const { imagesLoaded } = usePreloadImage([systemMapInfo]);
   const { data, isError, isLoading, refetch, isRefetching } =
     useSystemMap(serviceDescription);
-
-  console.log(data);
 
   if (isLoading || isRefetching) {
     return <Loading refetch={refetch} />;
@@ -131,68 +134,74 @@ const SystemMap = () => {
   } = data || {};
 
   return !imagesLoaded ? null : (
-    <Frame height={1364} src={systemMapInfo}>
-      <ContentHeader refetch={refetch} />
-      <Container>
-        <MapContainer>
-          <MapWrapper1>
-            <CurveImage src={curvedImg1} />
-            <ContentBox1>
-              <img src={systemMapActivity} />
-              <ul>
-                {keyEventsAndActivities.map(
-                  (activity: string, index: number) => (
-                    <li key={index}>{activity}</li>
-                  ),
-                )}
-              </ul>
-            </ContentBox1>
-            <CurveImage src={curvedImg2} />
-          </MapWrapper1>
-          <MapWrapper2>
-            <ContentBox2>
-              <img src={systemMapProduct} />
-              <ul>
-                {coreOrganizationAndProducts.map(
-                  (product: string, index: number) => (
-                    <li key={index}>{product}</li>
-                  ),
-                )}
-              </ul>
-            </ContentBox2>
-            <ContentBox3>
-              <ul>
-                {summary.map((item: string, index: number) => (
-                  <li key={index}>{item}</li>
-                ))}
-              </ul>
-            </ContentBox3>
-            <ContentBox2>
-              <img src={systemMapaStakeholders} />
-              <ul>
-                {stakeholders.map((stakeholder: string, index: number) => (
-                  <li key={index}>{stakeholder}</li>
-                ))}
-              </ul>
-            </ContentBox2>
-          </MapWrapper2>
-          <MapWrapper3>
-            <CurveImage src={curvedImg3} />
-            <ContentBox1>
-              <img src={systemMapInfra} />
-              <ul>
-                {keyResourcesAndInfrastructure.map(
-                  (infra: string, index: number) => (
-                    <li key={index}>{infra}</li>
-                  ),
-                )}
-              </ul>
-            </ContentBox1>
-            <CurveImage src={curvedImg4} />
-          </MapWrapper3>
-        </MapContainer>
-      </Container>
-    </Frame>
+    <DownloadWrapper ref={downloadRef}>
+      <Frame type="stm" height={1364} src={systemMapInfo}>
+        <ContentHeader
+          refetch={refetch}
+          downloadRef={downloadRef}
+          title={'마이핏_시스템맵'}
+        />
+        <Container>
+          <MapContainer>
+            <MapWrapper1>
+              <CurveImage src={curvedImg1} />
+              <ContentBox1>
+                <img src={systemMapActivity} />
+                <ul>
+                  {keyEventsAndActivities.map(
+                    (activity: string, index: number) => (
+                      <li key={index}>{activity}</li>
+                    ),
+                  )}
+                </ul>
+              </ContentBox1>
+              <CurveImage src={curvedImg2} />
+            </MapWrapper1>
+            <MapWrapper2>
+              <ContentBox2>
+                <img src={systemMapProduct} />
+                <ul>
+                  {coreOrganizationAndProducts.map(
+                    (product: string, index: number) => (
+                      <li key={index}>{product}</li>
+                    ),
+                  )}
+                </ul>
+              </ContentBox2>
+              <ContentBox3>
+                <ul>
+                  {summary.map((item: string, index: number) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
+              </ContentBox3>
+              <ContentBox2>
+                <img src={systemMapaStakeholders} />
+                <ul>
+                  {stakeholders.map((stakeholder: string, index: number) => (
+                    <li key={index}>{stakeholder}</li>
+                  ))}
+                </ul>
+              </ContentBox2>
+            </MapWrapper2>
+            <MapWrapper3>
+              <CurveImage src={curvedImg3} />
+              <ContentBox1>
+                <img src={systemMapInfra} />
+                <ul>
+                  {keyResourcesAndInfrastructure.map(
+                    (infra: string, index: number) => (
+                      <li key={index}>{infra}</li>
+                    ),
+                  )}
+                </ul>
+              </ContentBox1>
+              <CurveImage src={curvedImg4} />
+            </MapWrapper3>
+          </MapContainer>
+        </Container>
+      </Frame>
+    </DownloadWrapper>
   );
 };
 

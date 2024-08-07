@@ -127,8 +127,7 @@ export const Input = styled.input<{ $focus: boolean }>`
     line-height: 35.2px;
     letter-spacing: -0.005em;
     text-align: left;
-    color: ${({ theme }) => theme.color.primary[0]};
-    opacity: 0.6;
+    color: ${({ theme }) => theme.color.gray[2]};
   }
 `;
 

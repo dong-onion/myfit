@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Frame from '../components/Frame';
 import ContentHeader from '../components/ContentHeader/indext';
 import {
@@ -18,6 +18,10 @@ import Loading from './components/Loading';
 import { SESSION_KEYS } from '@/utility/constants';
 import { useBenchmark } from '@/hooks/useBenchmark';
 import usePreloadImage from '@/hooks/usePreloadImage';
+
+export const DownloadWrapper = styled.div`
+  display: flex;
+`;
 
 export const Container = styled.div`
   flex-direction: column;
@@ -113,6 +117,7 @@ const Benchmarking = () => {
   const serviceDescription = JSON.parse(
     sessionStorage.getItem(SESSION_KEYS.serviceDescription) || '',
   );
+  const downloadRef = useRef<HTMLDivElement>(null);
   const { imagesLoaded } = usePreloadImage([benchmarkingInfo]);
   const { data, isError, isLoading, refetch } =
     useBenchmark(serviceDescription);
@@ -128,41 +133,47 @@ const Benchmarking = () => {
   const { domestic = [], international = [] } = data || {};
 
   return !imagesLoaded ? null : (
-    <Frame src={benchmarkingInfo} height={1916}>
-      <ContentHeader refetch={refetch} />
-      <Container>
-        <TitleContainer>
-          <DomesticTitleWrapper>국내 경쟁사 분석</DomesticTitleWrapper>
-          <OverseasTitleWrapper>해외 경쟁사 분석</OverseasTitleWrapper>
-        </TitleContainer>
-        <ContentContainer>
-          <ContentFlexBox>
-            {domestic.map((item, index) => (
-              <ContentWrapper key={index}>
-                <img src={benchmarkingImgs[index]} alt="benchmarking" />
-                <ul>
-                  {item.map((content, index) => (
-                    <li key={index}>{content}</li>
-                  ))}
-                </ul>
-              </ContentWrapper>
-            ))}
-          </ContentFlexBox>
-          <ContentFlexBox>
-            {international.map((item, index) => (
-              <ContentWrapper key={index}>
-                <img src={benchmarkingImgs[index]} alt="benchmarking" />
-                <ul>
-                  {item.map((content, index) => (
-                    <li key={index}>{content}</li>
-                  ))}
-                </ul>
-              </ContentWrapper>
-            ))}
-          </ContentFlexBox>
-        </ContentContainer>
-      </Container>
-    </Frame>
+    <DownloadWrapper ref={downloadRef}>
+      <Frame type={'bcm'} src={benchmarkingInfo} height={1916}>
+        <ContentHeader
+          downloadRef={downloadRef}
+          title="마이핏_벤치마킹"
+          refetch={refetch}
+        />
+        <Container>
+          <TitleContainer>
+            <DomesticTitleWrapper>국내 경쟁사 분석</DomesticTitleWrapper>
+            <OverseasTitleWrapper>해외 경쟁사 분석</OverseasTitleWrapper>
+          </TitleContainer>
+          <ContentContainer>
+            <ContentFlexBox>
+              {domestic.map((item, index) => (
+                <ContentWrapper key={index}>
+                  <img src={benchmarkingImgs[index]} alt="benchmarking" />
+                  <ul>
+                    {item.map((content, index) => (
+                      <li key={index}>{content}</li>
+                    ))}
+                  </ul>
+                </ContentWrapper>
+              ))}
+            </ContentFlexBox>
+            <ContentFlexBox>
+              {international.map((item, index) => (
+                <ContentWrapper key={index}>
+                  <img src={benchmarkingImgs[index]} alt="benchmarking" />
+                  <ul>
+                    {item.map((content, index) => (
+                      <li key={index}>{content}</li>
+                    ))}
+                  </ul>
+                </ContentWrapper>
+              ))}
+            </ContentFlexBox>
+          </ContentContainer>
+        </Container>
+      </Frame>
+    </DownloadWrapper>
   );
 };
 

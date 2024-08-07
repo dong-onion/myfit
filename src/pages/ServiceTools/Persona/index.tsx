@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
   bullseye,
   hyperClova,
@@ -19,6 +19,11 @@ import { usePersona } from '@/hooks/usePersona';
 import Loading from './components/Loading';
 import { SESSION_KEYS } from '@/utility/constants';
 import usePreloadImage from '@/hooks/usePreloadImage';
+
+export const DownloadWrapper = styled.div`
+  display: flex;
+  width: 100%;
+`;
 
 export const Content1 = styled(ContentBox)`
   margin-top: 60px;
@@ -46,11 +51,12 @@ export const Content1 = styled(ContentBox)`
 `;
 
 export const Content2 = styled(ContentBox)`
+  width: 100%;
   margin-top: 14px;
   height: 173px;
   display: flex;
   flex-direction: column;
-  padding: 35px 40px;
+  padding: 25px 30px;
 
   & div {
     display: flex;
@@ -115,6 +121,7 @@ const Persona = () => {
   const serviceDescription = JSON.parse(
     sessionStorage.getItem(SESSION_KEYS.serviceDescription) || '',
   );
+  const downloadRef = useRef<HTMLDivElement>(null);
 
   const { data, isError, isLoading, refetch, isRefetching } =
     usePersona(serviceDescription);
@@ -138,77 +145,83 @@ const Persona = () => {
   }
 
   return !imagesLoaded ? null : (
-    <Frame src={personaInfo}>
-      <ContentHeader refetch={refetch} />
-      <Content1>
-        <img src={personaContent1} alt="personaContent1"></img>
-        <span>{introduction}</span>
-      </Content1>
-      <Content2>
-        <div>
-          <img src={redQuestionMark} alt="redQuestionMark"></img>
-          <p className="title">퍼소나 선정이유</p>
+    <DownloadWrapper ref={downloadRef}>
+      <Frame type="psn" src={personaInfo}>
+        <ContentHeader
+          refetch={refetch}
+          downloadRef={downloadRef}
+          title="마이핏_퍼소나"
+        />
+        <Content1>
+          <img src={personaContent1} alt="personaContent1"></img>
+          <span>{introduction}</span>
+        </Content1>
+        <Content2>
+          <div>
+            <img src={redQuestionMark} alt="redQuestionMark"></img>
+            <p className="title">퍼소나 선정이유</p>
+          </div>
+          <ContentInfo>
+            <span>{reason}</span>
+          </ContentInfo>
+        </Content2>
+        <ContentWrapper>
+          <Content3>
+            <div>
+              <img src={readingGlassesLeft} />
+              <p className="title">배경</p>
+            </div>
+            <span>{background}</span>
+          </Content3>
+          <Content3>
+            <div>
+              <img src={bullseye} />
+              <p className="title">목표</p>
+            </div>
+            <span>{goal}</span>
+          </Content3>
+          <Content3>
+            <div>
+              <img src={thumbsUp} />
+              <p className="title">동기</p>
+            </div>
+            <span>{motivation}</span>
+          </Content3>
+          <Content3>
+            <div>
+              <img src={wallet} />
+              <p className="title">소비 습관</p>
+            </div>
+            <span>{consumptionHabit}</span>
+          </Content3>
+          <Content3>
+            <div>
+              <img src={smileFace} />
+              <p className="title">성격</p>
+            </div>
+            <span>{personality}</span>
+          </Content3>
+          <Content3>
+            <div>
+              <img src={pesiveFace} />
+              <p className="title">페인포인트</p>
+            </div>
+            <span>{painPoint}</span>
+          </Content3>
+        </ContentWrapper>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            marginTop: 20,
+            width: '100%',
+          }}
+        >
+          <img src={hyperClova} width={200} height={15} />
         </div>
-        <ContentInfo>
-          <span>{reason}</span>
-        </ContentInfo>
-      </Content2>
-      <ContentWrapper>
-        <Content3>
-          <div>
-            <img src={readingGlassesLeft} />
-            <p className="title">배경</p>
-          </div>
-          <span>{background}</span>
-        </Content3>
-        <Content3>
-          <div>
-            <img src={bullseye} />
-            <p className="title">목표</p>
-          </div>
-          <span>{goal}</span>
-        </Content3>
-        <Content3>
-          <div>
-            <img src={thumbsUp} />
-            <p className="title">동기</p>
-          </div>
-          <span>{motivation}</span>
-        </Content3>
-        <Content3>
-          <div>
-            <img src={wallet} />
-            <p className="title">소비 습관</p>
-          </div>
-          <span>{consumptionHabit}</span>
-        </Content3>
-        <Content3>
-          <div>
-            <img src={smileFace} />
-            <p className="title">성격</p>
-          </div>
-          <span>{personality}</span>
-        </Content3>
-        <Content3>
-          <div>
-            <img src={pesiveFace} />
-            <p className="title">페인포인트</p>
-          </div>
-          <span>{painPoint}</span>
-        </Content3>
-      </ContentWrapper>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-          marginTop: 20,
-          width: '100%',
-        }}
-      >
-        <img src={hyperClova} width={200} height={15} />
-      </div>
-      <Footer />
-    </Frame>
+        <Footer />
+      </Frame>
+    </DownloadWrapper>
   );
 };
 

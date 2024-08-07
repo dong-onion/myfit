@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useAccessControl } from '@/hooks/useAccessControl';
 import { useNavigate } from 'react-router-dom';
 import { useSWOTAnalysis } from '@/hooks/useSwotAnalysis';
@@ -15,6 +15,11 @@ import ContentHeader from '../components/ContentHeader/indext';
 import styled from 'styled-components';
 import Loading from './components/Loading';
 import usePreloadImage from '@/hooks/usePreloadImage';
+
+export const DownloadWrapper = styled.div`
+  display: flex;
+  width: 100%;
+`;
 
 export const Container = styled.div`
   flex-direction: column;
@@ -99,7 +104,7 @@ export const DirectionSuggestionsWrapper = styled.div`
 const Swot = () => {
   const { level, serviceDescription } = useAccessControl();
   const { imagesLoaded } = usePreloadImage([swotInfo]);
-
+  const downloadRef = useRef<HTMLDivElement>(null);
   if (level === null || serviceDescription === null) {
     return <Loading />;
   }
@@ -133,34 +138,40 @@ const Swot = () => {
   ];
 
   return !imagesLoaded ? null : (
-    <Frame src={swotInfo}>
-      <ContentHeader refetch={refetch} />
-      <Container>
-        <AnalysisInfoContainer>
-          {swotData.map((item, index) => (
-            <AnalysisInfoBoxWrapper key={index}>
-              <img src={item.imgSrc} alt={item.alt} />
-              <AnalysisInfoBox>
-                <ul>
-                  {item.data &&
-                    item.data.map((item: string, index: number) => (
-                      <li key={index}>{item}</li>
-                    ))}
-                </ul>
-              </AnalysisInfoBox>
-            </AnalysisInfoBoxWrapper>
-          ))}
-        </AnalysisInfoContainer>
-        <DirectionSuggestionsWrapper>
-          <img src={swotSuggestion} />
-          <ul>
-            {strategy.map((item: string, index: number) => (
-              <li key={index}>{item}</li>
+    <DownloadWrapper ref={downloadRef}>
+      <Frame type="swot" src={swotInfo}>
+        <ContentHeader
+          downloadRef={downloadRef}
+          title="마이핏_SWOT"
+          refetch={refetch}
+        />
+        <Container>
+          <AnalysisInfoContainer>
+            {swotData.map((item, index) => (
+              <AnalysisInfoBoxWrapper key={index}>
+                <img src={item.imgSrc} alt={item.alt} />
+                <AnalysisInfoBox>
+                  <ul>
+                    {item.data &&
+                      item.data.map((item: string, index: number) => (
+                        <li key={index}>{item}</li>
+                      ))}
+                  </ul>
+                </AnalysisInfoBox>
+              </AnalysisInfoBoxWrapper>
             ))}
-          </ul>
-        </DirectionSuggestionsWrapper>
-      </Container>
-    </Frame>
+          </AnalysisInfoContainer>
+          <DirectionSuggestionsWrapper>
+            <img src={swotSuggestion} />
+            <ul>
+              {strategy.map((item: string, index: number) => (
+                <li key={index}>{item}</li>
+              ))}
+            </ul>
+          </DirectionSuggestionsWrapper>
+        </Container>
+      </Frame>
+    </DownloadWrapper>
   );
 };
 

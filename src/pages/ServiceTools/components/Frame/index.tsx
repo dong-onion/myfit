@@ -1,10 +1,12 @@
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 import TypeInfoSection from '../TypeInfoSection';
+import { ServiceTool } from '@/utility/constants';
 
 export const Container = styled.div`
   display: flex;
   background-color: ${({ theme }) => theme.color.bg[1]};
+  width: 100%;
 `;
 
 export const ContentsSection = styled.div`
@@ -21,12 +23,13 @@ interface Prop {
   src: string;
   children: ReactNode;
   height?: number;
+  type: ServiceTool;
 }
 
-const Frame = ({ src, children, height = 1301 }: Prop) => {
+const Frame = ({ src, children, height = 1301, type }: Prop) => {
   return (
     <Container>
-      <TypeInfoSection height={height} src={src}></TypeInfoSection>
+      <TypeInfoSection type={type} height={height} src={src}></TypeInfoSection>
       <ContentsSection>{children}</ContentsSection>
     </Container>
   );

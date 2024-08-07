@@ -12,7 +12,13 @@ import './assets/fonts/Font.css';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 root.render(
   <QueryClientProvider client={queryClient}>
     <ThemeProvider theme={theme}>

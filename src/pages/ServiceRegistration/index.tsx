@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {
   levelSeed,
@@ -258,12 +258,29 @@ export const CompleteButtonText = styled.span`
 `;
 
 const ServiceRegistration = () => {
+  const placeholders = [
+    '20대 여성을 위한 와인 구독 서비스',
+    '사회초년생을 위한 소액 투자 관리 앱',
+    '4050대를 위한 영양제 추천 서비스',
+    '대학교 앞 핫도그 가게',
+    '30대 직장인을 위한 디지털 운동 기기',
+  ];
   const [level, setLevel] = useState<number | null>(null);
+  const [placeholder, setPlaceholder] = useState<string>('');
   const [serviceDescription, setServiceDescription] = useState<string>('');
   const [inputFocus, setInputFocus] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const { imagesLoaded } = usePreloadImage([serviceRegistrationBackground]);
+
+  useEffect(() => {
+    const randomPlaceholder = () => {
+      const randomIndex = Math.floor(Math.random() * placeholders.length);
+      return placeholders[randomIndex];
+    };
+
+    setPlaceholder(randomPlaceholder());
+  }, []);
 
   const handleCompleteButtonClick = () => {
     sessionStorage.setItem(SESSION_KEYS.level, JSON.stringify(level) || '');
@@ -320,7 +337,7 @@ const ServiceRegistration = () => {
             <InputWrapper>
               <InputTitle>창업 아이템</InputTitle>
               <Input
-                placeholder="20대 여성을 위한 와인 구독 서비스"
+                placeholder={placeholder}
                 maxLength={30}
                 onChange={handleInputChange}
                 value={serviceDescription}

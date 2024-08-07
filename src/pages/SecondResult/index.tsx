@@ -282,7 +282,7 @@ export const DownloadButtonText = styled(RetryButtonText)`
 
 const SecondResult = () => {
   const navigate = useNavigate();
-  const donwloadRef = useRef<HTMLDivElement>(null);
+  const downloadRef = useRef<HTMLDivElement>(null);
   const serviceDescription = JSON.parse(
     sessionStorage.getItem(SESSION_KEYS.serviceDescription) || '',
   );
@@ -361,16 +361,16 @@ const SecondResult = () => {
   };
 
   const handleClickDownloadButton = () => {
-    if (!donwloadRef.current) {
+    if (!downloadRef.current) {
       alert('다운로드할 수 없습니다.');
       return;
     }
-    loadPageToPdf(donwloadRef.current, '테스트 결과');
+    loadPageToPdf(downloadRef.current, '마이핏_창업_유형_테스트_결과');
   };
 
   return (
     <Container>
-      <DownloadWrapper ref={donwloadRef}>
+      <DownloadWrapper ref={downloadRef}>
         <Header src={headerBackground}>
           <ChartContainer>
             {labelArray.map((label, index) => (

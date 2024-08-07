@@ -1,13 +1,8 @@
 import { downloadIcon, editImgBlue, refreshIcon } from '@/assets';
 import { Modal } from '@/components';
 import { SESSION_KEYS } from '@/utility/constants';
-import { BMCanvas, Persona } from '@/utility/utils';
+import { loadPageToPdf } from '@/utility/utils';
 import React, { useState } from 'react';
-import {
-  QueryObserverResult,
-  RefetchOptions,
-  RefetchQueryFilters,
-} from 'react-query';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -60,7 +55,6 @@ export const RefreshButton = styled.div`
   gap: 10px;
   width: 141px;
   height: 56px;
-  display: flex;
   justify-content: center;
   align-items: center;
   background-color: ${({ theme }) => theme.color.bg[1]};
@@ -95,7 +89,6 @@ export const DownloadButton = styled.div`
   gap: 10px;
   width: 157px;
   height: 56px;
-  display: flex;
   justify-content: center;
   align-items: center;
   background-color: ${({ theme }) => theme.color.primary[0]};
@@ -125,18 +118,30 @@ export const DownloadButton = styled.div`
 
 interface Props {
   refetch: any;
+  title: string;
+  downloadRef: React.RefObject<HTMLDivElement>;
 }
 
-const ContentHeader = ({ refetch }: Props) => {
+const ContentHeader = ({ refetch, title, downloadRef }: Props) => {
   const serviceDescription = JSON.parse(
     sessionStorage.getItem(SESSION_KEYS.serviceDescription) || '',
   );
+  const [showButton, setShowButton] = useState<boolean>(true);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const handleModalOpen = () => {
     setModalVisible(true);
   };
   const handleModalClose = () => {
     setModalVisible(false);
+  };
+  const handleClickDownload = async () => {
+    if (!downloadRef.current) {
+      return;
+    }
+
+    setShowButton(false);
+    await loadPageToPdf(downloadRef.current, title);
+    setShowButton(true);
   };
   return (
     <Container>
@@ -145,16 +150,18 @@ const ContentHeader = ({ refetch }: Props) => {
         <ContentTitle>{serviceDescription}</ContentTitle>
         <EditImg src={editImgBlue} onClick={handleModalOpen} />
       </TitleWrapper>
-      <ContentButtonContainer>
-        <RefreshButton onClick={refetch}>
-          <img src={refreshIcon} />
-          <span>재생성</span>
-        </RefreshButton>
-        <DownloadButton>
-          <img src={downloadIcon} />
-          <span>다운로드</span>
-        </DownloadButton>
-      </ContentButtonContainer>
+      {showButton && (
+        <ContentButtonContainer>
+          <RefreshButton onClick={refetch}>
+            <img src={refreshIcon} />
+            <span>재생성</span>
+          </RefreshButton>
+          <DownloadButton onClick={handleClickDownload}>
+            <img src={downloadIcon} />
+            <span>다운로드</span>
+          </DownloadButton>
+        </ContentButtonContainer>
+      )}
     </Container>
   );
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import Frame from '../components/Frame';
 import {
@@ -16,6 +16,10 @@ import { useCustomerJourneyMap } from '@/hooks/useCustomerJourneyMap';
 import Loading from './components/Loading';
 import { SESSION_KEYS } from '@/utility/constants';
 import usePreloadImage from '@/hooks/usePreloadImage';
+
+export const DownloadWrapper = styled.div`
+  display: flex;
+`;
 
 export const Container = styled.div`
   flex-direction: column;
@@ -148,6 +152,7 @@ const CustomerJouneyMap = () => {
   const serviceDescription = JSON.parse(
     sessionStorage.getItem(SESSION_KEYS.serviceDescription) || '',
   );
+  const downloadRef = useRef<HTMLDivElement>(null);
   const { imagesLoaded } = usePreloadImage([customerJourneyMapInfo]);
   const { data, isError, isLoading, refetch, isRefetching } =
     useCustomerJourneyMap(serviceDescription);
@@ -161,68 +166,74 @@ const CustomerJouneyMap = () => {
   }
 
   return !imagesLoaded ? null : (
-    <Frame src={customerJourneyMapInfo}>
-      <ContentHeader refetch={refetch} />
-      <Container>
-        <LevelContainer>
-          <ImgContainer style={{ height: '105px' }}>
-            <img src={levelImg} />
-          </ImgContainer>
-          {data?.map((item, index) => (
-            <div key={index}>{item.stepName}</div>
-          ))}
-        </LevelContainer>
-        <PurposeContainer>
-          <ImgContainer>
-            <img src={purposeImg} />
-          </ImgContainer>
-          {data &&
-            data.map((item, index) => <div key={index}>{item.purpose}</div>)}
-        </PurposeContainer>
-        <ActionContainer>
-          <ImgContainer>
-            <img src={actionImg} />
-          </ImgContainer>
-          {data?.map((item, index) => (
-            <div key={index}>{item.action}</div>
-          ))}
-        </ActionContainer>
-        <EmotionContainer>
-          <ImgContainer>
-            <img src={emotionImg} />
-          </ImgContainer>
-          {data?.map((item, index) => (
-            <div key={index}>{item.emotion}</div>
-          ))}
-        </EmotionContainer>
-        <NeedsContainer>
-          <ImgContainer>
-            <img src={needsImg} />
-          </ImgContainer>
-          {data?.map((item, index) => (
-            <div key={index}>{item.need}</div>
-          ))}
-        </NeedsContainer>
-        <SolutionContainer>
-          <ImgContainer>
-            <img className="solution" src={solutionVertical} />
-          </ImgContainer>
-          {data?.map((item, index) => (
-            <div key={index}>{item.solution}</div>
-          ))}
-        </SolutionContainer>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            marginTop: 20,
-            width: '100%',
-          }}
-        >
-          <img src={hyperClova} width={200} height={15} />
-        </div>
-      </Container>
-    </Frame>
+    <DownloadWrapper ref={downloadRef}>
+      <Frame type="cjm" src={customerJourneyMapInfo}>
+        <ContentHeader
+          downloadRef={downloadRef}
+          title="마이핏_고객_여정_지도"
+          refetch={refetch}
+        />
+        <Container>
+          <LevelContainer>
+            <ImgContainer style={{ height: '105px' }}>
+              <img src={levelImg} />
+            </ImgContainer>
+            {data?.map((item, index) => (
+              <div key={index}>{item.stepName}</div>
+            ))}
+          </LevelContainer>
+          <PurposeContainer>
+            <ImgContainer>
+              <img src={purposeImg} />
+            </ImgContainer>
+            {data &&
+              data.map((item, index) => <div key={index}>{item.purpose}</div>)}
+          </PurposeContainer>
+          <ActionContainer>
+            <ImgContainer>
+              <img src={actionImg} />
+            </ImgContainer>
+            {data?.map((item, index) => (
+              <div key={index}>{item.action}</div>
+            ))}
+          </ActionContainer>
+          <EmotionContainer>
+            <ImgContainer>
+              <img src={emotionImg} />
+            </ImgContainer>
+            {data?.map((item, index) => (
+              <div key={index}>{item.emotion}</div>
+            ))}
+          </EmotionContainer>
+          <NeedsContainer>
+            <ImgContainer>
+              <img src={needsImg} />
+            </ImgContainer>
+            {data?.map((item, index) => (
+              <div key={index}>{item.need}</div>
+            ))}
+          </NeedsContainer>
+          <SolutionContainer>
+            <ImgContainer>
+              <img className="solution" src={solutionVertical} />
+            </ImgContainer>
+            {data?.map((item, index) => (
+              <div key={index}>{item.solution}</div>
+            ))}
+          </SolutionContainer>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'flex-end',
+              marginTop: 20,
+              width: '100%',
+            }}
+          >
+            <img src={hyperClova} width={200} height={15} />
+          </div>
+        </Container>
+      </Frame>
+    </DownloadWrapper>
   );
 };
 
