@@ -20,6 +20,7 @@ export const useSystemMap = (serviceDescription: string) => {
     () =>
       fetchSystemMap(serviceDescription).then((data: SWOTAnalysisResponse) => {
         const parsedData = parseSystemMap(data.result.message.content);
+        console.log('parseData', parsedData);
         if (!parsedData) {
           throw new Error('Failed to parse SWOT Analysis');
         }

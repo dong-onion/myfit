@@ -330,6 +330,7 @@ const SecondResult = () => {
     isLoading,
     isError,
     refetch,
+    isRefetching,
   } = useOverallAnalysis(serviceDescription, categories, title);
 
   const handleServicToolImgClick = (tool: string) => {
@@ -347,7 +348,7 @@ const SecondResult = () => {
       return navigate(ROUTES_PATH.systemMap);
   };
 
-  if (isLoading) {
+  if (isLoading || isRefetching) {
     return <Loading refetch={refetch} />;
   }
 

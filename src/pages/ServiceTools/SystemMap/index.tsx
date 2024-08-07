@@ -112,6 +112,8 @@ const SystemMap = () => {
   const { data, isError, isLoading, refetch, isRefetching } =
     useSystemMap(serviceDescription);
 
+  console.log(data);
+
   if (isLoading || isRefetching) {
     return <Loading refetch={refetch} />;
   }

@@ -15,7 +15,10 @@ export const useOverallAnalysis = (
   categories: string[],
   weakness: string,
 ) => {
-  const { data, isLoading, isError, refetch } = useQuery<string, Error>(
+  const { data, isLoading, isError, refetch, isRefetching } = useQuery<
+    string,
+    Error
+  >(
     [queryKeys.OVERALL_ANALYSIS, serviceDescription],
     () =>
       fetchOverallAnalysis(serviceDescription, categories, weakness).then(
@@ -33,5 +36,6 @@ export const useOverallAnalysis = (
     isLoading,
     isError,
     refetch,
+    isRefetching,
   };
 };
