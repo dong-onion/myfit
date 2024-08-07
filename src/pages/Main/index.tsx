@@ -145,9 +145,9 @@ export const SummaryContent = styled.div`
 
   & span {
     font-family: Pretendard-Meidum;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
-    line-height: 30px;
+    line-height: 25px;
     letter-spacing: -0.002em;
     text-align: left;
     word-break: keep-all;
@@ -351,7 +351,13 @@ const Main = () => {
             </EditWrapper>
           </SummaryTitleWrapper>
 
-          {isLoading ? <Spinner /> : <SummaryContent>{result}</SummaryContent>}
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <SummaryContent>
+              <span>{result}</span>
+            </SummaryContent>
+          )}
         </SummaryContainer>
         <ContentSectionContainer>
           <h2>마이핏이 추천해요</h2>
