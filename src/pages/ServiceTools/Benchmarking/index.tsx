@@ -59,22 +59,27 @@ export const OverseasTitleWrapper = styled(DomesticTitleWrapper)`
 `;
 
 export const ContentContainer = styled.div`
-  display: grid;
+  display: flex;
   gap: 14px;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
   width: 100%;
-  /* height: 1462px; */
+`;
+
+export const ContentFlexBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 49.5%;
 `;
 
 export const ContentWrapper = styled.div`
+  overflow: scroll;
   height: 150px;
-  padding: 25px 30px;
+  padding: 15px 20px;
   background-color: ${({ theme }) => theme.color.white[0]};
   border-radius: 12px;
   border: 1px solid #b8c3ff;
   & ul {
-    margin: 15px;
+    margin: 5px;
     padding-left: 30px;
   }
 
@@ -120,7 +125,7 @@ const Benchmarking = () => {
     return <div>Error...</div>;
   }
 
-  console.log(data);
+  const { domestic = [], international = [] } = data || {};
 
   return !imagesLoaded ? null : (
     <Frame src={benchmarkingInfo} height={1916}>
@@ -131,15 +136,30 @@ const Benchmarking = () => {
           <OverseasTitleWrapper>해외 경쟁사 분석</OverseasTitleWrapper>
         </TitleContainer>
         <ContentContainer>
-          {Array.from({ length: 18 }).map((_, index) => (
-            <ContentWrapper key={index}>
-              <img src={benchmarkingImgs[Math.floor(index / 2)]} />
-              <ul>
-                <li>국내 1위 핫도그 프랜차이즈 브랜드</li>
-                <li>2023년 기준 매장 수 1,500개</li>
-              </ul>
-            </ContentWrapper>
-          ))}
+          <ContentFlexBox>
+            {domestic.map((item, index) => (
+              <ContentWrapper key={index}>
+                <img src={benchmarkingImgs[index]} alt="benchmarking" />
+                <ul>
+                  {item.map((content, index) => (
+                    <li key={index}>{content}</li>
+                  ))}
+                </ul>
+              </ContentWrapper>
+            ))}
+          </ContentFlexBox>
+          <ContentFlexBox>
+            {international.map((item, index) => (
+              <ContentWrapper key={index}>
+                <img src={benchmarkingImgs[index]} alt="benchmarking" />
+                <ul>
+                  {item.map((content, index) => (
+                    <li key={index}>{content}</li>
+                  ))}
+                </ul>
+              </ContentWrapper>
+            ))}
+          </ContentFlexBox>
         </ContentContainer>
       </Container>
     </Frame>

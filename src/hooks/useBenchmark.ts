@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 import { queryKeys } from '@/utility/constants';
 import { fetchBenchmark } from '@/clovaAI/api';
-import { parseBenchmark } from '@/utility/utils';
+import { benchmarkItem, parseBenchmark } from '@/utility/utils';
 
 interface SWOTAnalysisResponse {
   result: {
@@ -12,7 +12,7 @@ interface SWOTAnalysisResponse {
 }
 
 export const useBenchmark = (serviceDescription: string) => {
-  const { data, isLoading, isError, refetch } = useQuery<any, Error>(
+  const { data, isLoading, isError, refetch } = useQuery<benchmarkItem, Error>(
     [queryKeys.BENCHMARK, serviceDescription],
     () =>
       fetchBenchmark(serviceDescription).then((data: SWOTAnalysisResponse) => {

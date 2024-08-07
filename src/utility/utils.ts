@@ -303,8 +303,46 @@ export const parseSystemMap = (content: string) => {
   return result;
 };
 
+export interface benchmarkItem {
+  domestic: string[][];
+  international: string[][];
+}
+
 export const parseBenchmark = (content: string) => {
-  return content;
+  const parsedData = JSON.parse(content);
+
+  function sliceStringToArray(arr: string[]): string[] {
+    const result: string[] = [];
+    for (let item of arr) {
+      const startIndex = 0;
+      while (item.indexOf('\\n-') !== -1) {
+        const endIndex = item.indexOf('\\n-');
+        result.push(item.slice(startIndex, endIndex).trim());
+        item = item.slice(endIndex + 3); // '\\n-'.length = 3
+      }
+      result.push(item.trim()); // 마지막 남은 부분 추가
+    }
+    return result.map((i) => (i.startsWith('- ') ? i.slice(2) : i)); // '- ' 제거
+  }
+
+  // 모든 항목을 배열로 변환하여 2중 배열 생성
+  function transformSections(sections: {
+    [key: string]: string[];
+  }): string[][] {
+    const transformed: string[][] = [];
+    for (const key in sections) {
+      transformed.push(sliceStringToArray(sections[key]));
+    }
+    return transformed;
+  }
+
+  // 결과 객체 생성
+  const result: benchmarkItem = {
+    domestic: transformSections(parsedData.국내),
+    international: transformSections(parsedData.해외),
+  };
+
+  return result;
 };
 
 // totalscore 배열을 받아서 타입 별로 평균 계산하는 함수

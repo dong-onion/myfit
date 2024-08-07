@@ -5,3 +5,5 @@ export { default as SkeletonWrapper } from './SkeletonWrapper';
 export { default as HoldOn } from './HoldOn';
 export { default as Modal } from './Modal';
 export { default as Spinner } from './Spinner';
+export { default as ScrollToTop } from './ScrollToTop';
+export { default as Retry } from './Retry';

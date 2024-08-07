@@ -22,7 +22,6 @@ import {
   mainContentBmcHover,
   mainContentTestHover,
   editImg,
-  testStartBackground,
 } from '@/assets';
 import styled from 'styled-components';
 import { Modal, Spinner } from '@/components';
@@ -237,40 +236,40 @@ const Main = () => {
     mainContentTestHover,
   ]);
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        await Promise.all([
-          queryClient.prefetchQuery(
-            [queryKeys.PERSONA, serviceDescription],
-            () =>
-              fetchPersona(serviceDescription).then((res) =>
-                parsePersona(res.result.message.content),
-              ),
-            { staleTime: 1000 * 60 * 3 },
-          ),
-          queryClient.prefetchQuery(
-            [queryKeys.CUSTOMER_JOURNEY_MAP, serviceDescription],
-            () =>
-              fetchCustomerJourneyMap(serviceDescription).then((res) =>
-                parseCustomerJourneyMap(res.result.message.content),
-              ),
-            { staleTime: 1000 * 60 * 3 },
-          ),
-          queryClient.prefetchQuery(
-            [queryKeys.BUSINESS_MODEL_CANVAS, serviceDescription],
-            () =>
-              fetchBusinessModelCanvas(serviceDescription).then((res) =>
-                parseBMCanvas(res.result.message.content),
-              ),
-            { staleTime: 1000 * 60 * 3 },
-          ),
-        ]);
-        console.log('All data prefetched');
-      } catch (error) {
-        console.error('Error prefetching data:', error);
-      }
-    };
-    fetchData();
+    // const fetchData = async () => {
+    //   try {
+    //     await Promise.all([
+    //       queryClient.prefetchQuery(
+    //         [queryKeys.PERSONA, serviceDescription],
+    //         () =>
+    //           fetchPersona(serviceDescription).then((res) =>
+    //             parsePersona(res.result.message.content),
+    //           ),
+    //         { staleTime: 1000 * 60 * 3 },
+    //       ),
+    //       queryClient.prefetchQuery(
+    //         [queryKeys.CUSTOMER_JOURNEY_MAP, serviceDescription],
+    //         () =>
+    //           fetchCustomerJourneyMap(serviceDescription).then((res) =>
+    //             parseCustomerJourneyMap(res.result.message.content),
+    //           ),
+    //         { staleTime: 1000 * 60 * 3 },
+    //       ),
+    //       queryClient.prefetchQuery(
+    //         [queryKeys.BUSINESS_MODEL_CANVAS, serviceDescription],
+    //         () =>
+    //           fetchBusinessModelCanvas(serviceDescription).then((res) =>
+    //             parseBMCanvas(res.result.message.content),
+    //           ),
+    //         { staleTime: 1000 * 60 * 3 },
+    //       ),
+    //     ]);
+    //     console.log('All data prefetched');
+    //   } catch (error) {
+    //     console.error('Error prefetching data:', error);
+    //   }
+    // };
+    // fetchData();
   }, [queryClient]);
   const mainContentImgs = [
     {

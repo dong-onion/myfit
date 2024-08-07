@@ -3,6 +3,7 @@ import { logo } from '@/assets';
 import * as S from './HeaderLayout.style';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { ROUTES_PATH } from '@/utility/constants';
+import ScrollToTop from '../ScrollToTop';
 
 const HeaderLayout = () => {
   const { pathname } = useLocation();
@@ -22,6 +23,7 @@ const HeaderLayout = () => {
       </S.Container>
       <S.OutletWrapper>
         <Outlet />
+        <ScrollToTop />
       </S.OutletWrapper>
     </>
   );
