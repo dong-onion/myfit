@@ -175,7 +175,7 @@ const Blueprint = () => {
 
   return !imagesLoaded ? null : (
     <Frame src={blueprintInfo}>
-      <ContentHeader />
+      <ContentHeader refetch={refetch} />
       <Container>
         <LevelContainer>
           <div>

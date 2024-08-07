@@ -1,7 +1,8 @@
 import { downloadIcon, editImgBlue, refreshIcon } from '@/assets';
+import { Modal } from '@/components';
 import { SESSION_KEYS } from '@/utility/constants';
 import { BMCanvas, Persona } from '@/utility/utils';
-import React from 'react';
+import React, { useState } from 'react';
 import {
   QueryObserverResult,
   RefetchOptions,
@@ -123,18 +124,26 @@ export const DownloadButton = styled.div`
 `;
 
 interface Props {
-  refetch?: any;
+  refetch: any;
 }
 
 const ContentHeader = ({ refetch }: Props) => {
   const serviceDescription = JSON.parse(
     sessionStorage.getItem(SESSION_KEYS.serviceDescription) || '',
   );
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const handleModalOpen = () => {
+    setModalVisible(true);
+  };
+  const handleModalClose = () => {
+    setModalVisible(false);
+  };
   return (
     <Container>
+      {modalVisible && <Modal refetch={refetch} onClose={handleModalClose} />}
       <TitleWrapper>
         <ContentTitle>{serviceDescription}</ContentTitle>
-        <EditImg src={editImgBlue} />
+        <EditImg src={editImgBlue} onClick={handleModalOpen} />
       </TitleWrapper>
       <ContentButtonContainer>
         <RefreshButton onClick={refetch}>

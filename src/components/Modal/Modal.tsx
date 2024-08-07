@@ -128,6 +128,7 @@ export const Input = styled.input<{ $focus: boolean }>`
     letter-spacing: -0.005em;
     text-align: left;
     color: ${({ theme }) => theme.color.primary[0]};
+    opacity: 0.6;
   }
 `;
 
@@ -286,11 +287,18 @@ export const CompleteButtonText = styled.span`
 
 interface Props {
   onClose: () => void;
+  refetch: any;
 }
 
-const Modal = ({ onClose }: Props) => {
+const Modal = ({ onClose, refetch }: Props) => {
+  const defaultServiceDescription =
+    JSON.parse(sessionStorage.getItem(SESSION_KEYS.serviceDescription) || '') ||
+    '';
   const [level, setLevel] = useState<number | null>(null);
-  const [serviceDescription, setServiceDescription] = useState<string>('');
+  const [serviceDescription, setServiceDescription] = useState<string>(
+    defaultServiceDescription,
+  );
+
   const [inputFocus, setInputFocus] = useState<boolean>(false);
 
   const handleCompleteButtonClick = () => {
@@ -299,6 +307,8 @@ const Modal = ({ onClose }: Props) => {
       SESSION_KEYS.serviceDescription,
       JSON.stringify(serviceDescription),
     );
+
+    refetch();
     onClose();
   };
 
@@ -334,7 +344,7 @@ const Modal = ({ onClose }: Props) => {
             <InputWrapper>
               <InputTitle>창업 아이템</InputTitle>
               <Input
-                placeholder="20대 여성을 위한 와인 구독 서비스"
+                placeholder={defaultServiceDescription}
                 maxLength={30}
                 onChange={handleInputChange}
                 value={serviceDescription}

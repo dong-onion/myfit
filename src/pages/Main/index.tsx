@@ -341,7 +341,7 @@ const Main = () => {
       <InnerContainer>
         <HeaderTitle>창업 아이템이 고민이신가요?</HeaderTitle>
         <HeaderSubTitle>마이핏이 당신의 마켓핏을 점검해드릴게요</HeaderSubTitle>
-        {modalVisible && <Modal onClose={handleModalClose} />}
+        {modalVisible && <Modal onClose={handleModalClose} refetch={refetch} />}
         <SummaryContainer>
           <SummaryTitleWrapper>
             <span>{serviceDescription}</span>

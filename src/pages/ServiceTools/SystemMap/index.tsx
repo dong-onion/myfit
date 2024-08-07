@@ -130,7 +130,7 @@ const SystemMap = () => {
 
   return !imagesLoaded ? null : (
     <Frame height={1364} src={systemMapInfo}>
-      <ContentHeader />
+      <ContentHeader refetch={refetch} />
       <Container>
         <MapContainer>
           <MapWrapper1>

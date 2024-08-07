@@ -160,7 +160,7 @@ const CustomerJouneyMap = () => {
     return <div>Error...</div>;
   }
 
-  return imagesLoaded ? null : (
+  return !imagesLoaded ? null : (
     <Frame src={customerJourneyMapInfo}>
       <ContentHeader refetch={refetch} />
       <Container>

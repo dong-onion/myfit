@@ -129,7 +129,7 @@ const Benchmarking = () => {
 
   return !imagesLoaded ? null : (
     <Frame src={benchmarkingInfo} height={1916}>
-      <ContentHeader />
+      <ContentHeader refetch={refetch} />
       <Container>
         <TitleContainer>
           <DomesticTitleWrapper>국내 경쟁사 분석</DomesticTitleWrapper>
