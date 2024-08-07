@@ -20,7 +20,6 @@ import {
   weakneesTypeFooter1,
   weakneesTypeFooter2,
 } from '@/assets';
-import { title } from 'process';
 
 export const queryKeys = {
   SWOT_ANALYSIS: 'swotAnalysis',

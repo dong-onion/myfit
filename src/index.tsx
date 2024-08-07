@@ -16,9 +16,12 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+      refetchOnMount: false,
     },
   },
 });
+
 root.render(
   <QueryClientProvider client={queryClient}>
     <ThemeProvider theme={theme}>

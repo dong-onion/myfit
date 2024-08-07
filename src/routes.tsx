@@ -21,12 +21,13 @@ import {
 import { ROUTES_PATH } from './utility/constants';
 import Main from './pages/Main';
 import Swot from './pages/ServiceTools/Swot';
+import ErrorPage from './pages/ErrorPage';
 
 export const routes: RouteObject[] = [
   {
     path: ROUTES_PATH.home,
     element: <Home />,
-    errorElement: <div>Not Found</div>,
+    errorElement: <ErrorPage />,
   },
   {
     element: <HeaderLayout />,

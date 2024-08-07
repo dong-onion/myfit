@@ -15,8 +15,9 @@ import {
 import ContentHeader from '../components/ContentHeader/indext';
 import Loading from './components/Loading';
 import { useSystemMap } from '@/hooks/useSystemMap';
-import { SESSION_KEYS } from '@/utility/constants';
 import usePreloadImage from '@/hooks/usePreloadImage';
+import ErrorPage from '@/pages/ErrorPage';
+import { useAccessControl } from '@/hooks/useAccessControl';
 
 export const DownloadWrapper = styled.div`
   display: flex;
@@ -110,9 +111,10 @@ export const CurveImage = styled.img`
 
 const SystemMap = () => {
   const downloadRef = useRef<HTMLDivElement>(null);
-  const serviceDescription = JSON.parse(
-    sessionStorage.getItem(SESSION_KEYS.serviceDescription) || '',
-  );
+  const { level, serviceDescription } = useAccessControl();
+  if (level === null || serviceDescription === null) {
+    return <Loading />;
+  }
   const { imagesLoaded } = usePreloadImage([systemMapInfo]);
   const { data, isError, isLoading, refetch, isRefetching } =
     useSystemMap(serviceDescription);
@@ -122,7 +124,7 @@ const SystemMap = () => {
   }
 
   if (isError) {
-    return <div>Error...</div>;
+    return <ErrorPage />;
   }
 
   const {

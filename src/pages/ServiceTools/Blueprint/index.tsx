@@ -13,9 +13,10 @@ import {
 } from '@/assets';
 import ContentHeader from '../components/ContentHeader/indext';
 import Loading from './components/Loading';
-import { SESSION_KEYS } from '@/utility/constants';
 import { useBlueprint } from '@/hooks/useBlueprint';
 import usePreloadImage from '@/hooks/usePreloadImage';
+import ErrorPage from '@/pages/ErrorPage';
+import { useAccessControl } from '@/hooks/useAccessControl';
 
 export const DownloadWrapper = styled.div`
   display: flex;
@@ -198,9 +199,10 @@ export const SolutionContainer = styled(PurposeContainer)`
 `;
 
 const Blueprint = () => {
-  const serviceDescription = JSON.parse(
-    sessionStorage.getItem(SESSION_KEYS.serviceDescription) || '',
-  );
+  const { level, serviceDescription } = useAccessControl();
+  if (level === null || serviceDescription === null) {
+    return <Loading />;
+  }
   const downloadRef = useRef<HTMLDivElement>(null);
   const { imagesLoaded } = usePreloadImage([blueprintInfo]);
 
@@ -212,7 +214,7 @@ const Blueprint = () => {
   }
 
   if (isError) {
-    return <div>Error...</div>;
+    return <ErrorPage />;
   }
 
   return !imagesLoaded ? null : (

@@ -12,7 +12,7 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const Loading = ({ refetch }: { refetch: any }) => {
+const Loading = ({ refetch }: { refetch?: any }) => {
   const [showRetryButtton, setShowRetryButton] = useState<boolean>(false);
   useEffect(() => {
     const timer: NodeJS.Timeout | undefined = setTimeout(() => {
@@ -107,7 +107,7 @@ const Loading = ({ refetch }: { refetch: any }) => {
         <Skeleton width={458} height={32} style={{ marginTop: 10 }} />
         <Skeleton width={910} height={22} style={{ marginTop: 30 }} />
         <div style={{ marginTop: 20, display: 'flex', gap: 24 }}>
-          {Array.from({ length: 3 }).map((_, index) => (
+          {Array.from({ length: 3 }).map(() => (
             <>
               <SkeletonWrapper
                 $isGray

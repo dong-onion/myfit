@@ -126,6 +126,7 @@ import editImg from './editImg.png';
 import modalCloseBtn from './modalCloseBtn.png';
 import editImgBlue from './editImgBlue.png';
 import folderIconBlue from './folderIconBlue.png';
+import errorImg from './errorImg.png';
 
 export {
   logo,
@@ -256,4 +257,5 @@ export {
   swotSuggestion,
   swotInfo,
   folderIconBlue,
+  errorImg,
 };

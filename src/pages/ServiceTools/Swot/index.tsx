@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import { useAccessControl } from '@/hooks/useAccessControl';
-import { useNavigate } from 'react-router-dom';
 import { useSWOTAnalysis } from '@/hooks/useSwotAnalysis';
 import {
   swotInfo,
@@ -15,6 +14,7 @@ import ContentHeader from '../components/ContentHeader/indext';
 import styled from 'styled-components';
 import Loading from './components/Loading';
 import usePreloadImage from '@/hooks/usePreloadImage';
+import ErrorPage from '@/pages/ErrorPage';
 
 export const DownloadWrapper = styled.div`
   display: flex;
@@ -119,7 +119,7 @@ const Swot = () => {
   }
 
   if (isError) {
-    refetch();
+    return <ErrorPage />;
   }
 
   const {

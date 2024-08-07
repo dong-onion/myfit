@@ -21,6 +21,8 @@ import { Button } from '@/components';
 import { useOverallAnalysis } from '@/hooks/useOverallAnalysis';
 import { useNavigate } from 'react-router-dom';
 import Loading from './components/Loading';
+import ErrorPage from '../ErrorPage';
+import { useAccessControl } from '@/hooks/useAccessControl';
 
 export const Container = styled.div`
   margin-left: auto;
@@ -283,9 +285,10 @@ export const DownloadButtonText = styled(RetryButtonText)`
 const SecondResult = () => {
   const navigate = useNavigate();
   const downloadRef = useRef<HTMLDivElement>(null);
-  const serviceDescription = JSON.parse(
-    sessionStorage.getItem(SESSION_KEYS.serviceDescription) || '',
-  );
+  const { serviceDescription } = useAccessControl();
+  if (serviceDescription === null) {
+    return <Loading />;
+  }
   const totalScores = JSON.parse(
     sessionStorage.getItem(SESSION_KEYS.totalScores) ?? '',
   );
@@ -353,7 +356,7 @@ const SecondResult = () => {
   }
 
   if (isError) {
-    return <div>Error...</div>;
+    return <ErrorPage />;
   }
 
   const handleRetryButtonClick = () => {

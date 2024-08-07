@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from '../Button';
-import { useNavigate } from 'react-router-dom';
 import { SESSION_KEYS } from '@/utility/constants';
 import { levelSeed, levelSprout, levelTree, modalCloseBtn } from '@/assets';
 

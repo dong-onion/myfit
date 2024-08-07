@@ -20,7 +20,7 @@ const ContentWrapper = styled.div`
   width: 100%;
 `;
 
-const Loading = ({ refetch }: { refetch: any }) => {
+const Loading = ({ refetch }: { refetch?: any }) => {
   const [showRetryButtton, setShowRetryButton] = useState<boolean>(false);
   useEffect(() => {
     const timer: NodeJS.Timeout | undefined = setTimeout(() => {

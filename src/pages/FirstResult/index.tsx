@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   hyperClova,
   readingGlasses,
@@ -15,6 +15,7 @@ import { useSWOTAnalysis } from '@/hooks/useSwotAnalysis';
 import { useNavigate } from 'react-router-dom';
 import Loading from './components/Loading';
 import { useAccessControl } from '@/hooks/useAccessControl';
+import ErrorPage from '../ErrorPage';
 
 const FirstResult = () => {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ const FirstResult = () => {
   }
 
   if (isError) {
-    refetch();
+    return <ErrorPage />;
   }
 
   const { strength, weakness, opportunity, threat, result, strategy } =
