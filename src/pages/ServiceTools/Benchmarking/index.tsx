@@ -28,6 +28,7 @@ export const Container = styled.div`
   flex-direction: column;
   display: flex;
   width: 100%;
+  padding-bottom: 40px;
 
   * {
     color: ${({ theme }) => theme.color.gray[0]};
@@ -78,7 +79,7 @@ export const ContentFlexBox = styled.div`
 
 export const ContentWrapper = styled.div`
   overflow: scroll;
-  height: 150px;
+  height: 228px;
   padding: 15px 20px;
   background-color: ${({ theme }) => theme.color.white[0]};
   border-radius: 12px;
@@ -121,10 +122,10 @@ const Benchmarking = () => {
   }
   const downloadRef = useRef<HTMLDivElement>(null);
   const { imagesLoaded } = usePreloadImage([benchmarkingInfo]);
-  const { data, isError, isLoading, refetch } =
+  const { data, isError, isLoading, refetch, isRefetching } =
     useBenchmark(serviceDescription);
 
-  if (isLoading) {
+  if (isLoading || isRefetching) {
     return <Loading refetch={refetch} />;
   }
 

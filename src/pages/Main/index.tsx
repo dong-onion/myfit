@@ -148,18 +148,18 @@ export const EditImg = styled.img`
 
 export const SummaryContent = styled.div`
   margin-top: 20px;
+`;
 
-  & span {
-    font-family: Pretendard-Meidum;
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 25px;
-    letter-spacing: -0.002em;
-    text-align: left;
-    word-break: keep-all;
+export const SummaryResult = styled.p`
+  font-family: 'Pretendard-Meidum';
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 30px;
+  letter-spacing: -0.002em;
+  text-align: left;
+  word-break: keep-all;
 
-    color: ${({ theme }) => theme.color.gray[0]};
-  }
+  color: ${({ theme }) => theme.color.gray[0]};
 `;
 
 export const ContentSectionContainer = styled.div`
@@ -361,7 +361,7 @@ const Main = () => {
             <Spinner />
           ) : (
             <SummaryContent>
-              <span>{result}</span>
+              <SummaryResult>{result}</SummaryResult>
             </SummaryContent>
           )}
         </SummaryContainer>

@@ -27,10 +27,15 @@ export const routes: RouteObject[] = [
   {
     path: ROUTES_PATH.home,
     element: <Home />,
-    errorElement: <ErrorPage />,
+    errorElement: (
+      <HeaderLayout>
+        <ErrorPage />
+      </HeaderLayout>
+    ),
   },
   {
     element: <HeaderLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: ROUTES_PATH.serviceRegistration,

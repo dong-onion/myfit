@@ -31,39 +31,44 @@ export const Container = styled.div`
   }
 `;
 
-export const InteractionLine = styled.div`
+export const InteractionLineContainer = styled.div`
   width: 100%;
   margin-top: 14px;
   display: flex;
   align-items: center;
 
-  & > span {
+  & span {
     font-family: Pretendard-Medium;
     font-size: 18px;
     font-weight: 500;
     line-height: 23.4px;
     letter-spacing: -0.005em;
     text-align: center;
-    margin-left: 18px;
-    margin-right: 32px;
-
     color: ${({ theme }) => theme.color.primary[1]};
   }
 
-  & > div {
-    width: 100%;
+  & .box {
+    width: 9%;
+    margin-right: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  & .line {
+    width: 90%;
     border-top: 2px dotted ${({ theme }) => theme.color.primary[1]};
   }
 `;
 
-export const SightLine = styled(InteractionLine)`
-  & > div {
+export const SightLine = styled(InteractionLineContainer)`
+  & .line {
     border-top: 2px solid ${({ theme }) => theme.color.primary[1]};
   }
 `;
 
-export const InnerInteractionLine = styled(InteractionLine)`
-  & > div {
+export const InnerInteractionLine = styled(InteractionLineContainer)`
+  & .line {
     border-top: 2px dotted ${({ theme }) => theme.color.primary[1]};
   }
 `;
@@ -250,10 +255,12 @@ const Blueprint = () => {
               <div key={index}>{item.action}</div>
             ))}
           </ActionContainer>
-          <InteractionLine>
-            <span>상호작용선</span>
-            <div />
-          </InteractionLine>
+          <InteractionLineContainer>
+            <div className="box">
+              <span>상호작용선</span>
+            </div>
+            <div className="line" />
+          </InteractionLineContainer>
           <EmotionContainer>
             <div>
               <img className="f2f" src={f2fServiceUsersImg} />
@@ -263,8 +270,10 @@ const Blueprint = () => {
             ))}
           </EmotionContainer>
           <SightLine>
-            <span>가시선</span>
-            <div />
+            <div className="box">
+              <span>가시선</span>
+            </div>
+            <div className="line" />
           </SightLine>
           <NeedsContainer>
             <div>
@@ -275,8 +284,10 @@ const Blueprint = () => {
             ))}
           </NeedsContainer>
           <InnerInteractionLine>
-            <span>내부&nbsp;상호작용선</span>
-            <div />
+            <div className="box">
+              <span>내부&nbsp;상호작용선</span>
+            </div>
+            <div className="line" />
           </InnerInteractionLine>
           <SolutionContainer>
             <div>

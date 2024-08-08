@@ -16,6 +16,7 @@ export const Container = styled.div<{ height?: number }>`
   flex-direction: column;
   align-items: center;
   padding: 60px 30px;
+  border-right: 1px solid #b8c3ff;
 
   * {
     color: ${({ theme }) => theme.color.gray[0]};

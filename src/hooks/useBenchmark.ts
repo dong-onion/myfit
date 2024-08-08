@@ -12,7 +12,10 @@ interface SWOTAnalysisResponse {
 }
 
 export const useBenchmark = (serviceDescription: string) => {
-  const { data, isLoading, isError, refetch } = useQuery<benchmarkItem, Error>(
+  const { data, isLoading, isError, refetch, isRefetching } = useQuery<
+    benchmarkItem,
+    Error
+  >(
     [queryKeys.BENCHMARK, serviceDescription],
     () =>
       fetchBenchmark(serviceDescription).then((data: SWOTAnalysisResponse) => {
@@ -32,5 +35,6 @@ export const useBenchmark = (serviceDescription: string) => {
     isLoading,
     isError,
     refetch,
+    isRefetching,
   };
 };

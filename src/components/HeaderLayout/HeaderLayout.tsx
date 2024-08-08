@@ -5,7 +5,7 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { ROUTES_PATH } from '@/utility/constants';
 import ScrollToTop from '../ScrollToTop';
 
-const HeaderLayout = () => {
+const HeaderLayout = ({ children }: { children?: React.ReactNode }) => {
   const { pathname } = useLocation();
   const isServiceTools = pathname.startsWith('/tools/');
   const navigate = useNavigate();
@@ -23,6 +23,7 @@ const HeaderLayout = () => {
       </S.Container>
       <S.OutletWrapper>
         <Outlet />
+        {children}
         <ScrollToTop />
       </S.OutletWrapper>
     </>

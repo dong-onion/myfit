@@ -57,7 +57,6 @@ export const Container = styled.div`
 const ErrorPage = () => {
   return (
     <>
-      <HeaderLayout />
       <Container>
         <img src={errorImg} alt="error" />
         <h1>정보를 불러오지 못했어요</h1>
