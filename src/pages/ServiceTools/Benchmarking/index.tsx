@@ -78,7 +78,6 @@ export const ContentFlexBox = styled.div`
 `;
 
 export const ContentWrapper = styled.div`
-  overflow: scroll;
   height: 228px;
   padding: 15px 20px;
   background-color: ${({ theme }) => theme.color.white[0]};

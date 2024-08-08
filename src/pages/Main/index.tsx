@@ -28,14 +28,20 @@ import { Modal, Spinner } from '@/components';
 import { useQueryClient } from 'react-query';
 import { queryKeys } from '@/utility/constants';
 import {
+  fetchBenchmark,
+  fetchBlueprint,
   fetchBusinessModelCanvas,
   fetchCustomerJourneyMap,
   fetchPersona,
+  fetchSystemMap,
 } from '@/clovaAI/api';
 import {
+  parseBenchmark,
+  parseBlueprint,
   parseBMCanvas,
   parseCustomerJourneyMap,
   parsePersona,
+  parseSystemMap,
 } from '@/utility/utils';
 import usePreloadImage from '@/hooks/usePreloadImage';
 import ErrorPage from '../ErrorPage';
@@ -151,7 +157,7 @@ export const SummaryContent = styled.div`
 `;
 
 export const SummaryResult = styled.p`
-  font-family: 'Pretendard-Meidum';
+  font-family: 'Pretendard-Medium';
   font-size: 20px;
   font-weight: 500;
   line-height: 30px;
@@ -269,8 +275,31 @@ const Main = () => {
               ),
             { staleTime: 1000 * 60 * 5 },
           ),
+          queryClient.prefetchQuery(
+            [queryKeys.BLUEPRINT, serviceDescription],
+            () =>
+              fetchBlueprint(serviceDescription).then((res) =>
+                parseBlueprint(res.result.message.content),
+              ),
+            { staleTime: 1000 * 60 * 5 },
+          ),
+          queryClient.prefetchQuery(
+            [queryKeys.SYSTEM_MAP, serviceDescription],
+            () =>
+              fetchSystemMap(serviceDescription).then((res) =>
+                parseSystemMap(res.result.message.content),
+              ),
+            { staleTime: 1000 * 60 * 5 },
+          ),
+          queryClient.prefetchQuery(
+            [queryKeys.BENCHMARK, serviceDescription],
+            () =>
+              fetchBenchmark(serviceDescription).then((res) =>
+                parseBenchmark(res.result.message.content),
+              ),
+            { staleTime: 1000 * 60 * 5 },
+          ),
         ]);
-        console.log('All data prefetched');
       } catch (error) {
         console.error('Error prefetching data:', error);
       }
