@@ -8,6 +8,8 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
 import './assets/fonts/Font.css';
+import MobilePage from './pages/MobilePage/MobilePage';
+import { isMobile } from 'react-device-detect';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -26,7 +28,7 @@ root.render(
   <QueryClientProvider client={queryClient}>
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <App />
+      {isMobile ? <MobilePage /> : <App />}
       <ReactQueryDevtools />
     </ThemeProvider>
   </QueryClientProvider>,

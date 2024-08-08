@@ -127,6 +127,9 @@ import modalCloseBtn from './modalCloseBtn.png';
 import editImgBlue from './editImgBlue.png';
 import folderIconBlue from './folderIconBlue.png';
 import errorImg from './errorImg.png';
+import mobileImg from './mobileImg.png';
+import mobileBackground from './mobileBackground.png';
+import mobileLogo from './mobileLogo.png';
 
 export {
   logo,
@@ -258,4 +261,7 @@ export {
   swotInfo,
   folderIconBlue,
   errorImg,
+  mobileImg,
+  mobileBackground,
+  mobileLogo,
 };
