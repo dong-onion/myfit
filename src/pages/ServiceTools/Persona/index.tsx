@@ -20,6 +20,7 @@ import Loading from './components/Loading';
 import usePreloadImage from '@/hooks/usePreloadImage';
 import ErrorPage from '@/pages/ErrorPage';
 import { useAccessControl } from '@/hooks/useAccessControl';
+import { ClovaLogo } from '@/components';
 
 export const DownloadWrapper = styled.div`
   display: flex;
@@ -219,7 +220,7 @@ const Persona = () => {
             width: '100%',
           }}
         >
-          <img src={hyperClova} width={200} height={15} />
+          <ClovaLogo />
         </div>
         <Footer />
       </Frame>

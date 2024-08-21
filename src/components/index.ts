@@ -7,3 +7,4 @@ export { default as Modal } from './Modal';
 export { default as Spinner } from './Spinner';
 export { default as ScrollToTop } from './ScrollToTop';
 export { default as Retry } from './Retry';
+export { default as ClovaLogo } from './ClovaLogo';

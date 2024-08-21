@@ -18,6 +18,7 @@ export const Logo = styled.img`
   height: 43px;
   object-fit: contain;
   padding: 10px 20px;
+  cursor: pointer;
 `;
 
 export const BackArrow = styled.div`
