@@ -23,9 +23,10 @@ export const fetchSWOTAnalysis = async (
   const requestData = {
     messages: [
       {
-        role: 'system',
-        content: `제시된 서비스를 주제로 SWOT 분석을 진행해줘.
-        그리고 결과 내용을 바탕으로 분석 결과 요약을 200자 이내로 작성해줘. 서비스가 성장하기 위해 필요한 전략와 진행 방향에 대해 간결히 제안해줘. 해요체로 답변해줘.
+        role: 'user',
+        content: `지금 구상하고 있는 사업은 "${serviceDescription}"이야.${levelDescriptions[level]} 
+        시된 사업 아이템과 창업 단계를 토대로 SWOT 분석을 진행해줘.
+        그리고 결과 내용을 바탕으로 분석 결과 요약을 작성해줘. 서비스가 성장하기 위해 필요한 전략와 진행 방향에 대해 간결히 제안해줘.  답변해줘. 그리고 '5. 분석 결과 요약' 의 글자수는 190자 이상 250자 이하로 작성해줘
         
         다른 추가설명 없이, 아래 예시와 같은 형태로 응답을 줘.
         
@@ -41,7 +42,7 @@ export const fetchSWOTAnalysis = async (
         
         3. 기회
         - {기회1}
-        - {기회2}
+        - {기회2} 
         - {기회3}
         
         4. 위협
@@ -58,14 +59,10 @@ export const fetchSWOTAnalysis = async (
         - {전략3}
         `,
       },
-      {
-        role: 'user',
-        content: `지금 구상하고 있는 사업은 ${serviceDescription}이야.${levelDescriptions[level]}`,
-      },
     ],
     topP: 0.1,
     topK: 0,
-    maxTokens: 500,
+    maxTokens: 1000,
     temperature: 0.1,
     repeatPenalty: 5.0,
     stopBefore: [],
