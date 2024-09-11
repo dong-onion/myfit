@@ -25,7 +25,7 @@ const Loading = ({ refetch }: { refetch?: any }) => {
   useEffect(() => {
     const timer: NodeJS.Timeout | undefined = setTimeout(() => {
       setShowRetryButton(true);
-    }, 30000);
+    }, 59999);
 
     return () => clearTimeout(timer);
   }, []);
