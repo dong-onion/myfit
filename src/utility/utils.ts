@@ -344,50 +344,41 @@ export interface benchmarkItem {
 
 //   return result;
 // };
-export const parseBenchmark = (content: string) => {
+export const parseBenchmark = (content: string): benchmarkItem => {
   let parsedData: any;
 
-  // JSON 파싱 시도
   try {
-    // JSON 형식으로 시작하는 부분만 추출
-    const jsonStringMatch = content.match(/({.*})/s);
-    if (jsonStringMatch) {
-      parsedData = JSON.parse(jsonStringMatch[0]);
-    } else {
-      throw new Error('유효한 JSON을 찾을 수 없습니다.');
-    }
+    // JSON 형식으로 파싱 시도
+    parsedData = JSON.parse(content);
   } catch (error) {
-    console.error('JSON 파싱 오류:', error);
+    // JSON 파싱 실패 시 부가 설명 처리
+    const sections = content.split(/\n- /).slice(1); // "- "로 분리하여 섹션 생성
+    const domestic: string[] = [];
+    const international: string[] = [];
 
-    // JSON 형식이 아닌 경우 새로운 파싱 로직 적용
-    parsedData = {
-      국내: { '제품 및 서비스': [] },
-      해외: { '제품 및 서비스': [] },
-    };
+    const currentSection: string[] = [];
+    let isDomestic = false;
 
-    // 각 섹션을 구분하기 위한 정규 표현식
-    const sectionRegex = /-\s*(국내|해외)\s*\n*([\s\S]*?)(?=\n-|\s*$)/g;
+    for (const section of sections) {
+      if (section.startsWith('국내')) {
+        isDomestic = true;
+        continue; // 다음 섹션으로 넘어감
+      } else if (section.startsWith('해외')) {
+        isDomestic = false;
+        continue; // 다음 섹션으로 넘어감
+      }
 
-    // 섹션 정보 파싱
-    let match;
-    while ((match = sectionRegex.exec(content)) !== null) {
-      const sectionType = match[1].trim();
-      const sectionContent = match[2].trim();
-
-      // 제품 및 서비스 데이터 추출
-      const services = sectionContent
-        .split('\n')
-        .filter((line) => line.trim() !== '');
-      const slicedData = services.map((service) =>
-        service.replace(/^- /, '').trim(),
-      );
-
-      if (sectionType === '국내') {
-        parsedData.국내 = slicedData;
-      } else if (sectionType === '해외') {
-        parsedData.해외 = slicedData;
+      if (isDomestic) {
+        currentSection.push(section.trim());
+      } else {
+        international.push(section.trim());
       }
     }
+
+    parsedData = {
+      국내: { '제품 및 서비스': currentSection },
+      해외: { '제품 및 서비스': international },
+    };
   }
 
   function sliceStringToArray(arr: string[]): string[] {
