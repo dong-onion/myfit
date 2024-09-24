@@ -383,9 +383,9 @@ export const parseBenchmark = (content: string) => {
       );
 
       if (sectionType === '국내') {
-        parsedData.국내['제품 및 서비스'] = slicedData;
+        parsedData.국내 = slicedData;
       } else if (sectionType === '해외') {
-        parsedData.해외['제품 및 서비스'] = slicedData;
+        parsedData.해외 = slicedData;
       }
     }
   }
