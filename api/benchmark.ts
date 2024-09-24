@@ -14,9 +14,9 @@ export const getBenchmarkResponse = async (serviceDescription: string) => {
   const requestData = {
     messages: [
       {
-        role: 'system',
+        role: 'user',
         content: `
-제시된 서비스로 벤치마킹을 작성할거야.
+      ${serviceDescription} 서비스로 벤치마킹을 작성할거야.
 국내와 해외로 나눠서 어떤 유사, 경쟁 서비스 또는 시장이 있는지 알려줘. 
 문장은 '-해요' 문체로 작성해줘.
 다음 항목을 포함해줘: 경쟁사 제품 및 서비스, 가격, 마케팅 전략, 고객 서비스, 기술 및 혁신, 시장 점유율 및 성과, 비즈니스 전략, 고객 평가 및 피드백, 인력 및 조직 구조. 
@@ -84,10 +84,6 @@ export const getBenchmarkResponse = async (serviceDescription: string) => {
   }
 }
         `,
-      },
-      {
-        role: 'user',
-        content: `지금 구상하고 있는 사업은 ${serviceDescription}이야.`,
       },
     ],
     topP: 0.1,
