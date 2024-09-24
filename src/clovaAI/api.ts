@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://myfit-marketfit.vercel.app';
+const API_URL = 'https://www.myfit.work';
 const HEADERS = {
   'Content-Type': 'application/json',
 };
