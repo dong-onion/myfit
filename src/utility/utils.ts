@@ -308,8 +308,87 @@ export interface benchmarkItem {
   international: string[][];
 }
 
+// export const parseBenchmark = (content: string) => {
+//   const parsedData = JSON.parse(content);
+
+//   function sliceStringToArray(arr: string[]): string[] {
+//     const result: string[] = [];
+//     for (let item of arr) {
+//       const startIndex = 0;
+//       while (item.indexOf('\\n-') !== -1) {
+//         const endIndex = item.indexOf('\\n-');
+//         result.push(item.slice(startIndex, endIndex).trim());
+//         item = item.slice(endIndex + 3); // '\\n-'.length = 3
+//       }
+//       result.push(item.trim()); // 마지막 남은 부분 추가
+//     }
+//     return result.map((i) => (i.startsWith('- ') ? i.slice(2) : i)); // '- ' 제거
+//   }
+
+//   // 모든 항목을 배열로 변환하여 2중 배열 생성
+//   function transformSections(sections: {
+//     [key: string]: string[];
+//   }): string[][] {
+//     const transformed: string[][] = [];
+//     for (const key in sections) {
+//       transformed.push(sliceStringToArray(sections[key]));
+//     }
+//     return transformed;
+//   }
+
+//   // 결과 객체 생성
+//   const result: benchmarkItem = {
+//     domestic: transformSections(parsedData.국내),
+//     international: transformSections(parsedData.해외),
+//   };
+
+//   return result;
+// };
 export const parseBenchmark = (content: string) => {
-  const parsedData = JSON.parse(content);
+  let parsedData: any;
+
+  // JSON 파싱 시도
+  try {
+    // JSON 형식으로 시작하는 부분만 추출
+    const jsonStringMatch = content.match(/({.*})/s);
+    if (jsonStringMatch) {
+      parsedData = JSON.parse(jsonStringMatch[0]);
+    } else {
+      throw new Error('유효한 JSON을 찾을 수 없습니다.');
+    }
+  } catch (error) {
+    console.error('JSON 파싱 오류:', error);
+
+    // JSON 형식이 아닌 경우 새로운 파싱 로직 적용
+    parsedData = {
+      국내: { '제품 및 서비스': [] },
+      해외: { '제품 및 서비스': [] },
+    };
+
+    // 각 섹션을 구분하기 위한 정규 표현식
+    const sectionRegex = /-\s*(국내|해외)\s*\n*([\s\S]*?)(?=\n-|\s*$)/g;
+
+    // 섹션 정보 파싱
+    let match;
+    while ((match = sectionRegex.exec(content)) !== null) {
+      const sectionType = match[1].trim();
+      const sectionContent = match[2].trim();
+
+      // 제품 및 서비스 데이터 추출
+      const services = sectionContent
+        .split('\n')
+        .filter((line) => line.trim() !== '');
+      const slicedData = services.map((service) =>
+        service.replace(/^- /, '').trim(),
+      );
+
+      if (sectionType === '국내') {
+        parsedData.국내['제품 및 서비스'] = slicedData;
+      } else if (sectionType === '해외') {
+        parsedData.해외['제품 및 서비스'] = slicedData;
+      }
+    }
+  }
 
   function sliceStringToArray(arr: string[]): string[] {
     const result: string[] = [];
