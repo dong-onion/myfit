@@ -19,7 +19,6 @@ export const useBenchmark = (serviceDescription: string) => {
     [queryKeys.BENCHMARK, serviceDescription],
     () =>
       fetchBenchmark(serviceDescription).then((data: SWOTAnalysisResponse) => {
-        console.log('content', data.result.message.content);
         const parsedData = parseBenchmark(data.result.message.content);
         if (!parsedData) {
           throw new Error('Failed to parse SWOT Analysis');
