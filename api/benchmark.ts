@@ -18,7 +18,6 @@ export const getBenchmarkResponse = async (serviceDescription: string) => {
         content: `
       ${serviceDescription} 서비스로 벤치마킹을 작성할거야.
 국내와 해외로 나눠서 어떤 유사, 경쟁 서비스 또는 시장이 있는지 알려줘. 
-문장은 '-해요' 문체로 작성해줘.
 다음 항목을 포함해줘: 경쟁사 제품 및 서비스, 가격, 마케팅 전략, 고객 서비스, 기술 및 혁신, 시장 점유율 및 성과, 비즈니스 전략, 고객 평가 및 피드백, 인력 및 조직 구조. 
 
 다른 추가설명 없이, 아래 예시와 같은 형태로 응답을 줘.

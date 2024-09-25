@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 import { queryKeys } from '@/utility/constants';
 import { fetchBenchmark } from '@/clovaAI/api';
-import { benchmarkItem, parseBenchmark } from '@/utility/utils';
+import { BenchmarkItem, parseBenchmark } from '@/utility/utils';
 
 interface SWOTAnalysisResponse {
   result: {
@@ -13,12 +13,13 @@ interface SWOTAnalysisResponse {
 
 export const useBenchmark = (serviceDescription: string) => {
   const { data, isLoading, isError, refetch, isRefetching } = useQuery<
-    benchmarkItem,
+    BenchmarkItem,
     Error
   >(
     [queryKeys.BENCHMARK, serviceDescription],
     () =>
       fetchBenchmark(serviceDescription).then((data: SWOTAnalysisResponse) => {
+        console.log('content', data.result.message.content);
         const parsedData = parseBenchmark(data.result.message.content);
         if (!parsedData) {
           throw new Error('Failed to parse SWOT Analysis');

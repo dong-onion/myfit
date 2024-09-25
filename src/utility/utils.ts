@@ -303,111 +303,69 @@ export const parseSystemMap = (content: string) => {
   return result;
 };
 
-export interface benchmarkItem {
+export interface BenchmarkItem {
   domestic: string[][];
   international: string[][];
 }
 
-// export const parseBenchmark = (content: string) => {
-//   const parsedData = JSON.parse(content);
-
-//   function sliceStringToArray(arr: string[]): string[] {
-//     const result: string[] = [];
-//     for (let item of arr) {
-//       const startIndex = 0;
-//       while (item.indexOf('\\n-') !== -1) {
-//         const endIndex = item.indexOf('\\n-');
-//         result.push(item.slice(startIndex, endIndex).trim());
-//         item = item.slice(endIndex + 3); // '\\n-'.length = 3
-//       }
-//       result.push(item.trim()); // 마지막 남은 부분 추가
-//     }
-//     return result.map((i) => (i.startsWith('- ') ? i.slice(2) : i)); // '- ' 제거
-//   }
-
-//   // 모든 항목을 배열로 변환하여 2중 배열 생성
-//   function transformSections(sections: {
-//     [key: string]: string[];
-//   }): string[][] {
-//     const transformed: string[][] = [];
-//     for (const key in sections) {
-//       transformed.push(sliceStringToArray(sections[key]));
-//     }
-//     return transformed;
-//   }
-
-//   // 결과 객체 생성
-//   const result: benchmarkItem = {
-//     domestic: transformSections(parsedData.국내),
-//     international: transformSections(parsedData.해외),
-//   };
-
-//   return result;
-// };
-export const parseBenchmark = (content: string): benchmarkItem => {
-  let parsedData: any;
+export const parseBenchmark = (content: string): BenchmarkItem => {
+  let parsedData: { [key: string]: { [key: string]: string[] } };
 
   try {
-    // JSON 형식으로 파싱 시도
+    // JSON 형식일 경우 파싱
     parsedData = JSON.parse(content);
   } catch (error) {
-    // JSON 파싱 실패 시 부가 설명 처리
-    const sections = content.split(/\n- /).slice(1); // "- "로 분리하여 섹션 생성
-    const domestic: string[] = [];
-    const international: string[] = [];
+    // 문자열 형식일 경우 처리
+    parsedData = parseStringContent(content);
+  }
 
-    const currentSection: string[] = [];
-    let isDomestic = false;
-
-    for (const section of sections) {
-      if (section.startsWith('국내')) {
-        isDomestic = true;
-        continue; // 다음 섹션으로 넘어감
-      } else if (section.startsWith('해외')) {
-        isDomestic = false;
-        continue; // 다음 섹션으로 넘어감
-      }
-
-      if (isDomestic) {
-        currentSection.push(section.trim());
-      } else {
-        international.push(section.trim());
-      }
-    }
-
-    parsedData = {
-      국내: { '제품 및 서비스': currentSection },
-      해외: { '제품 및 서비스': international },
+  function parseStringContent(content: string): {
+    [key: string]: { [key: string]: string[] };
+  } {
+    const sections: { [key: string]: { [key: string]: string[] } } = {
+      국내: {},
+      해외: {},
     };
-  }
+    const lines = content.split('\n');
 
-  function sliceStringToArray(arr: string[]): string[] {
-    const result: string[] = [];
-    for (let item of arr) {
-      const startIndex = 0;
-      while (item.indexOf('\\n-') !== -1) {
-        const endIndex = item.indexOf('\\n-');
-        result.push(item.slice(startIndex, endIndex).trim());
-        item = item.slice(endIndex + 3); // '\\n-'.length = 3
+    let currentCategory: '국내' | '해외' | null = null;
+
+    for (const line of lines) {
+      const trimmedLine = line.trim();
+
+      if (trimmedLine.startsWith('-')) {
+        if (trimmedLine.includes('국내')) {
+          currentCategory = '국내';
+        } else if (trimmedLine.includes('해외')) {
+          currentCategory = '해외';
+        } else if (currentCategory) {
+          const [keyPart, ...valueParts] = trimmedLine.split(':');
+          const key = keyPart.replace('- ', '').trim();
+          const value = valueParts.join(':').trim();
+
+          if (!sections[currentCategory][key]) {
+            sections[currentCategory][key] = [];
+          }
+
+          sections[currentCategory][key].push(value);
+        }
       }
-      result.push(item.trim()); // 마지막 남은 부분 추가
     }
-    return result.map((i) => (i.startsWith('- ') ? i.slice(2) : i)); // '- ' 제거
+
+    return sections;
   }
 
-  // 모든 항목을 배열로 변환하여 2중 배열 생성
   function transformSections(sections: {
     [key: string]: string[];
   }): string[][] {
     const transformed: string[][] = [];
     for (const key in sections) {
-      transformed.push(sliceStringToArray(sections[key]));
+      transformed.push(sections[key]);
     }
     return transformed;
   }
 
-  // 결과 객체 생성
-  const result: benchmarkItem = {
+  const result: BenchmarkItem = {
     domestic: transformSections(parsedData.국내),
     international: transformSections(parsedData.해외),
   };
