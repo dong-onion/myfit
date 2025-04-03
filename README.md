@@ -101,7 +101,7 @@ yarn start
 
 | 창업 유형 점검 | 서비스 전략 확인 |
 | :--------: | :------------: |
-| 16가지 문항을 통해 창업자의 <br/> 강점·취약점을 분석하고, <br/> 맞춤형 전략을 제공합니다. <br/><br/> <img src="./screenshots/test.png" alt="service input" width="600px" /> | AI가 분석한 내용을 바탕으로 <br/> 실행 가능한 전략을 제공합니다. <br/><br/> <img src="./screenshots/complete_test.png" alt="complete_test" width="600px" /> |
+| 16가지 문항을 통해 창업자의 <br/> 강점·취약점을 분석하고, <br/> 맞춤형 전략을 제공합니다. <br/><br/> <img src="./screenshots/test.png" alt="service input" width="600px" /> | AI가 분석한 내용을 바탕으로 <br/> 실행 가능한 전략을 제공합니다. <br/><br/><br/> <img src="./screenshots/complete_test.png" alt="complete_test" width="600px" /> |
 
 | 비즈니스 방향성 제안 |
 | :--------------: |
@@ -110,24 +110,82 @@ yarn start
 <br/>
 
 ## 📂 Project Structure  
-
 ```bash
 .
-├── api              
-├── public            
-├── screenshots       
-├── src               
-│   ├── @types       
-│   ├── components   
-│   ├── hooks        
-│   ├── pages        
-│   ├── styles       
-│   ├── utility      
-│   ├── routes.tsx   
-│   └── App.tsx      
-├── tsconfig.json     
-└── vercel.json    
+├── README.md              
+├── api                    # 각종 API 관련 TypeScript 파일
+│   ├── benchmark.ts       
+│   ├── blueprint.ts       
+│   ├── bm-canvas.ts       
+│   ├── customer-journey-map.ts 
+│   ├── overall.ts         
+│   ├── persona.ts         
+│   ├── swot.ts            
+│   └── system-map.ts      
+├── craco.config.cjs       # CRACO 설정 파일
+├── package.json           
+├── public                 
+│   ├── favicon.ico        
+│   ├── images             
+│   │   └── main.png       
+│   ├── index.html         
+│   ├── manifest.json      
+│   └── robots.txt         
+├── screenshots            # 프로젝트 스크린샷 저장 폴더
+│   ├── complete_test.png  
+│   ├── input_service.png  
+│   ├── main.png           
+│   ├── service_design_tool.png 
+│   ├── test.png           
+│   └── thumbnail.png      
+├── src                    
+│   ├── @types             # 타입 정의 폴더
+│   │   ├── global         
+│   │   │   └── index.d.ts 
+│   │   └── styled.d.ts    
+│   ├── App.tsx            # 애플리케이션 루트 컴포넌트
+│   ├── assets             # 에셋 파일 (아이콘, 이미지 등)
+│   ├── clovaAI            # Clova AI API 연동 관련 폴더
+│   │   └── api.ts         
+│   ├── components         # 재사용 가능한 UI 컴포넌트
+│   │   ├── Button         
+│   │   ├── ClovaLogo      
+│   │   ├── HeaderLayout   
+│   │   ├── HoldOn         
+│   │   ├── Modal          
+│   │   ├── Retry          
+│   │   ├── ScrollToTop    
+│   │   ├── Skeleton       
+│   │   ├── SkeletonWrapper 
+│   │   ├── Spinner        
+│   │   └── index.ts       
+│   ├── hooks              # 커스텀 훅 폴더
+│   ├── pages              # 페이지 단위 컴포넌트 폴더
+│   │   ├── ErrorPage      
+│   │   ├── FirstResult    
+│   │   ├── Home           
+│   │   ├── Main           
+│   │   ├── MobilePage     
+│   │   ├── NotFound       
+│   │   ├── SecondResult   
+│   │   ├── ServiceRegistration 
+│   │   ├── ServiceTools   
+│   │   ├── Test           
+│   │   ├── TestStart      
+│   │   └── index.ts       
+│   ├── routes.tsx         # 라우팅 설정
+│   ├── styles             # 스타일 관련 폴더
+│   │   ├── GlobalStyle.tsx 
+│   │   ├── pageStyles     
+│   │   └── theme.ts       
+│   └── utility            # 유틸리티 함수 폴더
+│       ├── constants.ts   
+│       └── utils.ts       
+├── tsconfig.json          # TypeScript 설정 파일
+├── tsconfig.paths.json    # TypeScript 경로 별칭 설정
+└── vercel.json            # Vercel 배포 설정 파일
 ```
+
 ## 👨‍💻 Developed by  
 [김동언](https://github.com/dong-onion) – Frontend Developer  
 
