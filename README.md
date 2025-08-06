@@ -36,7 +36,7 @@
 <br />
 
 ### 🔗 배포 주소  
-[🌐 MyFit 서비스 바로가기](https://www.myfit.work/)  
+[🌐 MyFit 서비스 바로가기](https://myfit-marketfit.vercel.app/)  
 <br />
 
 ## 🚀 Installation & Usage  
