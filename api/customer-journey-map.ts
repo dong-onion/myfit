@@ -4,10 +4,10 @@ import axios from 'axios';
 
 export const API_URL = process.env.REACT_APP_API_URL;
 export const HEADERS = {
-  'X-NCP-CLOVASTUDIO-API-KEY': process.env.REACT_APP_CLOVA_STUDIO_API_KEY,
-  'X-NCP-APIGW-API-KEY': process.env.REACT_APP_APIGW_API_KEY,
+  Authorization: `Bearer ${process.env.REACT_APP_CLOVA_STUDIO_API_KEY}`,
   'X-NCP-CLOVASTUDIO-REQUEST-ID': process.env.REACT_APP_CLOVASTUDIO_REQUEST_ID,
   'Content-Type': 'application/json',
+  Accept: 'application/json',
 };
 
 export const getCustomerJourneyMapResponse = async (
